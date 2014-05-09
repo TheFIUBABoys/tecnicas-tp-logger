@@ -1,6 +1,6 @@
 package level;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 public class LevelFatalTest {
     private LogLevel levelDebug;
@@ -22,32 +22,32 @@ public class LevelFatalTest {
 
     @org.junit.Test
     public void testCompareToDebug() throws Exception {
-        Assert.assertTrue(levelDebug.compareTo(levelFatal) > 0);
+        assertTrue(levelDebug.compareTo(levelFatal) > 0);
     }
 
     @org.junit.Test
     public void testCompareToInfo() throws Exception {
-        Assert.assertTrue(levelInfo.compareTo(levelFatal) > 0);
+        assertTrue(levelInfo.compareTo(levelFatal) > 0);
     }
 
     @org.junit.Test
     public void testCompareToWarn() throws Exception {
-        Assert.assertTrue(levelWarn.compareTo(levelFatal) > 0);
+        assertTrue(levelWarn.compareTo(levelFatal) > 0);
     }
 
     @org.junit.Test
     public void testCompareToError() throws Exception {
-        Assert.assertTrue(levelError.compareTo(levelFatal) > 0);
+        assertTrue(levelError.compareTo(levelFatal) > 0);
     }
 
     @org.junit.Test
     public void testCompareToFatal() throws Exception {
-        Assert.assertTrue(levelFatal.compareTo(levelFatal) < 0);
+        assertTrue(levelFatal.compareTo(levelFatal) < 0);
     }
 
     @org.junit.Test
     public void testCompareToOff() throws Exception {
-        Assert.assertTrue(levelOff.compareTo(levelFatal) > 0);
+        assertTrue(levelOff.compareTo(levelFatal) > 0);
     }
 
 }
