@@ -2,8 +2,6 @@ package level;
 
 import junit.framework.Assert;
 
-import static org.junit.Assert.*;
-
 public class LevelDebugTest {
 
     private LogLevel levelDebug;
