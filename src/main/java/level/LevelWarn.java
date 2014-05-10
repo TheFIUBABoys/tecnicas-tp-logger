@@ -34,4 +34,8 @@ public class LevelWarn extends LogLevel {
         return 1;
     }
 
+    public String toString() {
+        return "WARN";
+    }
+
 }

@@ -33,4 +33,8 @@ public class LevelOff extends LogLevel {
     public int compareTo(LevelOff logLevel) {
         return 1;
     }
+
+    public String toString() {
+        return "OFF";
+    }
 }

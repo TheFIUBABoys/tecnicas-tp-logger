@@ -82,4 +82,11 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @return an integer that indicates <, > or ==.
      */
     public abstract int compareTo(LevelOff logLevel);
+
+    /**
+     * String representation of the LogLevel.
+     *
+     * @return the string that represents the log level.
+     */
+    public abstract String toString();
 }

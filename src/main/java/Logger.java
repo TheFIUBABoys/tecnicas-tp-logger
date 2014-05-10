@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Logger {
     private static LogLevel logLevelSet = new LevelDebug();
-    // TODO: MessageFormat class.
+    // TODO: LogMessageFormat class.
     private static String logFormat = "DEFAULT";
     private static ArrayList<BufferedWriter> outputFiles = new ArrayList<BufferedWriter>();
     private static Boolean terminalOutput = true;
