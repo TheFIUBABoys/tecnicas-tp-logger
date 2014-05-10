@@ -35,6 +35,7 @@ public class LogFormat {
         replaced = replaced.replaceAll(dateRegex, (new Date()).toString());
         replaced = replaced.replaceAll(separatorRegex, "\n");
 
+        // Invocation dependant.
         Thread current = Thread.currentThread();
         StackTraceElement stackTraceElement = current.getStackTrace()[2];
 
