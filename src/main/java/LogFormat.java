@@ -1,6 +1,9 @@
 import level.LogLevel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by GonchuB on 09/05/2014.
@@ -10,7 +13,8 @@ public class LogFormat {
 
     private String formatString;
 
-    private final String dateRegex = "%d";
+    private final String dateRegex = "%d\\{[^\\}]*\\}";
+    private final Pattern datePattern = Pattern.compile(dateRegex);
     private final String levelRegex = "%p";
     private final String threadRegex = "%t";
     private final String messageRegex = "%m";
@@ -32,7 +36,19 @@ public class LogFormat {
         replaced = replaced.replaceAll(messageRegex, message);
 
         // These are independant.
-        replaced = replaced.replaceAll(dateRegex, (new Date()).toString());
+        Matcher dateMatches = datePattern.matcher(replaced);
+        if (dateMatches.find()) {
+            String formatString = dateMatches.group(0);
+            StringBuilder builder = new StringBuilder(formatString);
+            // Delete last }
+            builder.deleteCharAt(formatString.length() - 1);
+            // Delete %, d, {
+            builder.deleteCharAt(0);
+            builder.deleteCharAt(0);
+            builder.deleteCharAt(0);
+            SimpleDateFormat dateFormat = new SimpleDateFormat(builder.toString());
+            replaced = replaced.replaceAll(dateRegex, dateFormat.format(new Date()));
+        }
         replaced = replaced.replaceAll(separatorRegex, "\n");
 
         // Invocation dependant.

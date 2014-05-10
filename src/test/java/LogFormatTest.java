@@ -2,17 +2,21 @@ import level.LevelDebug;
 import level.LogLevel;
 import org.junit.Assert;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class LogFormatTest {
 
     private LogFormat messageFormat;
-    private LogFormat messageFormatInferred;
+    private LogFormat messageFormatDate;
 
     @org.junit.Before
     public void setUp() throws Exception {
         messageFormat = new LogFormat("%p - %m");
-        messageFormatInferred = new LogFormat("%t - %F - %L - %M");
+        messageFormatDate = new LogFormat("%d{dd-MM-yyyy}");
     }
 
     @org.junit.Test
@@ -22,11 +26,14 @@ public class LogFormatTest {
 
         Assert.assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel));
     }
+
     @org.junit.Test
-    public void testTest() throws Exception {
+    public void testFormatWithDate() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
+        String dateFormat = "dd-MM-yyyy";
+        String expectedDate = (new SimpleDateFormat(dateFormat)).format(new Date());
 
-        Assert.assertEquals("main - LogFormatTest.java - 30 - testTest",  messageFormatInferred.formatLogMessage(message, logLevel));
+        Assert.assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel));
     }
 }
