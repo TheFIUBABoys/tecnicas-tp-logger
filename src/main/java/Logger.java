@@ -13,12 +13,11 @@ import java.util.ArrayList;
  */
 public class Logger {
     private static LogLevel logLevelSet = new LevelDebug();
-    // TODO: LogMessageFormat class.
-    private static String logFormat = "DEFAULT";
+    private static LogFormat logFormat = new LogFormat();
     private static ArrayList<BufferedWriter> outputFiles = new ArrayList<BufferedWriter>();
     private static Boolean terminalOutput = true;
 
-    public static void setMessageFormat(String messageFormat) {
+    public static void setMessageFormat(LogFormat messageFormat) {
         logFormat = messageFormat;
     }
 
@@ -51,8 +50,8 @@ public class Logger {
 
     private static void executeLog(String message) {
         //TODO: do the actual logging.
-        if (terminalOutput && logFormat.equals("DEFAULT")) {
-            System.out.println(message);
+        if (terminalOutput) {
+            System.out.println(logFormat.formatLogMessage(message, logLevelSet));
         }
     }
 

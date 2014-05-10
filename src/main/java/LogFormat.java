@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 public class LogFormat {
 
     private String formatString;
+    private String defaultFormat = "%p - %m";
 
     private final String dateRegex = "%d\\{[^\\}]*\\}";
     private final Pattern datePattern = Pattern.compile(dateRegex);
@@ -23,6 +24,10 @@ public class LogFormat {
     private final String lineRegex = "%L";
     private final String filenameRegex = "%F";
     private final String methodRegex = "%M";
+
+    public LogFormat() {
+        new LogFormat(defaultFormat);
+    }
 
     public LogFormat(String format) {
         formatString = format;
