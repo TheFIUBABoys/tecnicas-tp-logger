@@ -1,5 +1,4 @@
-import level.LevelDebug;
-import level.LogLevel;
+import level.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,6 +15,13 @@ public class Logger {
     private static LogFormat logFormat = new LogFormat();
     private static ArrayList<BufferedWriter> outputFiles = new ArrayList<BufferedWriter>();
     private static Boolean terminalOutput = true;
+
+    public static LogLevel LEVEL_DEBUG = new LevelDebug();
+    public static LogLevel LEVEL_INFO = new LevelInfo();
+    public static LogLevel LEVEL_WARN = new LevelWarn();
+    public static LogLevel LEVEL_ERROR = new LevelError();
+    public static LogLevel LEVEL_FATAL = new LevelFatal();
+    public static LogLevel LEVEL_OFF = new LevelOff();
 
     public static void setMessageFormat(LogFormat messageFormat) {
         logFormat = messageFormat;

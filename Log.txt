@@ -9,3 +9,4 @@ ERROR - Error Message
 INFO - Info Message
 ERROR - Error Message
 INFO - Info Message
+FATAL - Fatal Message

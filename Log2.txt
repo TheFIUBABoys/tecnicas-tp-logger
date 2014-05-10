@@ -1,2 +1,3 @@
 ERROR - Error Message
 INFO - Info Message
+FATAL - Fatal Message
