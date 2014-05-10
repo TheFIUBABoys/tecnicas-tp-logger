@@ -35,11 +35,13 @@ public class LogFormat {
         replaced = replaced.replaceAll(dateRegex, (new Date()).toString());
         replaced = replaced.replaceAll(separatorRegex, "\n");
 
-        // TODO: All of these should be inferred in some way.
-        replaced = replaced.replaceAll(threadRegex, "THREAD");
-        replaced = replaced.replaceAll(lineRegex, "LINE_NUMBER");
-        replaced = replaced.replaceAll(filenameRegex, "FILENAME");
-        replaced = replaced.replaceAll(methodRegex, "METHOD");
+        Thread current = Thread.currentThread();
+        StackTraceElement stackTraceElement = current.getStackTrace()[2];
+
+        replaced = replaced.replaceAll(threadRegex, current.getName());
+        replaced = replaced.replaceAll(lineRegex, "" + stackTraceElement.getLineNumber());
+        replaced = replaced.replaceAll(filenameRegex, stackTraceElement.getFileName());
+        replaced = replaced.replaceAll(methodRegex, stackTraceElement.getMethodName());
 
         // This one has to be replaced at the end cause it could break another regex.
         // For example %%m could have undesired behaviors.
