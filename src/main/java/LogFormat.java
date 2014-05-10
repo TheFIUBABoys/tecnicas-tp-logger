@@ -24,17 +24,25 @@ public class LogFormat {
         formatString = format;
     }
 
-    public String formatLogMessage(String message, LogLevel level, Integer line, String fileName, String method) {
+    public String formatLogMessage(String message, LogLevel level) {
         String replaced = formatString;
 
-        replaced = replaced.replaceAll(dateRegex, (new Date()).toString());
+        // These should be received.
         replaced = replaced.replaceAll(levelRegex, level.toString());
         replaced = replaced.replaceAll(messageRegex, message);
-        replaced = replaced.replaceAll(threadRegex, "THREAD");
+
+        // These are independant.
+        replaced = replaced.replaceAll(dateRegex, (new Date()).toString());
         replaced = replaced.replaceAll(separatorRegex, "\n");
-        replaced = replaced.replaceAll(lineRegex, line.toString());
-        replaced = replaced.replaceAll(filenameRegex, fileName);
-        replaced = replaced.replaceAll(methodRegex, fileName);
+
+        // TODO: All of these should be inferred in some way.
+        replaced = replaced.replaceAll(threadRegex, "THREAD");
+        replaced = replaced.replaceAll(lineRegex, "LINE_NUMBER");
+        replaced = replaced.replaceAll(filenameRegex, "FILENAME");
+        replaced = replaced.replaceAll(methodRegex, "METHOD");
+
+        // This one has to be replaced at the end cause it could break another regex.
+        // For example %%m could have undesired behaviors.
         replaced = replaced.replaceAll(percentRegex, "%");
 
         return replaced;

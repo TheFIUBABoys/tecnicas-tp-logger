@@ -18,6 +18,6 @@ public class LogFormatTest {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
 
-        Assert.assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel, 0, "", ""));
+        Assert.assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel));
     }
 }
