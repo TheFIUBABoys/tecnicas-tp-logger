@@ -11,10 +11,13 @@ import java.util.ArrayList;
  * FIUBA
  */
 public class Logger {
-    private static LogLevel logLevelSet = new LevelDebug();
-    private static LogFormat logFormat = new LogFormat();
-    private static ArrayList<BufferedWriter> outputFiles = new ArrayList<BufferedWriter>();
-    private static Boolean terminalOutput = true;
+
+    private static Logger loggerInstance = null;
+
+    private LogLevel logLevelSet;
+    private LogFormat logFormat;
+    private ArrayList<BufferedWriter> outputFiles;
+    private Boolean terminalOutput;
 
     public static LogLevel LEVEL_DEBUG = new LevelDebug();
     public static LogLevel LEVEL_INFO = new LevelInfo();
@@ -23,15 +26,29 @@ public class Logger {
     public static LogLevel LEVEL_FATAL = new LevelFatal();
     public static LogLevel LEVEL_OFF = new LevelOff();
 
-    public static void setMessageFormat(LogFormat messageFormat) {
+    private Logger() {
+        logLevelSet = new LevelDebug();
+        logFormat = new LogFormat();
+        outputFiles = new ArrayList<BufferedWriter>();
+        terminalOutput = true;
+    }
+
+    public static Logger getLogger() {
+        if (loggerInstance == null) {
+            loggerInstance = new Logger();
+        }
+        return loggerInstance;
+    }
+
+    public void setMessageFormat(LogFormat messageFormat) {
         logFormat = messageFormat;
     }
 
-    public static void setConsoleOutput(Boolean value) {
+    public void setConsoleOutput(Boolean value) {
         terminalOutput = value;
     }
 
-    public static void addOutputFile(String filename) throws IOException {
+    public void addOutputFile(String filename) throws IOException {
         File file = new File(filename);
 
         if (!file.exists()) {
@@ -43,18 +60,18 @@ public class Logger {
         outputFiles.add(bw);
     }
 
-    public static void setLogLevel(LogLevel logLevel) {
+    public void setLogLevel(LogLevel logLevel) {
         logLevelSet = logLevel;
     }
 
-    public static void logMessage(String message, LogLevel logLevel) {
+    public void logMessage(String message, LogLevel logLevel) {
         // Check if log level is lower than the one set. If so, execute the logging.
         if (logLevel.compareTo(logLevelSet) < 0) {
             executeLog(message, logLevel);
         }
     }
 
-    private static void writeInBuffer(BufferedWriter bw, String message) {
+    private void writeInBuffer(BufferedWriter bw, String message) {
         try {
             bw.write(message);
             bw.flush();
@@ -63,7 +80,7 @@ public class Logger {
         }
     }
 
-    private static void executeLog(String message, LogLevel logLevel) {
+    private void executeLog(String message, LogLevel logLevel) {
         String formattedMessage = logFormat.formatLogMessage(message, logLevel);
         if (terminalOutput) {
             System.out.print(formattedMessage);
