@@ -32,7 +32,7 @@ public class Logger {
             file.createNewFile();
         }
 
-        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
         outputFiles.add(bw);
     }
@@ -44,14 +44,26 @@ public class Logger {
     public static void logMessage(String message, LogLevel logLevel) {
         // Check if log level is lower than the one set. If so, execute the logging.
         if (logLevel.compareTo(logLevelSet) < 0) {
-            executeLog(message);
+            executeLog(message, logLevel);
         }
     }
 
-    private static void executeLog(String message) {
-        //TODO: do the actual logging.
+    private static void writeInBuffer(BufferedWriter bw, String message) {
+        try {
+            bw.write(message);
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void executeLog(String message, LogLevel logLevel) {
+        String formattedMessage = logFormat.formatLogMessage(message, logLevel);
         if (terminalOutput) {
-            System.out.println(logFormat.formatLogMessage(message, logLevelSet));
+            System.out.print(formattedMessage);
+        }
+        for (BufferedWriter bw : outputFiles) {
+            writeInBuffer(bw, formattedMessage);
         }
     }
 
