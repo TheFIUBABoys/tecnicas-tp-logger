@@ -36,4 +36,13 @@ public class LogFormatTest {
 
         Assert.assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel));
     }
+
+    @org.junit.Test
+    public void testValidFormat() throws Exception {
+        String invalidFormatString = "%p - %m - %w";
+        String validFormatString = "%p - %m";
+
+        Assert.assertFalse(messageFormat.validFormat(invalidFormatString));
+        Assert.assertTrue(messageFormat.validFormat(validFormatString));
+    }
 }
