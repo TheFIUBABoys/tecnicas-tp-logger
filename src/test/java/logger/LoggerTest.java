@@ -18,13 +18,14 @@ public class LoggerTest {
     private String permanentFilename = "Log.txt";
     private String temporaryFilename = "TempLog.txt";
 
-    private void setUpStandarOutputRedirect() throws FileNotFoundException, IOException{
+    private void setUpStandarOutputRedirect() throws IOException{
         standarOutputSteam = new File("tmp_stdout.txt");
         standarOutputSteam.createNewFile();
         System.setOut(new PrintStream(standarOutputSteam));
     }
 
-    private void tearDownStandarOutputRedirect() throws FileNotFoundException, IOException{
+    private void tearDownStandarOutputRedirect() throws IOException{
+        standarOutputSteam.delete();
         System.setOut(System.out);
     }
 

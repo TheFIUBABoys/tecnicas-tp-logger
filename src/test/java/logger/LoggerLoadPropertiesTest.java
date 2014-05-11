@@ -1,7 +1,6 @@
 package logger;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
@@ -19,6 +18,7 @@ public class LoggerLoadPropertiesTest {
     Logger loggerInstance;
     String filename = "appProperties.txt";
     String outputFilename = "outputFilename.txt";
+    File standarOutputSteam;
 
     private void setUpOutputFileProperty() throws Exception{
         File f = new File(outputFilename);
@@ -47,6 +47,17 @@ public class LoggerLoadPropertiesTest {
         outputFile.close();
     }
 
+    private void setUpStandarOutputRedirect() throws IOException {
+        standarOutputSteam = new File("tmp_stdout.txt");
+        standarOutputSteam.createNewFile();
+        System.setOut(new PrintStream(standarOutputSteam));
+    }
+
+    private void tearDownStandarOutputRedirect() throws IOException{
+        standarOutputSteam.delete();
+        System.setOut(System.out);
+    }
+
     @Before
     public void setUp() throws Exception {
         loggerInstance = Logger.getLogger();
@@ -54,6 +65,8 @@ public class LoggerLoadPropertiesTest {
 
     @Test
     public void testLoadConsoleOutput() throws Exception {
+        setUpStandarOutputRedirect();
+
         setUpConsoleOutputProperty();
         loggerInstance.loadConfigFromFile(filename);
         loggerInstance.setMessageFormat(new LogFormat("%m"));
@@ -62,8 +75,19 @@ public class LoggerLoadPropertiesTest {
         loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
 
-        //TODO: add console reading to test.
-        assertTrue(false);
+        Scanner s = new Scanner(new File(outputFilename));
+        ArrayList<String> list = new ArrayList<String>();
+        while (s.hasNext()){
+            list.add(s.next());
+        }
+        s.close();
+
+        assertTrue(list.get(0).equals("Fatal"));
+        assertTrue(list.get(1).equals("Message"));
+        assertTrue(list.get(2).equals("Error"));
+        assertTrue(list.get(3).equals("Message"));
+
+        tearDownStandarOutputRedirect();
     }
 
     @Test
