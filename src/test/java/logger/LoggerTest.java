@@ -3,21 +3,32 @@ package logger;
 import level.LogLevel;
 import logger.LogFormat;
 import logger.Logger;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
 
 
 public class LoggerTest {
 
     private Logger loggerInstance;
+    private String permanentFilename = "Log.txt";
+    private String temporaryFilename = "TempLog.txt";
 
     @Before
     public void setUp() throws Exception {
         loggerInstance = Logger.getLogger();
         loggerInstance.setConsoleOutput(true);
         loggerInstance.setMessageFormat(new LogFormat("%p - %m"));
-        loggerInstance.addOutputFile("Log.txt");
-        loggerInstance.addOutputFile("Log2.txt");
+        loggerInstance.addOutputFile(permanentFilename);
+        loggerInstance.addOutputFile(temporaryFilename);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        File file = new File(temporaryFilename);
+        file.delete();
     }
 
     @Test
