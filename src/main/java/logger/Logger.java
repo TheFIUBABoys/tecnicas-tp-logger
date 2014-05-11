@@ -1,31 +1,34 @@
 package logger;
 
 import level.*;
+import loggerExceptions.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by GonchuB on 09/05/2014.
  * FIUBA
  */
-public class Logger {
+
+public class Logger implements PropertyApplyingDelegate{
 
     private static Logger loggerInstance = null;
-
+    
     private LogLevel logLevelSet;
     private LogFormat logFormat;
     private ArrayList<BufferedWriter> outputFiles;
     private Boolean terminalOutput;
+    
+	private LoggerPropertyLoader loggerPropertyLoader;
 
     private Logger() {
         logLevelSet = new LevelDebug();
         logFormat = new LogFormat();
         outputFiles = new ArrayList<BufferedWriter>();
         terminalOutput = true;
+        loggerPropertyLoader = new LoggerPropertyLoader(this);
+
     }
 
     public static Logger getLogger() {
@@ -33,6 +36,9 @@ public class Logger {
             loggerInstance = new Logger();
         }
         return loggerInstance;
+    }
+    public void resetLogger() { 
+    	loggerInstance = null;
     }
 
     public void setMessageFormat(LogFormat messageFormat) {
@@ -64,6 +70,7 @@ public class Logger {
         if (logLevel.compareTo(logLevelSet) < 0) {
             executeLog(message, logLevel);
         }
+        //TODO: throw wrong level Exception
     }
 
     private void writeInBuffer(BufferedWriter bw, String message) {
@@ -84,5 +91,33 @@ public class Logger {
             writeInBuffer(bw, formattedMessage);
         }
     }
+    
+    public void applyLogFormatProperty(String property, String fileValue) throws WrongPropertyFormatException{
+    	try{
+    		//TODO: implement exception in log format class
+    		logFormat = new LogFormat(fileValue);
+    	}catch(Exception e){
+    		throw new WrongPropertyFormatException(e.getMessage());
+    	}
+    }
+    
+    public void applyLogLevelProperty(String property, String fileValue) throws WrongPropertyFormatException{
+    	//TODO: log level factory probably needed here.
+    }
 
+    public void applyOutputFileProperty(String property, String fileValue) throws IOException{
+    	addOutputFile(fileValue);
+    }
+         
+    public void applyConsoleOutputProperty(String property, String fileValue) throws WrongPropertyFormatException{
+    	if (fileValue.equalsIgnoreCase("true") || fileValue.equalsIgnoreCase("false")) {
+    	    setConsoleOutput(Boolean.valueOf(fileValue));
+    	} else {
+    	   throw new WrongPropertyFormatException(fileValue + " is not a valid value for "+ property);
+    	}
+    }
+    
+	public void loadConfigFromFile(String filename) throws Exception {
+		loggerPropertyLoader.loadConfigFromFile(filename);
+	}
 }

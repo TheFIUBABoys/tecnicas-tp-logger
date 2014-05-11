@@ -33,6 +33,7 @@ public class LogFormat {
 
     public LogFormat(String format) {
         formatString = format;
+        //TODO: Throw WrongFormatException if provided string is not a valid one.
     }
 
     public String formatLogMessage(String message, LogLevel level) {
