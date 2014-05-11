@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
 
+import level.LevelDebug;
 import level.LogLevel;
 import logger.LogFormat;
 import logger.Logger;
@@ -42,6 +43,30 @@ public class LoggerLoadPropertiesTest {
         loggerInstance = Logger.getLogger();
         Properties applicationProps = new Properties();
         applicationProps.setProperty("consoleOutput","true");
+        FileOutputStream outputFile = new FileOutputStream(filename);
+        applicationProps.store(outputFile, "---No Comment---");
+        outputFile.close();
+    }
+
+    private void setUpFatalLevelProperty() throws Exception{
+        File f = new File(filename);
+        f.delete();
+        loggerInstance.resetLogger();
+        loggerInstance = Logger.getLogger();
+        Properties applicationProps = new Properties();
+        applicationProps.setProperty("logLevel",LogLevel.LEVEL_FATAL.toString());
+        FileOutputStream outputFile = new FileOutputStream(filename);
+        applicationProps.store(outputFile, "---No Comment---");
+        outputFile.close();
+    }
+
+    private void setUpFormatProperty() throws Exception{
+        File f = new File(filename);
+        f.delete();
+        loggerInstance.resetLogger();
+        loggerInstance = Logger.getLogger();
+        Properties applicationProps = new Properties();
+        applicationProps.setProperty("logFormat","%m");
         FileOutputStream outputFile = new FileOutputStream(filename);
         applicationProps.store(outputFile, "---No Comment---");
         outputFile.close();
@@ -116,14 +141,51 @@ public class LoggerLoadPropertiesTest {
 
     @Test
     public void testLoadLogLevel() throws Exception {
-        //TODO
-        assertTrue(false);
+        setUpStandarOutputRedirect();
+
+        setUpFatalLevelProperty();
+        loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.setMessageFormat(new LogFormat("%m"));
+        loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
+        loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
+
+        Scanner s = new Scanner(standarOutputSteam);
+        ArrayList<String> list = new ArrayList<String>();
+        while (s.hasNext()){
+            list.add(s.next());
+        }
+        s.close();
+
+        assertTrue(list.get(0).equals("Fatal"));
+        assertTrue(list.get(1).equals("Message"));
+
+        tearDownStandarOutputRedirect();
     }
 
     @Test
     public void testLoadLogFormat() throws Exception {
-        //TODO: Logformatfactory.
-        assertTrue(false);
+        setUpStandarOutputRedirect();
+
+        setUpFormatProperty();
+        loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
+        loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
+
+        Scanner s = new Scanner(standarOutputSteam);
+        ArrayList<String> list = new ArrayList<String>();
+        while (s.hasNext()){
+            list.add(s.next());
+        }
+        s.close();
+
+        assertTrue(list.get(0).equals("Error"));
+        assertFalse(list.get(0).equals("ERROR"));
+        assertTrue(list.get(1).equals("Message"));
+        assertTrue(list.get(2).equals("Fatal"));
+        assertFalse(list.get(2).equals("FATAL"));
+        assertTrue(list.get(3).equals("Message"));
+
+        tearDownStandarOutputRedirect();
     }
 
     @After

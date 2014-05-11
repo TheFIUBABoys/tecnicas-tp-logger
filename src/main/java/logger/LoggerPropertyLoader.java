@@ -60,7 +60,7 @@ public class LoggerPropertyLoader {
         });
         
         methodMap.put("logFormat", new Command() {
-            public void applyPropertyWithValue(String propertyKey, String value) throws WrongPropertyFormatException { 
+            public void applyPropertyWithValue(String propertyKey, String value) throws WrongPropertyFormatException {
             	applyLogFormatProperty(propertyKey,value);
             	};
         });
@@ -70,7 +70,7 @@ public class LoggerPropertyLoader {
     private void applyLogFormatProperty(String property, String fileValue) throws WrongPropertyFormatException{
     	delegate.applyLogFormatProperty(property, fileValue);
     }
-    
+
     private void applyLogLevelProperty(String property, String fileValue) throws WrongPropertyFormatException{
     	delegate.applyLogLevelProperty(property, fileValue);
     }

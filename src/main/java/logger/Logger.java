@@ -167,7 +167,12 @@ public class Logger implements PropertyApplyingDelegate {
     }
 
     public void applyLogLevelProperty(String property, String fileValue) throws WrongPropertyFormatException {
-        //TODO: log level factory probably needed here.
+        LogLevelFactory logLevelFactory = LogLevelFactory.getInstance();
+        try {
+            logLevelSet = logLevelFactory.createLogLevel(fileValue);
+        } catch (NotExistingLevelException e) {
+            e.printStackTrace();
+        }
     }
 
     public void applyOutputFileProperty(String property, String fileValue) throws IOException {
