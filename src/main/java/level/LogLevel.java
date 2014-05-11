@@ -2,10 +2,15 @@ package level;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * FIUBA
+ * The responsibility of this class is to provide an interface
+ * for the different types of logging levels.
  */
-public abstract class LogLevel implements Comparable<LogLevel> {
+public interface LogLevel extends Comparable<LogLevel> {
 
+    /**
+     * Easy access to debugging level types.
+     * Example of semantics: LogLevel.LEVEL_DEBUG
+     */
     public static LogLevel LEVEL_DEBUG = new LevelDebug();
     public static LogLevel LEVEL_INFO = new LevelInfo();
     public static LogLevel LEVEL_WARN = new LevelWarn();
@@ -22,7 +27,7 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @param logLevel the logLevel to compare to.
      * @return an integer that indicates <, > or ==.
      */
-    public abstract int compareTo(LogLevel logLevel);
+    public int compareTo(LogLevel logLevel);
 
     /**
      * Implement compare to method.
@@ -33,7 +38,7 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @param logLevel the logLevel to compare to.
      * @return an integer that indicates <, > or ==.
      */
-    public abstract int compareTo(LevelDebug logLevel);
+    public int compareTo(LevelDebug logLevel);
 
     /**
      * Implement compare to method.
@@ -44,7 +49,7 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @param logLevel the logLevel to compare to.
      * @return an integer that indicates <, > or ==.
      */
-    public abstract int compareTo(LevelInfo logLevel);
+    public int compareTo(LevelInfo logLevel);
 
     /**
      * Implement compare to method.
@@ -55,7 +60,7 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @param logLevel the logLevel to compare to.
      * @return an integer that indicates <, > or ==.
      */
-    public abstract int compareTo(LevelWarn logLevel);
+    public int compareTo(LevelWarn logLevel);
 
     /**
      * Implement compare to method.
@@ -66,7 +71,7 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @param logLevel the logLevel to compare to.
      * @return an integer that indicates <, > or ==.
      */
-    public abstract int compareTo(LevelError logLevel);
+    public int compareTo(LevelError logLevel);
 
     /**
      * Implement compare to method.
@@ -77,7 +82,7 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @param logLevel the logLevel to compare to.
      * @return an integer that indicates <, > or ==.
      */
-    public abstract int compareTo(LevelFatal logLevel);
+    public int compareTo(LevelFatal logLevel);
 
     /**
      * Implement compare to method.
@@ -88,12 +93,12 @@ public abstract class LogLevel implements Comparable<LogLevel> {
      * @param logLevel the logLevel to compare to.
      * @return an integer that indicates <, > or ==.
      */
-    public abstract int compareTo(LevelOff logLevel);
+    public int compareTo(LevelOff logLevel);
 
     /**
      * String representation of the LogLevel.
      *
      * @return the string that represents the log level.
      */
-    public abstract String toString();
+    public String toString();
 }
