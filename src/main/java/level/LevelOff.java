@@ -2,7 +2,9 @@ package level;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * FIUBA
+ * This class represents the OFF logging level. It
+ * implements all comparing methods defined by the LogLevel
+ * interface.
  */
 public class LevelOff implements LogLevel {
 
