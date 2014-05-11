@@ -6,6 +6,13 @@ package level;
  */
 public abstract class LogLevel implements Comparable<LogLevel> {
 
+    public static LogLevel LEVEL_DEBUG = new LevelDebug();
+    public static LogLevel LEVEL_INFO = new LevelInfo();
+    public static LogLevel LEVEL_WARN = new LevelWarn();
+    public static LogLevel LEVEL_ERROR = new LevelError();
+    public static LogLevel LEVEL_FATAL = new LevelFatal();
+    public static LogLevel LEVEL_OFF = new LevelOff();
+
     /**
      * Implement compare to method.
      * thisOne.compareTo(otherOne) > 0, thisOne > otherOne

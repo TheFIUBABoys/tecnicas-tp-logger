@@ -1,3 +1,5 @@
+package logger;
+
 import level.LogLevel;
 
 import java.text.SimpleDateFormat;

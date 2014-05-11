@@ -1,3 +1,5 @@
+package logger;
+
 import level.*;
 
 import java.io.BufferedWriter;
@@ -18,13 +20,6 @@ public class Logger {
     private LogFormat logFormat;
     private ArrayList<BufferedWriter> outputFiles;
     private Boolean terminalOutput;
-
-    public static LogLevel LEVEL_DEBUG = new LevelDebug();
-    public static LogLevel LEVEL_INFO = new LevelInfo();
-    public static LogLevel LEVEL_WARN = new LevelWarn();
-    public static LogLevel LEVEL_ERROR = new LevelError();
-    public static LogLevel LEVEL_FATAL = new LevelFatal();
-    public static LogLevel LEVEL_OFF = new LevelOff();
 
     private Logger() {
         logLevelSet = new LevelDebug();
