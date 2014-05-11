@@ -49,4 +49,9 @@ public class LevelInfoTest {
     public void testCompareToOff() throws Exception {
         assertTrue(levelOff.compareTo(levelInfo) > 0);
     }
+
+    @org.junit.Test
+    public void testToString() throws Exception {
+        assertEquals("INFO", levelInfo.toString());
+    }
 }
