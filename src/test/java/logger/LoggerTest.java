@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import level.LogLevel;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,11 +37,16 @@ public class LoggerTest {
         loggerInstance.setMessageFormat(new LogFormat("%p - %m"));
         loggerInstance.addOutputFile(permanentFilename);
         loggerInstance.addOutputFile(temporaryFilename);
+        setUpStandarOutputRedirect();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        tearDownStandarOutputRedirect();
     }
 
     @Test
     public void testLogMessageInfo() throws Exception {
-        setUpStandarOutputRedirect();
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
 
         String error = "Error Message%n";
@@ -71,14 +77,10 @@ public class LoggerTest {
         assertTrue(list.get(6).equals("Info"));
         assertTrue(list.get(7).equals("Message"));
 
-        tearDownStandarOutputRedirect();
-
     }
 
     @Test
     public void testLogMessageOff() throws Exception {
-        setUpStandarOutputRedirect();
-
         loggerInstance.setLogLevel(LogLevel.LEVEL_OFF);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Debug Message%n", LogLevel.LEVEL_DEBUG);
@@ -93,13 +95,10 @@ public class LoggerTest {
 
         assertTrue(list.isEmpty());
 
-        tearDownStandarOutputRedirect();
     }
 
     @Test
     public void testLogMessageFatal() throws Exception {
-        setUpStandarOutputRedirect();
-
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Debug Message%n", LogLevel.LEVEL_DEBUG);
@@ -119,7 +118,6 @@ public class LoggerTest {
         assertTrue(list.get(0).equals("FATAL"));
         assertTrue(list.get(2).equals("Fatal"));
 
-        tearDownStandarOutputRedirect();
     }
 
 }
