@@ -1,6 +1,7 @@
 package logger;
 
 import level.LogLevel;
+import loggerExceptions.InvalidFormatException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +36,7 @@ public class LogFormat {
      * Creates a new LogFormat instance with a default format.
      */
     public LogFormat() {
-        new LogFormat(defaultFormat);
+        formatString = defaultFormat;
     }
 
     /**
@@ -43,15 +44,14 @@ public class LogFormat {
      *
      * @param format the format string that will be used to format the messages.
      */
-    public LogFormat(String format) {
+    public LogFormat(String format) throws InvalidFormatException {
         if (!validFormat(format)) {
-//            throw
+            throw new InvalidFormatException("Invalid format: " + format);
         }
         formatString = format;
-        //TODO: Throw WrongFormatException if provided string is not a valid one.
     }
 
-    public Boolean validFormat(String format) {
+    private Boolean validFormat(String format) {
         String copy = format.concat("");
         copy = copy.replaceAll(levelRegex, "");
         copy = copy.replaceAll(dateRegex, "");

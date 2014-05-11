@@ -3,6 +3,7 @@ package logger;
 import level.LevelDebug;
 import level.LogLevel;
 import logger.LogFormat;
+import loggerExceptions.InvalidFormatException;
 import org.junit.Assert;
 
 import java.text.SimpleDateFormat;
@@ -11,11 +12,13 @@ import java.util.Date;
 public class LogFormatTest {
 
     private LogFormat messageFormat;
+    private LogFormat defaultFormat;
     private LogFormat messageFormatDate;
 
     @org.junit.Before
     public void setUp() throws Exception {
         messageFormat = new LogFormat("%p - %m");
+        defaultFormat = new LogFormat();
         messageFormatDate = new LogFormat("%d{dd-MM-yyyy}");
     }
 
@@ -28,6 +31,14 @@ public class LogFormatTest {
     }
 
     @org.junit.Test
+    public void testDefaultFormatLogMessage() throws Exception {
+        String message = "Message";
+        LogLevel logLevel = new LevelDebug();
+
+        Assert.assertEquals("DEBUG - Message", defaultFormat.formatLogMessage(message, logLevel));
+    }
+
+    @org.junit.Test
     public void testFormatWithDate() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
@@ -37,12 +48,9 @@ public class LogFormatTest {
         Assert.assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel));
     }
 
-    @org.junit.Test
-    public void testValidFormat() throws Exception {
+    @org.junit.Test(expected = InvalidFormatException.class)
+    public void testInvalidFormat() throws Exception {
         String invalidFormatString = "%p - %m - %w";
-        String validFormatString = "%p - %m";
-
-        Assert.assertFalse(messageFormat.validFormat(invalidFormatString));
-        Assert.assertTrue(messageFormat.validFormat(validFormatString));
+        new LogFormat(invalidFormatString);
     }
 }

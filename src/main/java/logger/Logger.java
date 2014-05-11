@@ -160,9 +160,8 @@ public class Logger implements PropertyApplyingDelegate {
 
     public void applyLogFormatProperty(String property, String fileValue) throws WrongPropertyFormatException {
         try {
-            //TODO: implement exception in log format class
             logFormat = new LogFormat(fileValue);
-        } catch (Exception e) {
+        } catch (InvalidFormatException e) {
             throw new WrongPropertyFormatException(e.getMessage());
         }
     }
