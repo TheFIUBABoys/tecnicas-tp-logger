@@ -8,3 +8,4 @@
 *.txt
 out/
 target/
+coverage-report/
