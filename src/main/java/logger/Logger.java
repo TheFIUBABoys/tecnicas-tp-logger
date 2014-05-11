@@ -36,7 +36,6 @@ public class Logger implements PropertyApplyingDelegate {
         outputFiles = new ArrayList<BufferedWriter>();
         terminalOutput = true;
         loggerPropertyLoader = new LoggerPropertyLoader(this);
-
     }
 
     /**
@@ -55,7 +54,14 @@ public class Logger implements PropertyApplyingDelegate {
      * Resets the logger to its default state.
      */
     public void resetLogger() {
-        loggerInstance = null;
+        for (BufferedWriter bw : outputFiles) {
+            try {
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        loggerInstance = new Logger();
     }
 
     /**

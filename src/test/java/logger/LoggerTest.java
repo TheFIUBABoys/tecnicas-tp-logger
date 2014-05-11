@@ -1,14 +1,8 @@
 package logger;
 
 import level.LogLevel;
-import logger.LogFormat;
-import logger.Logger;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.File;
-
 
 public class LoggerTest {
 
@@ -23,12 +17,6 @@ public class LoggerTest {
         loggerInstance.setMessageFormat(new LogFormat("%p - %m"));
         loggerInstance.addOutputFile(permanentFilename);
         loggerInstance.addOutputFile(temporaryFilename);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        File file = new File(temporaryFilename);
-        file.delete();
     }
 
     @Test
@@ -55,4 +43,5 @@ public class LoggerTest {
         loggerInstance.logMessage("Warn Message%n", LogLevel.LEVEL_WARN);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
     }
+
 }
