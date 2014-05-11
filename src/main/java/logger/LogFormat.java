@@ -44,8 +44,25 @@ public class LogFormat {
      * @param format the format string that will be used to format the messages.
      */
     public LogFormat(String format) {
+        if (!validFormat(format)) {
+//            throw
+        }
         formatString = format;
         //TODO: Throw WrongFormatException if provided string is not a valid one.
+    }
+
+    public Boolean validFormat(String format) {
+        String copy = format.concat("");
+        copy = copy.replaceAll(levelRegex, "");
+        copy = copy.replaceAll(dateRegex, "");
+        copy = copy.replaceAll(threadRegex, "");
+        copy = copy.replaceAll(messageRegex, "");
+        copy = copy.replaceAll(separatorRegex, "");
+        copy = copy.replaceAll(lineRegex, "");
+        copy = copy.replaceAll(filenameRegex, "");
+        copy = copy.replaceAll(methodRegex, "");
+        copy = copy.replaceAll(percentRegex, "");
+        return copy.replaceAll("%", "").equals(copy);
     }
 
     /**
