@@ -50,4 +50,9 @@ public class LevelFatalTest {
         assertTrue(levelOff.compareTo(levelFatal) > 0);
     }
 
+    @org.junit.Test
+    public void testToString() throws Exception {
+        assertEquals("FATAL", levelFatal.toString());
+    }
+
 }

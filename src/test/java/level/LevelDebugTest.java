@@ -50,4 +50,10 @@ public class LevelDebugTest {
     public void testCompareToOff() throws Exception {
         assertTrue(levelOff.compareTo(levelDebug) > 0);
     }
+
+    @org.junit.Test
+    public void testToString() throws Exception {
+        assertEquals("OFF", levelOff.toString());
+    }
+    
 }

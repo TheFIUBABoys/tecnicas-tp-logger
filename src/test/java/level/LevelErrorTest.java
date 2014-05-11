@@ -50,4 +50,9 @@ public class LevelErrorTest {
         assertTrue(levelOff.compareTo(levelError) > 0);
     }
 
+    @org.junit.Test
+    public void testToString() throws Exception {
+        assertEquals("ERROR", levelError.toString());
+    }
+
 }
