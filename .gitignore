@@ -5,6 +5,6 @@
 .project
 .tmp
 .class
-.txt
+*.txt
 out/
 target/

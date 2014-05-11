@@ -17,21 +17,12 @@ public class LoggerLoadPropertiesTest {
 	Logger loggerInstance;
 	String filename = "appProperties.txt";
 	String outputFilename = "outputFilename.txt";
-		
-	private void setUpOutputFileProperty() throws Exception{
-    	File f = new File(outputFilename);
-    	f.delete();
-    	File f1 = new File(filename);
-    	f1.delete();
-    	loggerInstance.resetLogger();
-    	loggerInstance = Logger.getLogger();
-    	loggerInstance.setConsoleOutput(false);
-		Properties applicationProps = new Properties();
-    	applicationProps.setProperty("outputFile",outputFilename);
-    	FileOutputStream outputFile = new FileOutputStream(filename);
-    	applicationProps.store(outputFile, "---No Comment---");
-    	outputFile.close();
-	}
+
+	
+    @Before
+    public void setUp() throws Exception {
+        loggerInstance = Logger.getLogger();
+    }
 
 	private void setUpConsoleOutputProperty() throws Exception{
     	File f = new File(filename);
@@ -45,11 +36,6 @@ public class LoggerLoadPropertiesTest {
     	outputFile.close();
 	}
 	
-    @Before
-    public void setUp() throws Exception {
-        loggerInstance = Logger.getLogger();
-    }
-    
     @Test
     public void testLoadConsoleOutput() throws Exception {
     	setUpConsoleOutputProperty();
@@ -64,6 +50,21 @@ public class LoggerLoadPropertiesTest {
         assertTrue(false);
     }
     
+	private void setUpOutputFileProperty() throws Exception{
+    	File f = new File(outputFilename);
+    	f.delete();
+    	File f1 = new File(filename);
+    	f1.delete();
+    	loggerInstance.resetLogger();
+    	loggerInstance = Logger.getLogger();
+    	loggerInstance.setConsoleOutput(false);
+		Properties applicationProps = new Properties();
+    	applicationProps.setProperty("outputFile",outputFilename);
+    	FileOutputStream outputFile = new FileOutputStream(filename);
+    	applicationProps.store(outputFile, "---No Comment---");
+    	outputFile.close();
+	}
+	
     @Test
     public void testLoadOutputFile() throws Exception {
     	setUpOutputFileProperty();
@@ -100,10 +101,5 @@ public class LoggerLoadPropertiesTest {
         assertTrue(false);
     }
     
-    @After
-    public void tearDown(){
-    	File f = new File(filename);
-    	f.delete();
-    }
-    
+
 }

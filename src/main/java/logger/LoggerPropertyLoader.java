@@ -92,7 +92,7 @@ public class LoggerPropertyLoader {
      * 
      */
 	public void loadConfigFromFile(String filename) throws Exception {
-		FileInputStream inputStream = new FileInputStream("appProperties");
+		FileInputStream inputStream = new FileInputStream(filename);
 		Properties properties = new Properties();
 		properties.load(inputStream);
 		inputStream.close();
