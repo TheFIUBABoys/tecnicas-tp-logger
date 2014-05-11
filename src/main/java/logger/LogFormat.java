@@ -9,13 +9,17 @@ import java.util.regex.Pattern;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * FIUBA
+ * This class' responsibility is to format a message, given the
+ * message and a format expression.
  */
 public class LogFormat {
 
     private String formatString;
     private String defaultFormat = "%p - %m";
 
+    /**
+     * Regex and patterns to interpolate the format string.
+     */
     private final String dateRegex = "%d\\{[^\\}]*\\}";
     private final Pattern datePattern = Pattern.compile(dateRegex);
     private final String levelRegex = "%p";
@@ -27,14 +31,29 @@ public class LogFormat {
     private final String filenameRegex = "%F";
     private final String methodRegex = "%M";
 
+    /**
+     * Creates a new LogFormat instance with a default format.
+     */
     public LogFormat() {
         new LogFormat(defaultFormat);
     }
 
+    /**
+     * Creates a new LogFormat instance with the specified format.
+     *
+     * @param format the format string that will be used to format the messages.
+     */
     public LogFormat(String format) {
         formatString = format;
     }
 
+    /**
+     * Formats the received log message.
+     *
+     * @param message the message to be logged.
+     * @param level   the logging level of the message.
+     * @return the string with the formatted message (parameters in the format interpolated).
+     */
     public String formatLogMessage(String message, LogLevel level) {
         String replaced = formatString;
 
@@ -42,7 +61,24 @@ public class LogFormat {
         replaced = replaced.replaceAll(levelRegex, level.toString());
         replaced = replaced.replaceAll(messageRegex, message);
 
-        // These are independant.
+        replaced = replaceInvocationIndependent(replaced);
+        replaced = replaceInvocationDependant(replaced);
+
+        // This one has to be replaced at the end cause it could break another regex.
+        // For example %%m could have undesired behaviors.
+        replaced = replaced.replaceAll(percentRegex, "%");
+
+        return replaced;
+    }
+
+    /**
+     * Replaces the received string with invocation independent values.
+     * Independent values are the Date and Time and the Line separator.
+     *
+     * @param replaced the string to be replaced.
+     * @return the string interpolated with the invocation independent values.
+     */
+    private String replaceInvocationIndependent(String replaced) {
         Matcher dateMatches = datePattern.matcher(replaced);
         if (dateMatches.find()) {
             String formatString = dateMatches.group(0);
@@ -57,8 +93,18 @@ public class LogFormat {
             replaced = replaced.replaceAll(dateRegex, dateFormat.format(new Date()));
         }
         replaced = replaced.replaceAll(separatorRegex, "\n");
+        return replaced;
+    }
 
-        // Invocation dependant.
+
+    /**
+     * Replaces the received string with invocation dependant values.
+     * Dependent values are all those related with the execution thread.
+     *
+     * @param replaced the string to be replaced.
+     * @return the string interpolated with the invocation dependant values.
+     */
+    private String replaceInvocationDependant(String replaced) {
         Thread current = Thread.currentThread();
         StackTraceElement stackTraceElement = current.getStackTrace()[2];
 
@@ -66,11 +112,6 @@ public class LogFormat {
         replaced = replaced.replaceAll(lineRegex, "" + stackTraceElement.getLineNumber());
         replaced = replaced.replaceAll(filenameRegex, stackTraceElement.getFileName());
         replaced = replaced.replaceAll(methodRegex, stackTraceElement.getMethodName());
-
-        // This one has to be replaced at the end cause it could break another regex.
-        // For example %%m could have undesired behaviors.
-        replaced = replaced.replaceAll(percentRegex, "%");
-
         return replaced;
     }
 }
