@@ -34,7 +34,7 @@ public class LoggerTest {
     public void setUp() throws Exception {
         loggerInstance = LoggerImpl.getLogger();
         loggerInstance.setConsoleOutput(true);
-        loggerInstance.setMessageFormat(new LogFormat("%p - %m"));
+        loggerInstance.setMessageFormat(new LogFormatImpl("%p - %m"));
         loggerInstance.addOutputFile(permanentFilename);
         loggerInstance.addOutputFile(temporaryFilename);
         setUpStandarOutputRedirect();

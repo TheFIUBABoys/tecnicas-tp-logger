@@ -2,7 +2,6 @@ package logger;
 
 import level.LevelDebug;
 import level.LogLevel;
-import logger.LogFormat;
 import loggerExceptions.InvalidFormatException;
 import org.junit.Assert;
 
@@ -17,9 +16,9 @@ public class LogFormatTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
-        messageFormat = new LogFormat("%p - %m");
-        defaultFormat = new LogFormat();
-        messageFormatDate = new LogFormat("%d{dd-MM-yyyy}");
+        messageFormat = new LogFormatImpl("%p - %m");
+        defaultFormat = new LogFormatImpl();
+        messageFormatDate = new LogFormatImpl("%d{dd-MM-yyyy}");
     }
 
     @org.junit.Test
@@ -51,6 +50,6 @@ public class LogFormatTest {
     @org.junit.Test(expected = InvalidFormatException.class)
     public void testInvalidFormat() throws Exception {
         String invalidFormatString = "%p - %m - %w";
-        new LogFormat(invalidFormatString);
+        new LogFormatImpl(invalidFormatString);
     }
 }

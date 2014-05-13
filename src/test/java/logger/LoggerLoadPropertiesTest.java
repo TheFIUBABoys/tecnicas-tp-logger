@@ -87,7 +87,7 @@ public class LoggerLoadPropertiesTest {
 
         setUpConsoleOutputProperty();
         loggerInstance.loadConfigFromFile(filename);
-        loggerInstance.setMessageFormat(new LogFormat("%m"));
+        loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
         loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
@@ -112,7 +112,7 @@ public class LoggerLoadPropertiesTest {
     public void testLoadOutputFile() throws Exception {
         setUpOutputFileProperty();
         loggerInstance.loadConfigFromFile(filename);
-        loggerInstance.setMessageFormat(new LogFormat("%m"));
+        loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
         loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
@@ -138,7 +138,7 @@ public class LoggerLoadPropertiesTest {
 
         setUpFatalLevelProperty();
         loggerInstance.loadConfigFromFile(filename);
-        loggerInstance.setMessageFormat(new LogFormat("%m"));
+        loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
 

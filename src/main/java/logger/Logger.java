@@ -1,7 +1,6 @@
 package logger;
 
 import level.LogLevel;
-import loggerExceptions.WrongPropertyFormatException;
 
 import java.io.IOException;
 
@@ -52,6 +51,12 @@ public interface Logger {
      */
     public void addOutputFile(String filename) throws IOException;
 
+    /**
+     * Loads the configuration from the given file.
+     *
+     * @param filename the filename of the configuration.
+     * @throws Exception if an error occurred when configuring.
+     */
     public void loadConfigFromFile(String filename) throws Exception;
 
 }

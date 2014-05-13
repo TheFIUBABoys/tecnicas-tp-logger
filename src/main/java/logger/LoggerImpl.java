@@ -32,7 +32,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     private LoggerImpl() {
         logLevelSet = new LevelDebug();
-        logFormat = new LogFormat();
+        logFormat = new LogFormatImpl();
         outputFiles = new ArrayList<BufferedWriter>();
         terminalOutput = true;
         loggerPropertyLoader = new LoggerPropertyLoader(this);
@@ -128,14 +128,20 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void applyLogFormatProperty(String property, String fileValue) throws WrongPropertyFormatException {
         try {
-            logFormat = new LogFormat(fileValue);
+            logFormat = new LogFormatImpl(fileValue);
         } catch (InvalidFormatException e) {
             throw new WrongPropertyFormatException(e.getMessage());
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void applyLogLevelProperty(String property, String fileValue) throws WrongPropertyFormatException {
         LogLevelFactory logLevelFactory = LogLevelFactory.getInstance();
         try {
@@ -145,10 +151,16 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void applyOutputFileProperty(String property, String fileValue) throws IOException {
         addOutputFile(fileValue);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void applyConsoleOutputProperty(String property, String fileValue) throws WrongPropertyFormatException {
         if (fileValue.equalsIgnoreCase("true") || fileValue.equalsIgnoreCase("false")) {
             setConsoleOutput(Boolean.valueOf(fileValue));
@@ -157,6 +169,9 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void loadConfigFromFile(String filename) throws Exception {
         loggerPropertyLoader.loadConfigFromFile(filename);
     }
