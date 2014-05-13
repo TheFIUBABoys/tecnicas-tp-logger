@@ -76,7 +76,9 @@ public class LoggerPropertyLoader {
     }
 
     private void applyOutputFileProperty(String property, String fileValue) throws IOException{
-    	delegate.applyOutputFileProperty(property, fileValue);
+        List<String> fileList = Arrays.asList(fileValue.split(","));
+        for (String file : fileList)
+            delegate.applyOutputFileProperty(property, file);
     }
          
     private void applyConsoleOutputProperty(String property, String fileValue) throws WrongPropertyFormatException{

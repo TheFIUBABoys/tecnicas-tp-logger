@@ -32,6 +32,24 @@ public class LoggerLoadPropertiesTest {
         outputFile.close();
     }
 
+    private void setUpOutputFilesProperty() throws Exception {
+        File f = new File(outputFilename);
+        f.delete();
+
+        File f2 = new File(outputFilename+"1");
+        f2.delete();
+
+        File f1 = new File(filename);
+        f1.delete();
+        loggerInstance = LoggerImpl.getLogger();
+        loggerInstance.setConsoleOutput(false);
+        Properties applicationProps = new Properties();
+        applicationProps.setProperty("outputFile", outputFilename+","+outputFilename+"1");
+        FileOutputStream outputFile = new FileOutputStream(filename);
+        applicationProps.store(outputFile, "---No Comment---");
+        outputFile.close();
+    }
+
     private void setUpWrongFormatConsoleProperty() throws Exception{
         File f = new File(filename);
         f.delete();
@@ -169,6 +187,35 @@ public class LoggerLoadPropertiesTest {
         Assert.assertEquals("Message", list.get(1));
         Assert.assertEquals("Error", list.get(2));
         Assert.assertEquals("Message", list.get(3));
+
+    }
+
+    private void testFile(String aFilename) throws Exception{
+        File f = new File(aFilename);
+        Scanner s = new Scanner(f);
+        ArrayList<String> list = new ArrayList<String>();
+        while (s.hasNext()) {
+            list.add(s.next());
+        }
+        s.close();
+        f.delete();
+        Assert.assertEquals("Fatal", list.get(0));
+        Assert.assertEquals("Message", list.get(1));
+        Assert.assertEquals("Error", list.get(2));
+        Assert.assertEquals("Message", list.get(3));
+    }
+    @Test
+    public void testLoadSeveralOutputFiles() throws Exception {
+        setUpOutputFilesProperty();
+        loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
+        loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
+        loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
+        loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
+        loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
+
+        testFile(outputFilename);
+        testFile(outputFilename+"1");
 
     }
 
