@@ -11,12 +11,14 @@ import java.util.Date;
 public class LogFormatTest {
 
     private LogFormat messageFormat;
+    private LogFormat threadFormat;
     private LogFormat defaultFormat;
     private LogFormat messageFormatDate;
 
     @org.junit.Before
     public void setUp() throws Exception {
         messageFormat = new LogFormatImpl("%p - %m");
+        threadFormat = new LogFormatImpl("%t - %L - %M");
         defaultFormat = new LogFormatImpl();
         messageFormatDate = new LogFormatImpl("%d{dd-MM-yyyy}");
     }
@@ -51,5 +53,14 @@ public class LogFormatTest {
     public void testInvalidFormat() throws Exception {
         String invalidFormatString = "%p - %m - %w";
         new LogFormatImpl(invalidFormatString);
+    }
+
+    @org.junit.Test
+    public void testThreadFormat() throws Exception {
+        String message = "Message";
+        LogLevel logLevel = new LevelDebug();
+        String expected = "main - 64 - testThreadFormat";
+
+        Assert.assertEquals(expected, threadFormat.formatLogMessage(message, logLevel));
     }
 }
