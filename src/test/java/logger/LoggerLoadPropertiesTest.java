@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
 
-import level.LevelDebug;
 import level.LogLevel;
-import logger.LogFormat;
-import logger.Logger;
 
 import org.junit.*;
 
@@ -26,8 +23,7 @@ public class LoggerLoadPropertiesTest {
         f.delete();
         File f1 = new File(filename);
         f1.delete();
-        loggerInstance.resetLogger();
-        loggerInstance = Logger.getLogger();
+        loggerInstance = LoggerImpl.getLogger();
         loggerInstance.setConsoleOutput(false);
         Properties applicationProps = new Properties();
         applicationProps.setProperty("outputFile",outputFilename);
@@ -39,8 +35,7 @@ public class LoggerLoadPropertiesTest {
     private void setUpConsoleOutputProperty() throws Exception{
         File f = new File(filename);
         f.delete();
-        loggerInstance.resetLogger();
-        loggerInstance = Logger.getLogger();
+        loggerInstance = LoggerImpl.getLogger();
         Properties applicationProps = new Properties();
         applicationProps.setProperty("consoleOutput","true");
         FileOutputStream outputFile = new FileOutputStream(filename);
@@ -51,8 +46,7 @@ public class LoggerLoadPropertiesTest {
     private void setUpFatalLevelProperty() throws Exception{
         File f = new File(filename);
         f.delete();
-        loggerInstance.resetLogger();
-        loggerInstance = Logger.getLogger();
+        loggerInstance = LoggerImpl.getLogger();
         Properties applicationProps = new Properties();
         applicationProps.setProperty("logLevel",LogLevel.LEVEL_FATAL.toString());
         FileOutputStream outputFile = new FileOutputStream(filename);
@@ -63,8 +57,7 @@ public class LoggerLoadPropertiesTest {
     private void setUpFormatProperty() throws Exception{
         File f = new File(filename);
         f.delete();
-        loggerInstance.resetLogger();
-        loggerInstance = Logger.getLogger();
+        loggerInstance = LoggerImpl.getLogger();
         Properties applicationProps = new Properties();
         applicationProps.setProperty("logFormat","%m");
         FileOutputStream outputFile = new FileOutputStream(filename);
@@ -85,7 +78,7 @@ public class LoggerLoadPropertiesTest {
 
     @Before
     public void setUp() throws Exception {
-        loggerInstance = Logger.getLogger();
+        loggerInstance = LoggerImpl.getLogger();
     }
 
     @Test

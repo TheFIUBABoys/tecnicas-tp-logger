@@ -19,20 +19,20 @@ public class LoggerTest {
     private String permanentFilename = "Log.txt";
     private String temporaryFilename = "TempLog.txt";
 
-    private void setUpStandarOutputRedirect() throws IOException{
+    private void setUpStandarOutputRedirect() throws IOException {
         standarOutputSteam = new File("tmp_stdout.txt");
         standarOutputSteam.createNewFile();
         System.setOut(new PrintStream(standarOutputSteam));
     }
 
-    private void tearDownStandarOutputRedirect() throws IOException{
+    private void tearDownStandarOutputRedirect() throws IOException {
         standarOutputSteam.delete();
         System.setOut(System.out);
     }
 
     @Before
     public void setUp() throws Exception {
-        loggerInstance = Logger.getLogger();
+        loggerInstance = LoggerImpl.getLogger();
         loggerInstance.setConsoleOutput(true);
         loggerInstance.setMessageFormat(new LogFormat("%p - %m"));
         loggerInstance.addOutputFile(permanentFilename);
@@ -59,7 +59,7 @@ public class LoggerTest {
 
         Scanner s = new Scanner(standarOutputSteam);
         ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()){
+        while (s.hasNext()) {
             list.add(s.next());
         }
         s.close();
@@ -88,7 +88,7 @@ public class LoggerTest {
 
         Scanner s = new Scanner(standarOutputSteam);
         ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()){
+        while (s.hasNext()) {
             list.add(s.next());
         }
         s.close();
@@ -107,7 +107,7 @@ public class LoggerTest {
 
         Scanner s = new Scanner(standarOutputSteam);
         ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()){
+        while (s.hasNext()) {
             list.add(s.next());
         }
         s.close();
@@ -117,7 +117,6 @@ public class LoggerTest {
 
         assertTrue(list.get(0).equals("FATAL"));
         assertTrue(list.get(2).equals("Fatal"));
-
     }
 
 }
