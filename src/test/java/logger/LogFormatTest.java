@@ -14,11 +14,13 @@ public class LogFormatTest {
     private LogFormat threadFormat;
     private LogFormat defaultFormat;
     private LogFormat messageFormatDate;
+    private LogFormat endOfLineFormat;
 
     @org.junit.Before
     public void setUp() throws Exception {
         messageFormat = new LogFormatImpl("%p - %m");
-        threadFormat = new LogFormatImpl("%t - %L - %M");
+        endOfLineFormat = new LogFormatImpl("%m%n");
+        threadFormat = new LogFormatImpl("%t - %M");
         defaultFormat = new LogFormatImpl();
         messageFormatDate = new LogFormatImpl("%d{dd-MM-yyyy}");
     }
@@ -59,8 +61,18 @@ public class LogFormatTest {
     public void testThreadFormat() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
-        String expected = "main - 64 - testThreadFormat";
+        String expected = "main - testThreadFormat";
 
         Assert.assertEquals(expected, threadFormat.formatLogMessage(message, logLevel));
+    }
+
+    @org.junit.Test
+    public void testConfigurableEol() throws Exception {
+        String message = "Message";
+        LogLevel logLevel = new LevelDebug();
+        String expected = "Message,";
+        endOfLineFormat.setEndOfLineSeparator(",");
+
+        Assert.assertEquals(expected, endOfLineFormat.formatLogMessage(message, logLevel));
     }
 }

@@ -17,4 +17,12 @@ public interface LogFormat {
      */
     public String formatLogMessage(String message, LogLevel level);
 
+    /**
+     * Configures the end of line separator.
+     *
+     * @param newEol the new separator.
+     */
+    public void setEndOfLineSeparator(String newEol);
+
+
 }

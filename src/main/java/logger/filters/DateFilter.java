@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by gonchub on 13/05/14.
+ * Filter for the dates.
  */
 public class DateFilter implements FormatFilter {
 

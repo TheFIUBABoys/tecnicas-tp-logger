@@ -18,21 +18,13 @@ import java.util.regex.Pattern;
 public class LogFormatImpl implements LogFormat {
 
     private String formatString;
-    private String defaultFormat = "%p - %m";
     private String separatorField = "\n";
-    private ArrayList<FormatFilter> filters;
-
-    /**
-     * Regex and patterns to interpolate the format string.
-     */
-    private final String levelRegex = "%p";
-    private final String messageRegex = "%m";
 
     /**
      * Creates a new LogFormatImpl instance with a default format.
      */
     public LogFormatImpl() {
-        formatString = defaultFormat;
+        formatString = "%p - %m";
     }
 
     /**
@@ -56,16 +48,17 @@ public class LogFormatImpl implements LogFormat {
     private Boolean validFormat(String format) {
         String copy = format.concat("");
 
+        FormatFilter messageFilter = new MessageFilter("");
+        FormatFilter levelFilter = new LevelFilter("");
+        FormatFilter separatorFilter = new SeparatorFilter("");
         FormatFilter dateFilter = new DateFilter();
-        FormatFilter separatorFilter = new SeparatorFilter(separatorField);
         FormatFilter threadFilter = new ThreadFilter();
         FormatFilter percentFilter = new PercentFilter();
 
-        copy = copy.replaceAll(levelRegex, "");
-        copy = copy.replaceAll(messageRegex, "");
-
-        copy = dateFilter.clear(copy);
+        copy = messageFilter.clear(copy);
+        copy = levelFilter.clear(copy);
         copy = separatorFilter.clear(copy);
+        copy = dateFilter.clear(copy);
         copy = threadFilter.clear(copy);
         copy = percentFilter.clear(copy);
 
@@ -77,22 +70,30 @@ public class LogFormatImpl implements LogFormat {
      */
     public String formatLogMessage(String message, LogLevel level) {
 
-        FormatFilter dateFilter = new DateFilter();
+        FormatFilter messageFilter = new MessageFilter(message);
+        FormatFilter levelFilter = new LevelFilter(level.toString());
         FormatFilter separatorFilter = new SeparatorFilter(separatorField);
+        FormatFilter dateFilter = new DateFilter();
         FormatFilter threadFilter = new ThreadFilter();
         FormatFilter percentFilter = new PercentFilter();
 
         String replaced = formatString;
 
-        // These should be received.
-        replaced = replaced.replaceAll(levelRegex, level.toString());
-        replaced = replaced.replaceAll(messageRegex, message);
-
-        replaced = dateFilter.filter(replaced);
+        replaced = messageFilter.filter(replaced);
+        replaced = levelFilter.filter(replaced);
         replaced = separatorFilter.filter(replaced);
+        replaced = dateFilter.filter(replaced);
         replaced = threadFilter.filter(replaced);
         replaced = percentFilter.filter(replaced);
 
         return replaced;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setEndOfLineSeparator(String newEol) {
+        separatorField = newEol;
+    }
+
 }
