@@ -19,6 +19,17 @@ interface Command {
     void applyPropertyWithValue(String propertyKey, String value) throws Exception;
 }
 
+/**
+ * @author Lucas
+ *
+ * Class that will handle property loading, applying the actions through a delegate.
+ * Current available properties are
+ * consoleOutput: true/false
+ * outputFile: list of files separated by commas, i.e. file1,file2,file3
+ * logLevel: a logLevel according to levels in LogLevel interface
+ * logFormat: format available in LogFormat interface
+ *
+ */
 public class LoggerPropertyLoader {
 	
 	private PropertyApplyingDelegate delegate;
@@ -38,7 +49,9 @@ public class LoggerPropertyLoader {
     }
     
     /**
+     *
      * Will load the method dictionary, one key:action for each available property.
+     *
      */
     private void initMethodMap(){
         methodMap.put("consoleOutput", new Command() {
