@@ -1,5 +1,7 @@
 package logger.filters;
 
+import java.util.ArrayList;
+
 /**
  * Created by gonchub on 13/05/14.
  * Filter for thread dependant strings.
@@ -17,7 +19,14 @@ public class ThreadFilter implements FormatFilter {
     public String filter(String message) {
         String filtered = message;
         Thread current = Thread.currentThread();
-        StackTraceElement stackTraceElement = current.getStackTrace()[3];
+        StackTraceElement[] stackTrace = current.getStackTrace();
+        StackTraceElement stackTraceElement = current.getStackTrace()[2];
+        for (Integer i = 0; i < stackTrace.length; i++) {
+            if (stackTrace[i].getClassName().equals(getClass().getName())) {
+                stackTraceElement = stackTrace[i + 2];
+                break;
+            }
+        }
 
         filtered = filtered.replaceAll(threadRegex, current.getName());
         filtered = filtered.replaceAll(lineRegex, "" + stackTraceElement.getLineNumber());
