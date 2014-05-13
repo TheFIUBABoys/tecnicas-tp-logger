@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by GonchuB on 09/05/2014.
  * This class represents the Logger singleton. It's
- * responsibility is do the actual logging of the messages
+ * responsibility is doing the actual logging of the messages
  * into files and or terminal. The configuration of the
  * LoggerImpl can be loaded from a Properties file.
  */
