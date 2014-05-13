@@ -147,7 +147,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         try {
             logLevelSet = logLevelFactory.createLogLevel(fileValue);
         } catch (NotExistingLevelException e) {
-            e.printStackTrace();
+            throw new WrongPropertyFormatException(e.getMessage());
         }
     }
 

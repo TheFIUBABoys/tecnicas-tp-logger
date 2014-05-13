@@ -6,7 +6,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import level.LogLevel;
-
+import loggerExceptions.*;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -31,6 +31,41 @@ public class LoggerLoadPropertiesTest {
         applicationProps.store(outputFile, "---No Comment---");
         outputFile.close();
     }
+
+    private void setUpWrongFormatConsoleProperty() throws Exception{
+        File f = new File(filename);
+        f.delete();
+        loggerInstance = LoggerImpl.getLogger();
+        Properties applicationProps = new Properties();
+        applicationProps.setProperty("consoleOutput", "tasdrueasd");
+        FileOutputStream outputFile = new FileOutputStream(filename);
+        applicationProps.store(outputFile, "---No Comment---");
+        outputFile.close();
+    }
+
+    private void setUpWrongFormatLevelProperty() throws Exception{
+        File f = new File(filename);
+        f.delete();
+        loggerInstance = LoggerImpl.getLogger();
+        Properties applicationProps = new Properties();
+        applicationProps.setProperty("logLevel", "tasdrueasd");
+        FileOutputStream outputFile = new FileOutputStream(filename);
+        applicationProps.store(outputFile, "---No Comment---");
+        outputFile.close();
+    }
+
+
+    private void setUpWrongFormatFormatProperty() throws Exception{
+        File f = new File(filename);
+        f.delete();
+        loggerInstance = LoggerImpl.getLogger();
+        Properties applicationProps = new Properties();
+        applicationProps.setProperty("logFormat", "taru");
+        FileOutputStream outputFile = new FileOutputStream(filename);
+        applicationProps.store(outputFile, "---No Comment---");
+        outputFile.close();
+    }
+
 
     private void setUpConsoleOutputProperty() throws Exception {
         File f = new File(filename);
@@ -176,5 +211,51 @@ public class LoggerLoadPropertiesTest {
         Assert.assertEquals("Message", list.get(3));
 
     }
+
+    @Test
+    public void testWrongFormatConsole() throws Exception {
+        try{
+            setUpWrongFormatConsoleProperty();
+            loggerInstance.loadConfigFromFile(filename);
+            Assert.assertTrue(false);
+        }
+        catch(WrongPropertyFormatException e){
+            Assert.assertTrue(true);
+        }
+        catch(Exception e){
+            Assert.assertTrue(false);
+        }
+    }
+
+    @Test
+    public void testWrongFormatLevel() throws Exception {
+        try{
+            setUpWrongFormatLevelProperty();
+            loggerInstance.loadConfigFromFile(filename);
+            Assert.assertTrue(false);
+        }
+        catch(WrongPropertyFormatException e){
+            Assert.assertTrue(true);
+        }
+        catch(Exception e){
+            Assert.assertTrue(false);
+        }
+    }
+
+    public void testWrongFormatFormat() throws Exception {
+        try{
+            setUpWrongFormatFormatProperty();
+            loggerInstance.loadConfigFromFile(filename);
+            Assert.assertTrue(false);
+        }
+        catch(WrongPropertyFormatException e){
+            Assert.assertTrue(true);
+        }
+        catch(Exception e){
+            Assert.assertTrue(false);
+        }
+    }
+
+
 
 }
