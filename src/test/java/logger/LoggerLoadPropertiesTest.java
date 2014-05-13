@@ -28,25 +28,6 @@ public class LoggerLoadPropertiesTest {
         outputFile.close();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void tearDownStandardOutputRedirect() throws IOException {
         standardOutputStream.delete();
         System.setOut(System.out);
@@ -80,6 +61,7 @@ public class LoggerLoadPropertiesTest {
 
     @Test
     public void testLoadConsoleOutput() throws Exception {
+        setUpStandardOutputRedirect();
         setUpConsoleOutputProperty();
         loggerInstance.loadConfigFromFile(filename);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
@@ -88,11 +70,11 @@ public class LoggerLoadPropertiesTest {
         loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
 
-       testFile(outputFilename);
+        testFile(standardOutputStream);
+        tearDownStandardOutputRedirect();
     }
 
-    private void testFile(String aFilename) throws Exception{
-        File f = new File(aFilename);
+    private void testFile(File f) throws Exception{
         Scanner s = new Scanner(f);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
@@ -105,6 +87,11 @@ public class LoggerLoadPropertiesTest {
         Assert.assertEquals("Error", list.get(2));
         Assert.assertEquals("Message", list.get(3));
     }
+    private void testFile(String aFilename) throws Exception{
+       testFile(new File (aFilename));
+    }
+
+
 
     private void setUpOutputFileProperty() throws Exception {
         loggerInstance = LoggerImpl.getLogger();
