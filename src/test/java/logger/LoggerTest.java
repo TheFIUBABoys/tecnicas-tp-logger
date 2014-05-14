@@ -128,4 +128,41 @@ public class LoggerTest {
         assertTrue(list.get(2).equals("Fatal"));
     }
 
+    @Test
+    public void testAddSameOutputFileSeveralTimes() throws Exception {
+        loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
+
+        String error = "Error Message%n";
+        String debug = "Debug Message%n";
+        String info = "Info Message%n";
+
+        loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR);
+        loggerInstance.logMessage(debug, LogLevel.LEVEL_DEBUG);
+        loggerInstance.logMessage(info, LogLevel.LEVEL_INFO);
+        for (int i = 0; i<10; i++){
+            loggerInstance.addOutputFile(temporaryFilename);
+            loggerInstance.addOutputFile(permanentFilename);
+        }
+        Scanner s = new Scanner(standarOutputSteam);
+        ArrayList<String> list = new ArrayList<String>();
+        while (s.hasNext()) {
+            list.add(s.next());
+        }
+        s.close();
+
+        assertTrue(list.get(0).equals("ERROR"));
+        assertTrue(list.get(1).equals("-"));
+        assertTrue(list.get(2).equals("Error"));
+        assertTrue(list.get(3).equals("Message"));
+
+        assertFalse(list.get(4).equals("DEBUG"));
+        assertFalse(list.get(6).equals("Debug"));
+
+        assertTrue(list.get(4).equals("INFO"));
+        assertTrue(list.get(5).equals("-"));
+        assertTrue(list.get(6).equals("Info"));
+        assertTrue(list.get(7).equals("Message"));
+
+    }
+
 }

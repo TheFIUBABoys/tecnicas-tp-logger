@@ -22,7 +22,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
 
     private LogLevel logLevelSet;
     private LogFormat logFormat;
-    private ArrayList<BufferedWriter> outputFiles;
+    private HashMap<String,BufferedWriter> outputFiles;
     private Boolean terminalOutput;
 
     private LoggerPropertyLoader loggerPropertyLoader;
@@ -33,7 +33,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private LoggerImpl() {
         logLevelSet = new LevelDebug();
         logFormat = new LogFormatImpl();
-        outputFiles = new ArrayList<BufferedWriter>();
+        outputFiles = new HashMap<String,BufferedWriter>();
         terminalOutput = true;
         loggerPropertyLoader = new LoggerPropertyLoader(this);
     }
@@ -76,7 +76,8 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
 
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
-        outputFiles.add(bw);
+        if (!outputFiles.containsValue(filename))
+            outputFiles.put(filename,bw);
     }
 
     /**
@@ -123,7 +124,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         if (terminalOutput) {
             System.out.print(formattedMessage);
         }
-        for (BufferedWriter bw : outputFiles) {
+        for (BufferedWriter bw : outputFiles.values()) {
             writeInBuffer(bw, formattedMessage);
         }
     }
