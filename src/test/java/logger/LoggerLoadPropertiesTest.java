@@ -16,8 +16,8 @@ public class LoggerLoadPropertiesTest {
 
 
     private void setUpPropertyFileWithKeyValueDict(HashMap<String,String> dict)throws Exception{
-        loggerInstance = LoggerImpl.getLogger();
-        loggerInstance.setConsoleOutput(false);
+        loggerInstance = null;
+        loggerInstance = LoggerImpl.getLogger();;
         Properties applicationProps = new Properties();
         for (String key : dict.keySet()){
             applicationProps.setProperty(key, dict.get(key));
@@ -42,18 +42,15 @@ public class LoggerLoadPropertiesTest {
     @Before
     public void setUp() throws Exception {
         loggerInstance = LoggerImpl.getLogger();
-        setUpStandardOutputRedirect();
     }
 
     @After
     public void tearDown() throws Exception {
         File f = new File(filename);
         f.delete();
-        tearDownStandardOutputRedirect();
     }
 
     private void setUpConsoleOutputProperty() throws Exception {
-        loggerInstance = LoggerImpl.getLogger();
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("consoleOutput", "true");
         setUpPropertyFileWithKeyValueDict(data);
@@ -81,21 +78,19 @@ public class LoggerLoadPropertiesTest {
             list.add(s.next());
         }
         s.close();
-        f.delete();
         Assert.assertEquals("Fatal", list.get(0));
         Assert.assertEquals("Message", list.get(1));
         Assert.assertEquals("Error", list.get(2));
         Assert.assertEquals("Message", list.get(3));
     }
+
+
     private void testFile(String aFilename) throws Exception{
        testFile(new File (aFilename));
     }
 
 
-
     private void setUpOutputFileProperty() throws Exception {
-        loggerInstance = LoggerImpl.getLogger();
-        loggerInstance.setConsoleOutput(false);
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("outputFile", outputFilename);
         setUpPropertyFileWithKeyValueDict(data);
@@ -105,6 +100,7 @@ public class LoggerLoadPropertiesTest {
     public void testLoadOutputFile() throws Exception {
         setUpOutputFileProperty();
         loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.setConsoleOutput(false);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
@@ -117,8 +113,6 @@ public class LoggerLoadPropertiesTest {
 
 
     private void setUpOutputFilesProperty() throws Exception {
-        loggerInstance = LoggerImpl.getLogger();
-        loggerInstance.setConsoleOutput(false);
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("outputFile", outputFilename+","+outputFilename+"1");
         setUpPropertyFileWithKeyValueDict(data);
@@ -128,6 +122,7 @@ public class LoggerLoadPropertiesTest {
     public void testLoadSeveralOutputFiles() throws Exception {
         setUpOutputFilesProperty();
         loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.setConsoleOutput(false);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
@@ -140,7 +135,6 @@ public class LoggerLoadPropertiesTest {
     }
 
     private void setUpFatalLevelProperty() throws Exception {
-        loggerInstance = LoggerImpl.getLogger();
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("logLevel", LogLevel.LEVEL_FATAL.toString());
         setUpPropertyFileWithKeyValueDict(data);
@@ -148,53 +142,40 @@ public class LoggerLoadPropertiesTest {
 
     @Test
     public void testLoadLogLevel() throws Exception {
+        setUpStandardOutputRedirect();
         setUpFatalLevelProperty();
         loggerInstance.loadConfigFromFile(filename);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
 
-        Scanner s = new Scanner(standardOutputStream);
-        ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()) {
-            list.add(s.next());
-        }
-        s.close();
-
-        Assert.assertEquals("Fatal", list.get(0));
-        Assert.assertEquals("Message", list.get(1));
+        testFile(standardOutputStream);
+        tearDownStandardOutputRedirect();
     }
 
     private void setUpFormatProperty() throws Exception {
-        loggerInstance = LoggerImpl.getLogger();
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("logFormat", "%m");
+        data.put("consoleOutput", "true");
+        data.put("outputFile", "hullo.txt");
         setUpPropertyFileWithKeyValueDict(data);
     }
 
     @Test
     public void testLoadLogFormat() throws Exception {
+        setUpStandardOutputRedirect();
         setUpFormatProperty();
-        loggerInstance.loadConfigFromFile(filename);
-        loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
-        loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
+        //loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.addOutputFile("hullo.txt");
+        loggerInstance.logMessage("Error Message", LogLevel.LEVEL_ERROR);
+        loggerInstance.logMessage("Fatal Message", LogLevel.LEVEL_FATAL);
 
-        Scanner s = new Scanner(standardOutputStream);
-        ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()) {
-            list.add(s.next());
-        }
-        s.close();
-
-        Assert.assertEquals("Error", list.get(0));
-        Assert.assertEquals("Message", list.get(1));
-        Assert.assertEquals("Fatal", list.get(2));
-        Assert.assertEquals("Message", list.get(3));
+        testFile(standardOutputStream);
+        tearDownStandardOutputRedirect();
 
     }
 
     private void setUpWrongFormatConsoleProperty() throws Exception{
-        loggerInstance = LoggerImpl.getLogger();
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("consoleOutput", "asdasdasd");
         setUpPropertyFileWithKeyValueDict(data);
@@ -216,7 +197,6 @@ public class LoggerLoadPropertiesTest {
     }
 
     private void setUpWrongFormatLevelProperty() throws Exception{
-        loggerInstance = LoggerImpl.getLogger();
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("logLevel", "asdasdasd");
         setUpPropertyFileWithKeyValueDict(data);
@@ -238,7 +218,6 @@ public class LoggerLoadPropertiesTest {
     }
 
     private void setUpWrongFormatFormatProperty() throws Exception{
-        loggerInstance = LoggerImpl.getLogger();
         HashMap<String,String> data = new HashMap<String,String>();
         data.put("logFormat", "Tasdakldaslñd");
         setUpPropertyFileWithKeyValueDict(data);

@@ -11,7 +11,7 @@ import java.util.Properties;
 import loggerExceptions.WrongPropertyFormatException;
 
 /**
- * @author Lucas 
+ * Created by Lucas
  * Any property that will be applied must use this interface.
  * (Java 'hack' to have a method dictionary)
  */
@@ -20,7 +20,7 @@ interface Command {
 }
 
 /**
- * @author Lucas
+ * Created by Lucas
  *
  * Class that will handle property loading, applying the actions through a delegate.
  * Current available properties are
