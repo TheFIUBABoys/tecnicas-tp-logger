@@ -44,10 +44,12 @@ public class LoggerLoadPropertiesTest {
         loggerInstance = LoggerImpl.getLogger();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        File f = new File(filename);
-        f.delete();
+    @AfterClass
+    public static void tearDown() throws Exception {
+        File directory = new File(("./"));
+        for(File f: directory.listFiles())
+            if(f.getName().endsWith(".txt"))
+                f.delete();
     }
 
     private void setUpConsoleOutputProperty() throws Exception {
@@ -113,7 +115,7 @@ public class LoggerLoadPropertiesTest {
 
     private void setUpOutputFilesProperty() throws Exception {
         HashMap<String, String> data = new HashMap<String, String>();
-        data.put("outputFile", outputFilename + "," + outputFilename + "1");
+        data.put("outputFile", outputFilename + "," + "1"+outputFilename);
         setUpPropertyFileWithKeyValueDict(data);
     }
 
@@ -129,7 +131,7 @@ public class LoggerLoadPropertiesTest {
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
 
         testFile(outputFilename);
-        testFile(outputFilename + "1");
+        testFile("1"+outputFilename );
 
     }
 
@@ -143,11 +145,12 @@ public class LoggerLoadPropertiesTest {
     public void testLoadLogLevel() throws Exception {
         setUpFatalLevelProperty();
         loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.addOutputFile(outputFilename);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
 
-        testFile("hullo.txt");
+        testFile(outputFilename);
     }
 
     private void setUpFormatProperty() throws Exception {
@@ -162,9 +165,10 @@ public class LoggerLoadPropertiesTest {
     public void testLoadLogFormat() throws Exception {
         setUpFormatProperty();
         loggerInstance.loadConfigFromFile(filename);
+        loggerInstance.addOutputFile(outputFilename);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
-        testFile("hullo.txt");
+        testFile(outputFilename);
     }
 
     private void setUpWrongFormatConsoleProperty() throws Exception {

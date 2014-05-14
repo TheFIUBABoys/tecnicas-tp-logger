@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import level.LogLevel;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,6 +44,14 @@ public class LoggerTest {
     @After
     public void tearDown() throws Exception {
         tearDownStandarOutputRedirect();
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        File directory = new File(("./"));
+        for(File f: directory.listFiles())
+            if(f.getName().endsWith(".txt"))
+                f.delete();
     }
 
     @Test
