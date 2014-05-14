@@ -16,18 +16,18 @@ import static org.junit.Assert.assertTrue;
 public class LoggerTest {
 
     private Logger loggerInstance;
-    private File standarOutputSteam;
+    private File standardOutputStream;
     private String permanentFilename = "Log.txt";
     private String temporaryFilename = "TempLog.txt";
 
     private void setUpStandarOutputRedirect() throws IOException {
-        standarOutputSteam = new File("tmp_stdout.txt");
-        standarOutputSteam.createNewFile();
-        System.setOut(new PrintStream(standarOutputSteam));
+        standardOutputStream = new File("tmp_stdout.txt");
+        standardOutputStream.createNewFile();
+        System.setOut(new PrintStream(standardOutputStream));
     }
 
     private void tearDownStandarOutputRedirect() throws IOException {
-        standarOutputSteam.delete();
+        standardOutputStream.delete();
         System.setOut(System.out);
     }
 
@@ -66,7 +66,7 @@ public class LoggerTest {
         loggerInstance.logMessage(debug, LogLevel.LEVEL_DEBUG);
         loggerInstance.logMessage(info, LogLevel.LEVEL_INFO);
 
-        Scanner s = new Scanner(standarOutputSteam);
+        Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
             list.add(s.next());
@@ -95,7 +95,7 @@ public class LoggerTest {
         loggerInstance.logMessage("Debug Message%n", LogLevel.LEVEL_DEBUG);
         loggerInstance.logMessage("Info Message%n", LogLevel.LEVEL_INFO);
 
-        Scanner s = new Scanner(standarOutputSteam);
+        Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
             list.add(s.next());
@@ -114,7 +114,7 @@ public class LoggerTest {
         loggerInstance.logMessage("Warn Message%n", LogLevel.LEVEL_WARN);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
 
-        Scanner s = new Scanner(standarOutputSteam);
+        Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
             list.add(s.next());
@@ -129,7 +129,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void testAddSameOutputFileSeveralTimes() throws Exception {
+         public void testAddSameOutputFileSeveralTimes() throws Exception {
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
 
         String error = "Error Message%n";
@@ -143,7 +143,7 @@ public class LoggerTest {
             loggerInstance.addOutputFile(temporaryFilename);
             loggerInstance.addOutputFile(permanentFilename);
         }
-        Scanner s = new Scanner(standarOutputSteam);
+        Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
             list.add(s.next());
@@ -164,5 +164,7 @@ public class LoggerTest {
         assertTrue(list.get(7).equals("Message"));
 
     }
+
+
 
 }
