@@ -1,12 +1,12 @@
-package level;
+package logger.level;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * This class represents the WARN logging level. It
+ * This class represents the FATAL logging logger.level. It
  * implements all comparing methods defined by the LogLevel
  * interface.
  */
-public class LevelWarn implements LogLevel {
+public class LevelFatal implements LogLevel {
 
     /**
      * {@inheritDoc}
@@ -33,14 +33,14 @@ public class LevelWarn implements LogLevel {
      * {@inheritDoc}
      */
     public int compareTo(LevelWarn logLevel) {
-        return -1;
+        return 1;
     }
 
     /**
      * {@inheritDoc}
      */
     public int compareTo(LevelError logLevel) {
-        return -1;
+        return 1;
     }
 
     /**
@@ -61,7 +61,6 @@ public class LevelWarn implements LogLevel {
      * {@inheritDoc}
      */
     public String toString() {
-        return "WARN";
+        return "FATAL";
     }
-
 }

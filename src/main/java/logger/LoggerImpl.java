@@ -1,10 +1,17 @@
 package logger;
 
-import level.*;
-import loggerExceptions.*;
+import logger.level.LevelDebug;
+import logger.level.LogLevel;
+import logger.level.LogLevelFactory;
+import loggerExceptions.InvalidFormatException;
+import loggerExceptions.NotExistingLevelException;
+import loggerExceptions.WrongPropertyFormatException;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by GonchuB on 09/05/2014.
@@ -91,7 +98,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * {@inheritDoc}
      */
     public void logMessage(String message, LogLevel logLevel) {
-        // Check if log level is lower than the one set. If so, execute the logging.
+        // Check if log logger.level is lower than the one set. If so, execute the logging.
         if (logLevel.compareTo(logLevelSet) < 0) {
             executeLog(message, logLevel);
         }
@@ -117,7 +124,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * all the output files.
      *
      * @param message  the message that will be added after formatting.
-     * @param logLevel the logging level of the message.
+     * @param logLevel the logging logger.level of the message.
      */
     private void executeLog(String message, LogLevel logLevel) {
         String formattedMessage = logFormat.formatLogMessage(message, logLevel);

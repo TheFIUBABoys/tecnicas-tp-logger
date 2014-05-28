@@ -1,7 +1,5 @@
 package logger.filters;
 
-import java.util.ArrayList;
-
 /**
  * Created by gonchub on 13/05/14.
  * Filter for thread dependant strings.

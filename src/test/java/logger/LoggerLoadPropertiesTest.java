@@ -1,11 +1,20 @@
 package logger;
 
-import java.io.*;
-import java.util.*;
+import logger.level.LogLevel;
+import loggerExceptions.WrongPropertyFormatException;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import level.LogLevel;
-import loggerExceptions.*;
-import org.junit.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Properties;
+import java.util.Scanner;
 
 
 public class LoggerLoadPropertiesTest {

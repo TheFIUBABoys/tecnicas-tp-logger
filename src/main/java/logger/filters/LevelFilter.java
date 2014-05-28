@@ -2,7 +2,7 @@ package logger.filters;
 
 /**
  * Created by gonchub on 13/05/14.
- * Filter for the log level.
+ * Filter for the log logger.level.
  */
 public class LevelFilter implements FormatFilter {
 
@@ -10,9 +10,9 @@ public class LevelFilter implements FormatFilter {
     private String levelToReplace;
 
     /**
-     * Override default constructor to receive level to replace.
+     * Override default constructor to receive logger.level to replace.
      *
-     * @param level the level to replace.
+     * @param level the logger.level to replace.
      */
     public LevelFilter(String level) {
         levelToReplace = level;

@@ -1,4 +1,4 @@
-package level;
+package logger.level;
 
 /**
  * Created by GonchuB on 09/05/2014.
@@ -8,7 +8,7 @@ package level;
 public interface LogLevel extends Comparable<LogLevel> {
 
     /**
-     * Easy access to debugging level types.
+     * Easy access to debugging logger.level types.
      * Example of semantics: LogLevel.LEVEL_DEBUG
      */
     public static LogLevel LEVEL_DEBUG = new LevelDebug();
@@ -98,7 +98,7 @@ public interface LogLevel extends Comparable<LogLevel> {
     /**
      * String representation of the LogLevel.
      *
-     * @return the string that represents the log level.
+     * @return the string that represents the log logger.level.
      */
     public String toString();
 }

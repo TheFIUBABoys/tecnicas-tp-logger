@@ -1,14 +1,16 @@
 package logger;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import level.LogLevel;
+import logger.level.LogLevel;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

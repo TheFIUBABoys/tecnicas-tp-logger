@@ -1,6 +1,6 @@
 package logger;
 
-import level.LogLevel;
+import logger.level.LogLevel;
 
 import java.io.IOException;
 
@@ -19,19 +19,19 @@ public interface Logger {
     public void setMessageFormat(LogFormat messageFormat);
 
     /**
-     * Logs the received message with the also received logging level
-     * if the level is lower than the level set.
+     * Logs the received message with the also received logging logger.level
+     * if the logger.level is lower than the logger.level set.
      *
      * @param message  the message that will be added after formatting.
-     * @param logLevel the logging level of the message.
+     * @param logLevel the logging logger.level of the message.
      */
     public void logMessage(String message, LogLevel logLevel);
 
     /**
-     * Sets the logging level, which determines which type of messages
+     * Sets the logging logger.level, which determines which type of messages
      * will be logged.
      *
-     * @param logLevel the loging level to set.
+     * @param logLevel the loging logger.level to set.
      */
     public void setLogLevel(LogLevel logLevel);
 

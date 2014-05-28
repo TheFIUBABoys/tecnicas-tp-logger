@@ -1,4 +1,4 @@
-package level;
+package logger.level;
 
 import loggerExceptions.NotExistingLevelException;
 
@@ -29,9 +29,9 @@ public class LogLevelFactory {
     }
 
     /**
-     * Creates a log level that matches the given string.
+     * Creates a log logger.level that matches the given string.
      *
-     * @param level the string that represents the log level to be created.
+     * @param level the string that represents the log logger.level to be created.
      * @return the LogLevel that was created.
      * @throws NotExistingLevelException if a string that does not match any LogLevel is provided.
      */

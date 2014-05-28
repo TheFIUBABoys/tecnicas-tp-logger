@@ -1,6 +1,6 @@
 package logger;
 
-import level.LogLevel;
+import logger.level.LogLevel;
 
 /**
  * Created by gonchub on 13/05/14.
@@ -12,7 +12,7 @@ public interface LogFormat {
      * Formats the received log message.
      *
      * @param message the message to be logged.
-     * @param level   the logging level of the message.
+     * @param level   the logging logger.level of the message.
      * @return the string with the formatted message (parameters in the format interpolated).
      */
     public String formatLogMessage(String message, LogLevel level);

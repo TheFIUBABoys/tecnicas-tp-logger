@@ -1,12 +1,10 @@
 package logger.filters;
 
 import junit.framework.Assert;
-import level.LevelDebug;
-import level.LogLevel;
+import logger.level.LevelDebug;
+import logger.level.LogLevel;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class LevelFilterTest {
 

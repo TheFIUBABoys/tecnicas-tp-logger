@@ -1,13 +1,12 @@
 package logger.filters;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DateFilterTest {
 
@@ -22,13 +21,13 @@ public class DateFilterTest {
     public void testFilter() throws Exception {
         String dateFormat = "dd-MM-yyyy";
         String filterFormat = "%d{" + dateFormat + "}";
-        Assert.assertEquals((new SimpleDateFormat(dateFormat)).format(new Date()), dateFilter.filter(filterFormat));
+        assertEquals((new SimpleDateFormat(dateFormat)).format(new Date()), dateFilter.filter(filterFormat));
     }
 
     @Test
     public void testClear() throws Exception {
         String dateFormat = "dd-MM-yyyy";
         String filterFormat = "%d{" + dateFormat + "}";
-        Assert.assertEquals("", dateFilter.clear(filterFormat));
+        assertEquals("", dateFilter.clear(filterFormat));
     }
 }

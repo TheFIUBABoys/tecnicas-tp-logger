@@ -1,7 +1,7 @@
 package logger;
 
-import level.LevelDebug;
-import level.LogLevel;
+import logger.level.LevelDebug;
+import logger.level.LogLevel;
 import loggerExceptions.InvalidFormatException;
 import org.junit.Assert;
 

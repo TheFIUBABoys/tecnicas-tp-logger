@@ -1,14 +1,8 @@
 package logger;
 
-import level.LogLevel;
 import logger.filters.*;
+import logger.level.LogLevel;
 import loggerExceptions.InvalidFormatException;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by GonchuB on 09/05/2014.

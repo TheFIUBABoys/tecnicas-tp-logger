@@ -1,12 +1,12 @@
-package level;
+package logger.level;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * This class represents the INFO logging level. It
+ * This class represents the WARN logging logger.level. It
  * implements all comparing methods defined by the LogLevel
  * interface.
  */
-public class LevelInfo implements LogLevel {
+public class LevelWarn implements LogLevel {
 
     /**
      * {@inheritDoc}
@@ -26,7 +26,7 @@ public class LevelInfo implements LogLevel {
      * {@inheritDoc}
      */
     public int compareTo(LevelInfo logLevel) {
-        return -1;
+        return 1;
     }
 
     /**
@@ -61,6 +61,7 @@ public class LevelInfo implements LogLevel {
      * {@inheritDoc}
      */
     public String toString() {
-        return "INFO";
+        return "WARN";
     }
+
 }

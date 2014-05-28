@@ -1,8 +1,8 @@
 package logger;
 
-import java.io.IOException;
-
 import loggerExceptions.WrongPropertyFormatException;
+
+import java.io.IOException;
 
 /**
  * @author Lucas
@@ -23,8 +23,8 @@ public interface PropertyApplyingDelegate {
      * Applies the LogLevel property.
      *
      * @param property  the name of the property.
-     * @param fileValue the value of the log level property.
-     * @throws WrongPropertyFormatException if the log level is not a valid one.
+     * @param fileValue the value of the log logger.level property.
+     * @throws WrongPropertyFormatException if the log logger.level is not a valid one.
      */
     public void applyLogLevelProperty(String property, String fileValue) throws WrongPropertyFormatException;
 

@@ -1,11 +1,11 @@
-package level;
+package logger.level;
 
 import junit.framework.Assert;
 import loggerExceptions.NotExistingLevelException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 public class LogLevelFactoryTest {
 

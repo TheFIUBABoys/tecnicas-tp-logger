@@ -1,12 +1,12 @@
-package level;
+package logger.level;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * This class represents the FATAL logging level. It
+ * This class represents the OFF logging logger.level. It
  * implements all comparing methods defined by the LogLevel
  * interface.
  */
-public class LevelFatal implements LogLevel {
+public class LevelOff implements LogLevel {
 
     /**
      * {@inheritDoc}
@@ -47,7 +47,7 @@ public class LevelFatal implements LogLevel {
      * {@inheritDoc}
      */
     public int compareTo(LevelFatal logLevel) {
-        return -1;
+        return 1;
     }
 
     /**
@@ -61,6 +61,6 @@ public class LevelFatal implements LogLevel {
      * {@inheritDoc}
      */
     public String toString() {
-        return "FATAL";
+        return "OFF";
     }
 }

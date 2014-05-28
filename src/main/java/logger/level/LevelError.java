@@ -1,12 +1,12 @@
-package level;
+package logger.level;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * This class represents the OFF logging level. It
+ * This class represents the ERROR logging logger.level. It
  * implements all comparing methods defined by the LogLevel
  * interface.
  */
-public class LevelOff implements LogLevel {
+public class LevelError implements LogLevel {
 
     /**
      * {@inheritDoc}
@@ -40,14 +40,14 @@ public class LevelOff implements LogLevel {
      * {@inheritDoc}
      */
     public int compareTo(LevelError logLevel) {
-        return 1;
+        return -1;
     }
 
     /**
      * {@inheritDoc}
      */
     public int compareTo(LevelFatal logLevel) {
-        return 1;
+        return -1;
     }
 
     /**
@@ -61,6 +61,6 @@ public class LevelOff implements LogLevel {
      * {@inheritDoc}
      */
     public String toString() {
-        return "OFF";
+        return "ERROR";
     }
 }

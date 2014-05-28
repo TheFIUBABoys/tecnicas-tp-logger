@@ -1,12 +1,12 @@
-package level;
+package logger.level;
 
 /**
  * Created by GonchuB on 09/05/2014.
- * This class represents the DEBUG logging level. It
+ * This class represents the INFO logging logger.level. It
  * implements all comparing methods defined by the LogLevel
  * interface.
  */
-public class LevelDebug implements LogLevel {
+public class LevelInfo implements LogLevel {
 
     /**
      * {@inheritDoc}
@@ -19,7 +19,7 @@ public class LevelDebug implements LogLevel {
      * {@inheritDoc}
      */
     public int compareTo(LevelDebug logLevel) {
-        return -1;
+        return 1;
     }
 
     /**
@@ -61,6 +61,6 @@ public class LevelDebug implements LogLevel {
      * {@inheritDoc}
      */
     public String toString() {
-        return "DEBUG";
+        return "INFO";
     }
 }

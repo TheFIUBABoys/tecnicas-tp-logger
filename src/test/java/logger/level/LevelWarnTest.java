@@ -1,8 +1,9 @@
-package level;
+package logger.level;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class LevelOffTest {
+public class LevelWarnTest {
     private LogLevel levelDebug;
     private LogLevel levelInfo;
     private LogLevel levelWarn;
@@ -22,37 +23,37 @@ public class LevelOffTest {
 
     @org.junit.Test
     public void testCompareToDebug() throws Exception {
-        assertTrue(levelDebug.compareTo(levelOff) > 0);
+        assertTrue(levelDebug.compareTo(levelWarn) > 0);
     }
 
     @org.junit.Test
     public void testCompareToInfo() throws Exception {
-        assertTrue(levelInfo.compareTo(levelOff) > 0);
+        assertTrue(levelInfo.compareTo(levelWarn) > 0);
     }
 
     @org.junit.Test
     public void testCompareToWarn() throws Exception {
-        assertTrue(levelWarn.compareTo(levelOff) > 0);
+        assertTrue(levelWarn.compareTo(levelWarn) < 0);
     }
 
     @org.junit.Test
     public void testCompareToError() throws Exception {
-        assertTrue(levelError.compareTo(levelOff) > 0);
+        assertTrue(levelError.compareTo(levelWarn) < 0);
     }
 
     @org.junit.Test
     public void testCompareToFatal() throws Exception {
-        assertTrue(levelFatal.compareTo(levelOff) > 0);
+        assertTrue(levelFatal.compareTo(levelWarn) < 0);
     }
 
     @org.junit.Test
     public void testCompareToOff() throws Exception {
-        assertTrue(levelOff.compareTo(levelOff) > 0);
+        assertTrue(levelOff.compareTo(levelWarn) > 0);
     }
 
     @org.junit.Test
     public void testToString() throws Exception {
-        assertEquals("OFF", levelOff.toString());
+        assertEquals("WARN", levelWarn.toString());
     }
 
 }
