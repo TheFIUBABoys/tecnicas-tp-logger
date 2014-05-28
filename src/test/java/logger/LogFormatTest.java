@@ -3,6 +3,8 @@ package logger;
 import logger.level.LevelDebug;
 import logger.level.LogLevel;
 import loggerExceptions.InvalidFormatException;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +19,7 @@ public class LogFormatTest {
     private LogFormat messageFormatDate;
     private LogFormat endOfLineFormat;
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
         messageFormat = new LogFormatImpl("%p - %m");
         endOfLineFormat = new LogFormatImpl("%m%n");
@@ -26,7 +28,7 @@ public class LogFormatTest {
         messageFormatDate = new LogFormatImpl("%d{dd-MM-yyyy}");
     }
 
-    @org.junit.Test
+    @Test
     public void testFormatLogMessage() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
@@ -34,7 +36,7 @@ public class LogFormatTest {
         assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel));
     }
 
-    @org.junit.Test
+    @Test
     public void testDefaultFormatLogMessage() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
@@ -42,7 +44,7 @@ public class LogFormatTest {
         assertEquals("DEBUG - Message", defaultFormat.formatLogMessage(message, logLevel));
     }
 
-    @org.junit.Test
+    @Test
     public void testFormatWithDate() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
@@ -52,13 +54,13 @@ public class LogFormatTest {
         assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel));
     }
 
-    @org.junit.Test(expected = InvalidFormatException.class)
+    @Test(expected = InvalidFormatException.class)
     public void testInvalidFormat() throws Exception {
         String invalidFormatString = "%p - %m - %w";
         new LogFormatImpl(invalidFormatString);
     }
 
-    @org.junit.Test
+    @Test
     public void testThreadFormat() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
@@ -67,7 +69,7 @@ public class LogFormatTest {
         assertEquals(expected, threadFormat.formatLogMessage(message, logLevel));
     }
 
-    @org.junit.Test
+    @Test
     public void testConfigurableEol() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();

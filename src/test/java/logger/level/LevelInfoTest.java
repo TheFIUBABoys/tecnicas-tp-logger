@@ -1,5 +1,8 @@
 package logger.level;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -11,7 +14,7 @@ public class LevelInfoTest {
     private LogLevel levelFatal;
     private LogLevel levelOff;
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
         levelDebug = new LevelDebug();
         levelInfo = new LevelInfo();
@@ -21,37 +24,37 @@ public class LevelInfoTest {
         levelOff = new LevelOff();
     }
 
-    @org.junit.Test
+    @Test
     public void testCompareToDebug() throws Exception {
         assertTrue(levelDebug.compareTo(levelInfo) > 0);
     }
 
-    @org.junit.Test
+    @Test
     public void testCompareToInfo() throws Exception {
         assertTrue(levelInfo.compareTo(levelInfo) < 0);
     }
 
-    @org.junit.Test
+    @Test
     public void testCompareToWarn() throws Exception {
         assertTrue(levelWarn.compareTo(levelInfo) < 0);
     }
 
-    @org.junit.Test
+    @Test
     public void testCompareToError() throws Exception {
         assertTrue(levelError.compareTo(levelInfo) < 0);
     }
 
-    @org.junit.Test
+    @Test
     public void testCompareToFatal() throws Exception {
         assertTrue(levelFatal.compareTo(levelInfo) < 0);
     }
 
-    @org.junit.Test
+    @Test
     public void testCompareToOff() throws Exception {
         assertTrue(levelOff.compareTo(levelInfo) > 0);
     }
 
-    @org.junit.Test
+    @Test
     public void testToString() throws Exception {
         assertEquals("INFO", levelInfo.toString());
     }
