@@ -32,8 +32,6 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private HashMap<String,BufferedWriter> outputFiles;
     private Boolean terminalOutput;
 
-    private LoggerPropertyLoader loggerPropertyLoader;
-
     /**
      * Private constructor to be called from the getLogger method.
      */
@@ -42,7 +40,6 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         logFormat = new LogFormatImpl();
         outputFiles = new HashMap<String,BufferedWriter>();
         terminalOutput = true;
-        loggerPropertyLoader = new LoggerPropertyLoader(this);
     }
 
     /**
@@ -181,6 +178,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * {@inheritDoc}
      */
     public void loadConfigFromFile(String filename) throws Exception {
+        LoggerPropertyLoader loggerPropertyLoader = new LoggerPropertyLoader(this);
         loggerPropertyLoader.loadConfigFromFile(filename);
     }
 }
