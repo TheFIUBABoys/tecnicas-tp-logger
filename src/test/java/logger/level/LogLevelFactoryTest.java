@@ -1,10 +1,11 @@
 package logger.level;
 
-import junit.framework.Assert;
 import loggerExceptions.NotExistingLevelException;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 public class LogLevelFactoryTest {
@@ -18,7 +19,7 @@ public class LogLevelFactoryTest {
 
     @Test
     public void testGetInstance() throws Exception {
-        Assert.assertNotNull(factoryInstance);
+        assertNotNull(factoryInstance);
     }
 
     @Test
@@ -26,7 +27,7 @@ public class LogLevelFactoryTest {
         LogLevel levelDebug = new LevelDebug();
         try {
             LogLevel createdLevel = factoryInstance.createLogLevel(levelDebug.toString());
-            Assert.assertEquals(createdLevel.toString(), levelDebug.toString());
+            assertEquals(createdLevel.toString(), levelDebug.toString());
         } catch (NotExistingLevelException e) {
             fail("Should not get here.");
         }
@@ -37,7 +38,7 @@ public class LogLevelFactoryTest {
         LogLevel levelInfo = new LevelInfo();
         try {
             LogLevel createdLevel = factoryInstance.createLogLevel(levelInfo.toString());
-            Assert.assertEquals(createdLevel.toString(), levelInfo.toString());
+            assertEquals(createdLevel.toString(), levelInfo.toString());
         } catch (NotExistingLevelException e) {
             fail("Should not get here.");
         }
@@ -48,7 +49,7 @@ public class LogLevelFactoryTest {
         LogLevel levelWarn = new LevelWarn();
         try {
             LogLevel createdLevel = factoryInstance.createLogLevel(levelWarn.toString());
-            Assert.assertEquals(createdLevel.toString(), levelWarn.toString());
+            assertEquals(createdLevel.toString(), levelWarn.toString());
         } catch (NotExistingLevelException e) {
             fail("Should not get here.");
         }
@@ -59,7 +60,7 @@ public class LogLevelFactoryTest {
         LogLevel levelError = new LevelError();
         try {
             LogLevel createdLevel = factoryInstance.createLogLevel(levelError.toString());
-            Assert.assertEquals(createdLevel.toString(), levelError.toString());
+            assertEquals(createdLevel.toString(), levelError.toString());
         } catch (NotExistingLevelException e) {
             fail("Should not get here.");
         }
@@ -70,7 +71,7 @@ public class LogLevelFactoryTest {
         LogLevel levelFatal = new LevelFatal();
         try {
             LogLevel createdLevel = factoryInstance.createLogLevel(levelFatal.toString());
-            Assert.assertEquals(createdLevel.toString(), levelFatal.toString());
+            assertEquals(createdLevel.toString(), levelFatal.toString());
         } catch (NotExistingLevelException e) {
             fail("Should not get here.");
         }
@@ -81,7 +82,7 @@ public class LogLevelFactoryTest {
         LogLevel levelOff = new LevelOff();
         try {
             LogLevel createdLevel = factoryInstance.createLogLevel(levelOff.toString());
-            Assert.assertEquals(createdLevel.toString(), levelOff.toString());
+            assertEquals(createdLevel.toString(), levelOff.toString());
         } catch (NotExistingLevelException e) {
             fail("Should not get here.");
         }

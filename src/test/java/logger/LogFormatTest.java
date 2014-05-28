@@ -3,10 +3,11 @@ package logger;
 import logger.level.LevelDebug;
 import logger.level.LogLevel;
 import loggerExceptions.InvalidFormatException;
-import org.junit.Assert;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static org.junit.Assert.assertEquals;
 
 public class LogFormatTest {
 
@@ -30,7 +31,7 @@ public class LogFormatTest {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
 
-        Assert.assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel));
+        assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel));
     }
 
     @org.junit.Test
@@ -38,7 +39,7 @@ public class LogFormatTest {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
 
-        Assert.assertEquals("DEBUG - Message", defaultFormat.formatLogMessage(message, logLevel));
+        assertEquals("DEBUG - Message", defaultFormat.formatLogMessage(message, logLevel));
     }
 
     @org.junit.Test
@@ -48,7 +49,7 @@ public class LogFormatTest {
         String dateFormat = "dd-MM-yyyy";
         String expectedDate = (new SimpleDateFormat(dateFormat)).format(new Date());
 
-        Assert.assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel));
+        assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel));
     }
 
     @org.junit.Test(expected = InvalidFormatException.class)
@@ -63,7 +64,7 @@ public class LogFormatTest {
         LogLevel logLevel = new LevelDebug();
         String expected = "main - testThreadFormat";
 
-        Assert.assertEquals(expected, threadFormat.formatLogMessage(message, logLevel));
+        assertEquals(expected, threadFormat.formatLogMessage(message, logLevel));
     }
 
     @org.junit.Test
@@ -73,6 +74,6 @@ public class LogFormatTest {
         String expected = "Message,";
         endOfLineFormat.setEndOfLineSeparator(",");
 
-        Assert.assertEquals(expected, endOfLineFormat.formatLogMessage(message, logLevel));
+        assertEquals(expected, endOfLineFormat.formatLogMessage(message, logLevel));
     }
 }

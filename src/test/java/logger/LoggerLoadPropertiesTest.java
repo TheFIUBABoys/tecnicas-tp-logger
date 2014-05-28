@@ -3,7 +3,6 @@ package logger;
 import logger.level.LogLevel;
 import loggerExceptions.WrongPropertyFormatException;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,6 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Scanner;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class LoggerLoadPropertiesTest {
@@ -89,10 +91,10 @@ public class LoggerLoadPropertiesTest {
             list.add(s.next());
         }
         s.close();
-        Assert.assertEquals("Fatal", list.get(0));
-        Assert.assertEquals("Message", list.get(1));
-        Assert.assertEquals("Error", list.get(2));
-        Assert.assertEquals("Message", list.get(3));
+        assertEquals("Fatal", list.get(0));
+        assertEquals("Message", list.get(1));
+        assertEquals("Error", list.get(2));
+        assertEquals("Message", list.get(3));
     }
 
 
@@ -191,11 +193,11 @@ public class LoggerLoadPropertiesTest {
         try {
             setUpWrongFormatConsoleProperty();
             loggerInstance.loadConfigFromFile(filename);
-            Assert.assertTrue(false);
+            assertTrue(false);
         } catch (WrongPropertyFormatException e) {
-            Assert.assertTrue(true);
+            assertTrue(true);
         } catch (Exception e) {
-            Assert.assertTrue(false);
+            assertTrue(false);
         }
     }
 
@@ -210,11 +212,11 @@ public class LoggerLoadPropertiesTest {
         try {
             setUpWrongFormatLevelProperty();
             loggerInstance.loadConfigFromFile(filename);
-            Assert.assertTrue(false);
+            assertTrue(false);
         } catch (WrongPropertyFormatException e) {
-            Assert.assertTrue(true);
+            assertTrue(true);
         } catch (Exception e) {
-            Assert.assertTrue(false);
+            assertTrue(false);
         }
     }
 
@@ -229,11 +231,11 @@ public class LoggerLoadPropertiesTest {
         try {
             setUpWrongFormatFormatProperty();
             loggerInstance.loadConfigFromFile(filename);
-            Assert.assertTrue(false);
+            assertTrue(false);
         } catch (WrongPropertyFormatException e) {
-            Assert.assertTrue(true);
+            assertTrue(true);
         } catch (Exception e) {
-            Assert.assertTrue(false);
+            assertTrue(false);
         }
     }
 

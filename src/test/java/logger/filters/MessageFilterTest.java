@@ -1,8 +1,9 @@
 package logger.filters;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class MessageFilterTest {
 
@@ -18,12 +19,12 @@ public class MessageFilterTest {
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%m";
-        Assert.assertEquals(message, messageFilter.filter(filterFormat));
+        assertEquals(message, messageFilter.filter(filterFormat));
     }
 
     @Test
     public void testClear() throws Exception {
         String filterFormat = "%m";
-        Assert.assertEquals("", messageFilter.clear(filterFormat));
+        assertEquals("", messageFilter.clear(filterFormat));
     }
 }

@@ -1,8 +1,9 @@
 package logger.filters;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ThreadFilterTest {
 
@@ -16,12 +17,12 @@ public class ThreadFilterTest {
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%t - %F";
-        Assert.assertEquals("main - NativeMethodAccessorImpl.java", threadFilter.filter(filterFormat));
+        assertEquals("main - NativeMethodAccessorImpl.java", threadFilter.filter(filterFormat));
     }
 
     @Test
     public void testClear() throws Exception {
         String filterFormat = "%t%F";
-        Assert.assertEquals("", threadFilter.clear(filterFormat));
+        assertEquals("", threadFilter.clear(filterFormat));
     }
 }
