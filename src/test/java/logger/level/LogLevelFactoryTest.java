@@ -4,9 +4,7 @@ import loggerExceptions.NotExistingLevelException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class LogLevelFactoryTest {
 
@@ -90,7 +88,7 @@ public class LogLevelFactoryTest {
 
     @Test(expected = NotExistingLevelException.class)
     public void testCreateLogLevelThrowsException() throws Exception, NotExistingLevelException {
-        LogLevel createdLevel = factoryInstance.createLogLevel("DOES NOT EXIST");
+        factoryInstance.createLogLevel("DOES NOT EXIST");
         fail("Did not throw exception.");
     }
 
