@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class LevelFilterTest {
 
-    private FormatFilter levelFilter;
+    private FormatFilterInterface levelFilter;
     private LogLevel level;
 
     @Before

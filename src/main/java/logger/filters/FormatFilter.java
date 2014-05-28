@@ -1,25 +1,26 @@
 package logger.filters;
 
 /**
- * Created by gonchub on 13/05/14.
- * Interface for the format filters.
+ * Created by gonchub on 28/05/14.
+ * Reuse code between filters.
  */
-public interface FormatFilter {
+public abstract class FormatFilter implements FormatFilterInterface {
 
-    /**
-     * Filters the given message.
-     *
-     * @param message the message to filter.
-     * @return a new string with the filter value.
-     */
-    public String filter(String message);
+    protected String regex;
+    protected String toReplace;
 
-    /**
-     * Clears its part of the filter from the message. Used for validation.
-     *
-     * @param message the message to clear.
-     * @return the cleared message.
-     */
-    public String clear(String message);
+    @Override
+    public String filter(String message) {
+        String filtered = message;
+        filtered = filtered.replaceAll(regex, toReplace);
+        return filtered;
+    }
+
+    @Override
+    public String clear(String message) {
+        String filtered = message;
+        filtered = filtered.replaceAll(regex, "");
+        return filtered;
+    }
 
 }

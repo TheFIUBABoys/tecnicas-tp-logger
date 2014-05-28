@@ -3,6 +3,7 @@ package logger;
 import logger.level.LogLevel;
 import loggerExceptions.WrongPropertyFormatException;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 

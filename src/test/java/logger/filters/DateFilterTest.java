@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class DateFilterTest {
 
-    private FormatFilter dateFilter;
+    private FormatFilterInterface dateFilter;
 
     @Before
     public void setUp() {

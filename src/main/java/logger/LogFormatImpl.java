@@ -42,12 +42,12 @@ public class LogFormatImpl implements LogFormat {
     private Boolean validFormat(String format) {
         String copy = format.concat("");
 
-        FormatFilter messageFilter = new MessageFilter("");
-        FormatFilter levelFilter = new LevelFilter("");
-        FormatFilter separatorFilter = new SeparatorFilter("");
-        FormatFilter dateFilter = new DateFilter();
-        FormatFilter threadFilter = new ThreadFilter();
-        FormatFilter percentFilter = new PercentFilter();
+        FormatFilterInterface messageFilter = new MessageFilter("");
+        FormatFilterInterface levelFilter = new LevelFilter("");
+        FormatFilterInterface separatorFilter = new SeparatorFilter();
+        FormatFilterInterface dateFilter = new DateFilter();
+        FormatFilterInterface threadFilter = new ThreadFilter();
+        FormatFilterInterface percentFilter = new PercentFilter();
 
         copy = messageFilter.clear(copy);
         copy = levelFilter.clear(copy);
@@ -64,12 +64,12 @@ public class LogFormatImpl implements LogFormat {
      */
     public String formatLogMessage(String message, LogLevel level) {
 
-        FormatFilter messageFilter = new MessageFilter(message);
-        FormatFilter levelFilter = new LevelFilter(level.toString());
-        FormatFilter separatorFilter = new SeparatorFilter(separatorField);
-        FormatFilter dateFilter = new DateFilter();
-        FormatFilter threadFilter = new ThreadFilter();
-        FormatFilter percentFilter = new PercentFilter();
+        FormatFilterInterface messageFilter = new MessageFilter(message);
+        FormatFilterInterface levelFilter = new LevelFilter(level.toString());
+        FormatFilterInterface separatorFilter = new SeparatorFilter(separatorField);
+        FormatFilterInterface dateFilter = new DateFilter();
+        FormatFilterInterface threadFilter = new ThreadFilter();
+        FormatFilterInterface percentFilter = new PercentFilter();
 
         String replaced = formatString;
 

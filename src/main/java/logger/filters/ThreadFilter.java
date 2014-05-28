@@ -4,7 +4,7 @@ package logger.filters;
  * Created by gonchub on 13/05/14.
  * Filter for thread dependant strings.
  */
-public class ThreadFilter implements FormatFilter {
+public class ThreadFilter extends FormatFilter {
 
     private final String threadRegex = "%t";
     private final String lineRegex = "%L";

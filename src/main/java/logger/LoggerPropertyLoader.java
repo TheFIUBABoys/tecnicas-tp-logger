@@ -27,11 +27,10 @@ interface Command {
  */
 public class LoggerPropertyLoader {
 
-    private PropertyApplyingDelegate delegate;
     private static List<String> PROPERTY_CONFIG_KEYS = Arrays.asList("consoleOutput", "outputFile", "logLevel", "logFormat");
-
     //Action dict: key: propertyKey; value: action method corresponding to that property.
     Map<String, Command> methodMap = new HashMap<String, Command>();
+    private PropertyApplyingDelegate delegate;
 
     @SuppressWarnings("unused") //Wont be called
     private LoggerPropertyLoader() {
@@ -83,8 +82,9 @@ public class LoggerPropertyLoader {
 
     private void applyOutputFileProperty(String property, String fileValue) throws IOException {
         List<String> fileList = Arrays.asList(fileValue.split(","));
-        for (String file : fileList)
+        for (String file : fileList) {
             delegate.applyOutputFileProperty(property, file);
+        }
     }
 
     private void applyConsoleOutputProperty(String property, String fileValue) throws WrongPropertyFormatException {
@@ -102,8 +102,9 @@ public class LoggerPropertyLoader {
         inputStream.close();
         for (String propertyKey : PROPERTY_CONFIG_KEYS) {
             String propertyValue = properties.getProperty(propertyKey, "null");
-            if (!propertyValue.equals("null"))
+            if (!propertyValue.equals("null")) {
                 methodMap.get(propertyKey).applyPropertyWithValue(propertyKey, propertyValue);
+            }
         }
     }
 }

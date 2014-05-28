@@ -4,35 +4,24 @@ package logger.filters;
  * Created by gonchub on 13/05/14.
  * Filter for the EOL separator.
  */
-public class SeparatorFilter implements FormatFilter {
-
-    private final String separatorRegex = "%n";
-    private String separatorField = "\n";
+public class SeparatorFilter extends FormatFilter {
 
     /**
      * Override constructor to receive configurable separator field.
      *
-     * @param field the field to use as separator.
+     * @param separator the separator to override.
      */
-    public SeparatorFilter(String field) {
-        separatorField = field;
+    public SeparatorFilter(String separator) {
+        toReplace = separator;
+        regex = "%n";
     }
 
     /**
-     * {@inheritDoc}
+     * Override constructor to receive configurable separator field.
      */
-    public String filter(String message) {
-        String filtered = message;
-        filtered = filtered.replaceAll(separatorRegex, separatorField);
-        return filtered;
+    public SeparatorFilter() {
+        toReplace = "\n";
+        regex = "%n";
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public String clear(String message) {
-        String filtered = message;
-        filtered = filtered.replaceAll(separatorRegex, "");
-        return filtered;
-    }
 }

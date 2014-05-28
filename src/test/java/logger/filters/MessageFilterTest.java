@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class MessageFilterTest {
 
-    private FormatFilter messageFilter;
+    private FormatFilterInterface messageFilter;
     private String message;
 
     @Before

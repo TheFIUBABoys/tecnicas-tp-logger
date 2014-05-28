@@ -4,26 +4,14 @@ package logger.filters;
  * Created by gonchub on 13/05/14.
  * Filter for the percent symbol.
  */
-public class PercentFilter implements FormatFilter {
-
-    private final String percentRegex = "%%";
+public class PercentFilter extends FormatFilter {
 
     /**
-     * {@inheritDoc}
+     * Override default constructor to receive message to replace.
      */
-    public String filter(String message) {
-        String filtered = message;
-        filtered = filtered.replaceAll(percentRegex, "%");
-        return filtered;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String clear(String message) {
-        String filtered = message;
-        filtered = filtered.replaceAll(percentRegex, "");
-        return filtered;
+    public PercentFilter() {
+        toReplace = "%";
+        regex = "%%";
     }
 
 }

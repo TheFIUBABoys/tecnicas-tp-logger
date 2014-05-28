@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ThreadFilterTest {
 
-    private FormatFilter threadFilter;
+    private FormatFilterInterface threadFilter;
 
     @Before
     public void setUp() throws Exception {

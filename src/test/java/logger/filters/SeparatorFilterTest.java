@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SeparatorFilterTest {
 
-    private FormatFilter separatorFilter;
+    private FormatFilterInterface separatorFilter;
     private String separator;
 
     @Before

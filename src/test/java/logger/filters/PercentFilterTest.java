@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PercentFilterTest {
 
-    private FormatFilter percentFilter;
+    private FormatFilterInterface percentFilter;
 
     @Before
     public void setUp() throws Exception {
