@@ -11,7 +11,7 @@ import java.util.*;
  * Any property that will be applied must use this interface.
  * (Java 'hack' to have a method dictionary)
  */
-interface Command {
+interface PropertyApplier {
     void applyPropertyWithValue(String propertyKey, String value) throws Exception;
 }
 
@@ -29,7 +29,7 @@ public class LoggerPropertyLoader {
 
     private static List<String> PROPERTY_CONFIG_KEYS = Arrays.asList("consoleOutput", "outputFile", "logLevel", "logFormat");
     //Action dict: key: propertyKey; value: action method corresponding to that property.
-    Map<String, Command> methodMap = new HashMap<String, Command>();
+    private Map<String, PropertyApplier> methodMap = new HashMap<String, PropertyApplier>();
     private PropertyApplyingDelegate delegate;
 
     @SuppressWarnings("unused") //Wont be called
@@ -46,25 +46,25 @@ public class LoggerPropertyLoader {
      * Will load the method dictionary, one key:action for each available property.
      */
     private void initMethodMap() {
-        methodMap.put("consoleOutput", new Command() {
+        methodMap.put("consoleOutput", new PropertyApplier() {
             public void applyPropertyWithValue(String propertyKey, String value) throws WrongPropertyFormatException {
                 applyConsoleOutputProperty(propertyKey, value);
             }
         });
 
-        methodMap.put("outputFile", new Command() {
+        methodMap.put("outputFile", new PropertyApplier() {
             public void applyPropertyWithValue(String propertyKey, String value) throws IOException {
                 applyOutputFileProperty(propertyKey, value);
             }
         });
 
-        methodMap.put("logLevel", new Command() {
+        methodMap.put("logLevel", new PropertyApplier() {
             public void applyPropertyWithValue(String propertyKey, String value) throws WrongPropertyFormatException {
                 applyLogLevelProperty(propertyKey, value);
             }
         });
 
-        methodMap.put("logFormat", new Command() {
+        methodMap.put("logFormat", new PropertyApplier() {
             public void applyPropertyWithValue(String propertyKey, String value) throws WrongPropertyFormatException {
                 applyLogFormatProperty(propertyKey, value);
             }

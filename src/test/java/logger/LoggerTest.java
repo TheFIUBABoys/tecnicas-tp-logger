@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -68,25 +69,7 @@ public class LoggerTest {
         loggerInstance.logMessage(debug, LogLevel.LEVEL_DEBUG);
         loggerInstance.logMessage(info, LogLevel.LEVEL_INFO);
 
-        Scanner s = new Scanner(standardOutputStream);
-        ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()) {
-            list.add(s.next());
-        }
-        s.close();
-
-        assertTrue(list.get(0).equals("ERROR"));
-        assertTrue(list.get(1).equals("-"));
-        assertTrue(list.get(2).equals("Error"));
-        assertTrue(list.get(3).equals("Message"));
-
-        assertFalse(list.get(4).equals("DEBUG"));
-        assertFalse(list.get(6).equals("Debug"));
-
-        assertTrue(list.get(4).equals("INFO"));
-        assertTrue(list.get(5).equals("-"));
-        assertTrue(list.get(6).equals("Info"));
-        assertTrue(list.get(7).equals("Message"));
+        assertMessageLoggedCorrectly();
 
     }
 
@@ -97,6 +80,11 @@ public class LoggerTest {
         loggerInstance.logMessage("Debug Message%n", LogLevel.LEVEL_DEBUG);
         loggerInstance.logMessage("Info Message%n", LogLevel.LEVEL_INFO);
 
+        assertNothingWasLogged();
+
+    }
+
+    private void assertNothingWasLogged() throws FileNotFoundException {
         Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
@@ -105,7 +93,6 @@ public class LoggerTest {
         s.close();
 
         assertTrue(list.isEmpty());
-
     }
 
     @Test
@@ -116,6 +103,10 @@ public class LoggerTest {
         loggerInstance.logMessage("Warn Message%n", LogLevel.LEVEL_WARN);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
 
+        assertOnlyErrorAndFatalWereLogged();
+    }
+
+    private void assertOnlyErrorAndFatalWereLogged() throws FileNotFoundException {
         Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
@@ -145,6 +136,11 @@ public class LoggerTest {
             loggerInstance.addOutputFile(temporaryFilename);
             loggerInstance.addOutputFile(permanentFilename);
         }
+        assertMessageLoggedCorrectly();
+
+    }
+
+    private void assertMessageLoggedCorrectly() throws FileNotFoundException {
         Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
@@ -164,9 +160,7 @@ public class LoggerTest {
         assertTrue(list.get(5).equals("-"));
         assertTrue(list.get(6).equals("Info"));
         assertTrue(list.get(7).equals("Message"));
-
     }
-
 
 
 }
