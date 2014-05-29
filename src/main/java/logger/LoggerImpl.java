@@ -6,9 +6,9 @@ import logger.level.LogLevelFactory;
 import logger.writer.ConsoleWriter;
 import logger.writer.FileWriter;
 import logger.writer.Writer;
-import loggerExceptions.InvalidFormatException;
-import loggerExceptions.NotExistingLevelException;
-import loggerExceptions.WrongPropertyFormatException;
+import logger.exceptions.InvalidFormatException;
+import logger.exceptions.NotExistingLevelException;
+import logger.exceptions.WrongPropertyFormatException;
 
 import java.io.IOException;
 import java.util.HashMap;

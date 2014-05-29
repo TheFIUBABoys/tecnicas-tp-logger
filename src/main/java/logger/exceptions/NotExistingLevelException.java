@@ -1,4 +1,4 @@
-package loggerExceptions;
+package logger.exceptions;
 
 /**
  * Created by Tomas on 11/05/2014.

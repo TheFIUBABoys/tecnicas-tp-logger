@@ -2,7 +2,7 @@ package logger;
 
 import logger.filters.*;
 import logger.level.LogLevel;
-import loggerExceptions.InvalidFormatException;
+import logger.exceptions.InvalidFormatException;
 
 /**
  * Created by GonchuB on 09/05/2014.

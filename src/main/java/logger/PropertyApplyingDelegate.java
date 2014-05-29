@@ -1,6 +1,6 @@
 package logger;
 
-import loggerExceptions.WrongPropertyFormatException;
+import logger.exceptions.WrongPropertyFormatException;
 
 import java.io.IOException;
 

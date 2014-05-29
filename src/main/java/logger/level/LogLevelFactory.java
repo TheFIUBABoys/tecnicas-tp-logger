@@ -1,6 +1,6 @@
 package logger.level;
 
-import loggerExceptions.NotExistingLevelException;
+import logger.exceptions.NotExistingLevelException;
 
 /**
  * Created by Usuario on 11/05/2014.

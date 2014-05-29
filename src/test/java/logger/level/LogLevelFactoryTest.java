@@ -1,6 +1,6 @@
 package logger.level;
 
-import loggerExceptions.NotExistingLevelException;
+import logger.exceptions.NotExistingLevelException;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package loggerExceptions;
+package logger.exceptions;
 
 public class WrongPropertyFormatException extends Exception {
     /**
