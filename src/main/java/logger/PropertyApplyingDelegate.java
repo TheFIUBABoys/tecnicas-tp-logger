@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /**
  * @author Lucas
- *         Create LoggerPropertyLoader & implement this delegate methods to load properties from property file.
+ *         Create LoggerPropertyLoader and implement this delegate methods to load properties from property file.
  */
 public interface PropertyApplyingDelegate {
 

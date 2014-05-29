@@ -1,7 +1,8 @@
 package logger.writer;
 
 /**
- * Created by Tomas on 29/05/2014.
+ * @author Tomas
+ *         Defines Writer interface to be implemented by every type of writer to be used by the logger.
  */
 public interface Writer {
 

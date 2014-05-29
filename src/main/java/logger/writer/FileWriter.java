@@ -5,7 +5,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Tomas on 29/05/2014.
+ * @author Tomas
+ *         Creates FileWriter that implements Writer to write to an outputFile.
  */
 public class FileWriter implements Writer {
 
