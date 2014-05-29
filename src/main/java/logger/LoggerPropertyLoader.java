@@ -17,7 +17,6 @@ interface PropertyApplier {
 
 /**
  * Created by Lucas
- * <p/>
  * Class that will handle property loading, applying the actions through a delegate.
  * Current available properties are
  * consoleOutput: true/false

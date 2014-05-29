@@ -20,78 +20,78 @@ public interface LogLevel extends Comparable<LogLevel> {
 
     /**
      * Implement compare to method.
-     * thisOne.compareTo(otherOne) > 0, thisOne > otherOne
-     * thisOne.compareTo(otherOne) < 0, thisOne < otherOne
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
      * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
      *
      * @param logLevel the logLevel to compare to.
-     * @return an integer that indicates <, > or ==.
+     * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LogLevel logLevel);
 
     /**
      * Implement compare to method.
-     * thisOne.compareTo(otherOne) > 0, thisOne > otherOne
-     * thisOne.compareTo(otherOne) < 0, thisOne < otherOne
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
      * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
      *
      * @param logLevel the logLevel to compare to.
-     * @return an integer that indicates <, > or ==.
+     * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LevelDebug logLevel);
 
     /**
      * Implement compare to method.
-     * thisOne.compareTo(otherOne) > 0, thisOne > otherOne
-     * thisOne.compareTo(otherOne) < 0, thisOne < otherOne
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
      * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
      *
      * @param logLevel the logLevel to compare to.
-     * @return an integer that indicates <, > or ==.
+     * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LevelInfo logLevel);
 
     /**
      * Implement compare to method.
-     * thisOne.compareTo(otherOne) > 0, thisOne > otherOne
-     * thisOne.compareTo(otherOne) < 0, thisOne < otherOne
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
      * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
      *
      * @param logLevel the logLevel to compare to.
-     * @return an integer that indicates <, > or ==.
+     * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LevelWarn logLevel);
 
     /**
      * Implement compare to method.
-     * thisOne.compareTo(otherOne) > 0, thisOne > otherOne
-     * thisOne.compareTo(otherOne) < 0, thisOne < otherOne
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
      * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
      *
      * @param logLevel the logLevel to compare to.
-     * @return an integer that indicates <, > or ==.
+     * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LevelError logLevel);
 
     /**
      * Implement compare to method.
-     * thisOne.compareTo(otherOne) > 0, thisOne > otherOne
-     * thisOne.compareTo(otherOne) < 0, thisOne < otherOne
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
      * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
      *
      * @param logLevel the logLevel to compare to.
-     * @return an integer that indicates <, > or ==.
+     * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LevelFatal logLevel);
 
     /**
      * Implement compare to method.
-     * thisOne.compareTo(otherOne) > 0, thisOne > otherOne
-     * thisOne.compareTo(otherOne) < 0, thisOne < otherOne
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
      * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
      *
      * @param logLevel the logLevel to compare to.
-     * @return an integer that indicates <, > or ==.
+     * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LevelOff logLevel);
 
