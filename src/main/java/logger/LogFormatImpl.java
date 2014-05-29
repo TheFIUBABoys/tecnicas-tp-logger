@@ -25,6 +25,7 @@ public class LogFormatImpl implements LogFormat {
      * Creates a new LogFormatImpl instance with the specified format.
      *
      * @param format the format string that will be used to format the messages.
+     * @throws InvalidFormatException if the format received is not valid
      */
     public LogFormatImpl(String format) throws InvalidFormatException {
         if (!validFormat(format)) {
