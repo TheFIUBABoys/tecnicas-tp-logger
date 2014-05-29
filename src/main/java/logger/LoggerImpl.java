@@ -3,13 +3,13 @@ package logger;
 import logger.level.LevelDebug;
 import logger.level.LogLevel;
 import logger.level.LogLevelFactory;
+import logger.writer.ConsoleWriter;
+import logger.writer.FileWriter;
+import logger.writer.Writer;
 import loggerExceptions.InvalidFormatException;
 import loggerExceptions.NotExistingLevelException;
 import loggerExceptions.WrongPropertyFormatException;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -29,8 +29,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
 
     private LogLevel logLevelSet;
     private LogFormat logFormat;
-    private HashMap<String,BufferedWriter> outputFiles;
-    private Boolean terminalOutput;
+    private HashMap<String, Writer> outputWriters;
 
     /**
      * Private constructor to be called from the getLogger method.
@@ -38,8 +37,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private LoggerImpl() {
         logLevelSet = new LevelDebug();
         logFormat = new LogFormatImpl();
-        outputFiles = new HashMap<String,BufferedWriter>();
-        terminalOutput = true;
+        outputWriters = new HashMap<String,Writer>();
     }
 
     /**
@@ -65,23 +63,18 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * {@inheritDoc}
      */
     public void setConsoleOutput(Boolean value) {
-        terminalOutput = value;
+        if (!outputWriters.containsKey(ConsoleWriter.FILENAME)) {
+            outputWriters.put(ConsoleWriter.FILENAME, new ConsoleWriter());
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public void addOutputFile(String filename) throws IOException {
-        File file = new File(filename);
-
-        if (!file.exists()) {
-            file.createNewFile();
+        if (!outputWriters.containsKey(filename)) {
+            outputWriters.put(filename, new FileWriter(filename));
         }
-
-        FileWriter fw = new FileWriter(file, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        if (!outputFiles.containsValue(filename))
-            outputFiles.put(filename,bw);
     }
 
     /**
@@ -102,21 +95,6 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     }
 
     /**
-     * Writes the message in the received BufferedWriter and flushes it.
-     *
-     * @param bw      the buffered writer where the message will be written.
-     * @param message the message to write.
-     */
-    private void writeInBuffer(BufferedWriter bw, String message) {
-        try {
-            bw.write(message);
-            bw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Executes the logging of the message into terminal (if defined) and
      * all the output files.
      *
@@ -125,11 +103,8 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     private void executeLog(String message, LogLevel logLevel) {
         String formattedMessage = logFormat.formatLogMessage(message, logLevel);
-        if (terminalOutput) {
-            System.out.print(formattedMessage);
-        }
-        for (BufferedWriter bw : outputFiles.values()) {
-            writeInBuffer(bw, formattedMessage);
+        for (Writer w : outputWriters.values()) {
+            w.write(formattedMessage);
         }
     }
 
