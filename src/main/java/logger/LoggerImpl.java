@@ -31,6 +31,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private LogLevel logLevelSet;
     private LogFormat logFormat;
     private HashMap<String, Writer> outputWriters;
+    private LoggerConfigReader configReader;
 
     /**
      * Private constructor to be called from the getLogger method.
@@ -39,6 +40,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         logLevelSet = new LevelDebug();
         logFormat = new LogFormatImpl();
         outputWriters = new HashMap<String, Writer>();
+        configReader = new LoggerPropertyReader(this);
     }
 
     /**
@@ -166,7 +168,6 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * {@inheritDoc}
      */
     public void loadConfigFromFile(String filename) throws Exception {
-        LoggerPropertyLoader loggerPropertyLoader = new LoggerPropertyLoader(this);
-        loggerPropertyLoader.loadConfigFromFile(filename);
+        configReader.loadConfigFromFile(filename);
     }
 }

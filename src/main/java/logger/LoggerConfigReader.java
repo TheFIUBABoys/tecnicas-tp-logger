@@ -2,9 +2,11 @@ package logger;
 
 import logger.exceptions.WrongPropertyFormatException;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Lucas
@@ -16,27 +18,22 @@ interface PropertyApplier {
 }
 
 /**
- * Created by Lucas
- * Class that will handle property loading, applying the actions through a delegate.
- * Current available properties are
+ * Created by Tomas on 30/05/2014.
+ * Class that will define logger config loading interface, applying the actions through a delegate.
+ * Current available configs are
  * consoleOutput: true/false
  * outputFile: list of files separated by commas, i.e. file1,file2,file3
  * logLevel: a logLevel according to levels in LogLevel interface
  * logFormat: format available in LogFormat interface
  */
-public class LoggerPropertyLoader {
+public abstract class LoggerConfigReader {
 
-    private static List<String> PROPERTY_CONFIG_KEYS = Arrays.asList("consoleOutput", "outputFile", "logLevel", "logFormat");
+    protected static List<String> PROPERTY_CONFIG_KEYS = Arrays.asList("consoleOutput", "outputFile", "logLevel", "logFormat");
     //Action dict: key: propertyKey; value: action method corresponding to that property.
-    private Map<String, PropertyApplier> methodMap = new HashMap<String, PropertyApplier>();
+    protected Map<String, PropertyApplier> methodMap = new HashMap<String, PropertyApplier>();
     private PropertyApplyingDelegate delegate;
 
-    @SuppressWarnings("unused") //Wont be called
-    private LoggerPropertyLoader() {
-
-    }
-
-    public LoggerPropertyLoader(PropertyApplyingDelegate aDelegate) {
+    public LoggerConfigReader(PropertyApplyingDelegate aDelegate) {
         initMethodMap();
         delegate = aDelegate;
     }
@@ -70,7 +67,6 @@ public class LoggerPropertyLoader {
         });
     }
 
-
     private void applyLogFormatProperty(String property, String fileValue) throws WrongPropertyFormatException {
         delegate.applyLogFormatProperty(property, fileValue);
     }
@@ -94,16 +90,6 @@ public class LoggerPropertyLoader {
      * @param filename the filename to load the config from.
      * @throws Exception Will call the corresponding action method stored in method dictionary.
      */
-    public void loadConfigFromFile(String filename) throws Exception {
-        FileInputStream inputStream = new FileInputStream(filename);
-        Properties properties = new Properties();
-        properties.load(inputStream);
-        inputStream.close();
-        for (String propertyKey : PROPERTY_CONFIG_KEYS) {
-            String propertyValue = properties.getProperty(propertyKey, "null");
-            if (!propertyValue.equals("null")) {
-                methodMap.get(propertyKey).applyPropertyWithValue(propertyKey, propertyValue);
-            }
-        }
-    }
+    public abstract void loadConfigFromFile(String filename) throws Exception;
+
 }
