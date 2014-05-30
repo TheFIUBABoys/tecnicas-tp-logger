@@ -8,6 +8,11 @@ import static org.junit.Assert.assertTrue;
 public class LevelDebugTest {
 
     @Test
+    public void testCompareToTrace() throws Exception {
+        assertTrue(LogLevel.LEVEL_TRACE.compareTo(LogLevel.LEVEL_DEBUG) > 0);
+    }
+
+    @Test
     public void testCompareToDebug() throws Exception {
         assertTrue(LogLevel.LEVEL_DEBUG.compareTo(LogLevel.LEVEL_DEBUG) < 0);
     }
@@ -39,7 +44,7 @@ public class LevelDebugTest {
 
     @Test
     public void testToString() throws Exception {
-        assertEquals("OFF", LogLevel.LEVEL_OFF.toString());
+        assertEquals("DEBUG", LogLevel.LEVEL_DEBUG.toString());
     }
 
 }

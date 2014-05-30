@@ -2,7 +2,7 @@
 Implementar un binding a SLF4J http://www.slf4j.org/ para que una library que use SLF4J pueda 
 usar nuestro  logger como backend. 
 
-# Nuevo Nivel
+# [DONE] Nuevo Nivel
 Se requiere agregar el nivel ``TRACE`` > DEBUG > INFO > WARN > ERROR > FATAL > OFF. 
 
 # Multiples Loggers

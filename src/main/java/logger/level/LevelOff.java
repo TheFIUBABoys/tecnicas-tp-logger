@@ -18,6 +18,13 @@ public class LevelOff implements LogLevel {
     /**
      * {@inheritDoc}
      */
+    public int compareTo(LevelTrace logLevel) {
+        return 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public int compareTo(LevelDebug logLevel) {
         return 1;
     }

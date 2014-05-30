@@ -37,6 +37,7 @@ public class LogLevelFactory {
      */
     public LogLevel createLogLevel(String level) throws NotExistingLevelException {
 
+        LogLevel traceInstance = new LevelTrace();
         LogLevel debugInstance = new LevelDebug();
         LogLevel infoInstance = new LevelInfo();
         LogLevel warnInstance = new LevelWarn();
@@ -44,7 +45,9 @@ public class LogLevelFactory {
         LogLevel fatalInstance = new LevelFatal();
         LogLevel offInstance = new LevelOff();
 
-        if (level.equals(debugInstance.toString())) {
+        if (level.equals(traceInstance.toString())) {
+            return traceInstance;
+        } else if (level.equals(debugInstance.toString())) {
             return debugInstance;
         } else if (level.equals(infoInstance.toString())) {
             return infoInstance;

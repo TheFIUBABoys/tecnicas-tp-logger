@@ -8,6 +8,11 @@ import static org.junit.Assert.assertTrue;
 public class LevelErrorTest {
 
     @Test
+    public void testCompareToTrace() throws Exception {
+        assertTrue(LogLevel.LEVEL_TRACE.compareTo(LogLevel.LEVEL_ERROR) > 0);
+    }
+
+    @Test
     public void testCompareToDebug() throws Exception {
         assertTrue(LogLevel.LEVEL_DEBUG.compareTo(LogLevel.LEVEL_ERROR) > 0);
     }

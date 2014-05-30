@@ -1,12 +1,12 @@
 package logger.level;
 
 /**
- * Created by GonchuB on 09/05/2014.
- * This class represents the ERROR logging logger.level. It
+ * Created by GonchuB on 30/05/2014.
+ * This class represents the TRACE logging logger.level. It
  * implements all comparing methods defined by the LogLevel
  * interface.
  */
-public class LevelError implements LogLevel {
+public class LevelTrace implements LogLevel {
 
     /**
      * {@inheritDoc}
@@ -19,28 +19,28 @@ public class LevelError implements LogLevel {
      * {@inheritDoc}
      */
     public int compareTo(LevelTrace logLevel) {
-        return 1;
+        return -1;
     }
 
     /**
      * {@inheritDoc}
      */
     public int compareTo(LevelDebug logLevel) {
-        return 1;
+        return -1;
     }
 
     /**
      * {@inheritDoc}
      */
     public int compareTo(LevelInfo logLevel) {
-        return 1;
+        return -1;
     }
 
     /**
      * {@inheritDoc}
      */
     public int compareTo(LevelWarn logLevel) {
-        return 1;
+        return -1;
     }
 
     /**
@@ -68,6 +68,7 @@ public class LevelError implements LogLevel {
      * {@inheritDoc}
      */
     public String toString() {
-        return "ERROR";
+        return "TRACE";
     }
+
 }

@@ -11,6 +11,7 @@ public interface LogLevel extends Comparable<LogLevel> {
      * Easy access to debugging logger.level types.
      * Example of semantics: LogLevel.LEVEL_DEBUG
      */
+    public static LogLevel LEVEL_TRACE = new LevelTrace();
     public static LogLevel LEVEL_DEBUG = new LevelDebug();
     public static LogLevel LEVEL_INFO = new LevelInfo();
     public static LogLevel LEVEL_WARN = new LevelWarn();
@@ -28,6 +29,17 @@ public interface LogLevel extends Comparable<LogLevel> {
      * @return an integer that indicates &lt;, &gt; or ==.
      */
     public int compareTo(LogLevel logLevel);
+
+    /**
+     * Implement compare to method.
+     * thisOne.compareTo(otherOne) &gt; 0, thisOne &gt; otherOne
+     * thisOne.compareTo(otherOne) &lt; 0, thisOne &lt; otherOne
+     * thisOne.compareTo(otherOne) == 0, thisOne == otherOne
+     *
+     * @param logLevel the logLevel to compare to.
+     * @return an integer that indicates &lt;, &gt; or ==.
+     */
+    public int compareTo(LevelTrace logLevel);
 
     /**
      * Implement compare to method.
