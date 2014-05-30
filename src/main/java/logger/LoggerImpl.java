@@ -26,6 +26,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * LoggerImpl singleton instance.
      */
     private static Logger loggerInstance = null;
+    private static HashMap<String, Logger> loggers = new HashMap<String, Logger>();
 
     private LogLevel logLevelSet;
     private LogFormat logFormat;
@@ -37,7 +38,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private LoggerImpl() {
         logLevelSet = new LevelDebug();
         logFormat = new LogFormatImpl();
-        outputWriters = new HashMap<String,Writer>();
+        outputWriters = new HashMap<String, Writer>();
     }
 
     /**
@@ -50,6 +51,18 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             loggerInstance = new LoggerImpl();
         }
         return loggerInstance;
+    }
+
+    /**
+     * Get the instance of the logger required by name. If it doesn't exist, creates one.
+     *
+     * @return the LoggerImpl instance.
+     */
+    public static Logger getLogger(String loggerName) {
+        if (loggers.get(loggerName) == null) {
+            loggers.put(loggerName, new LoggerImpl());
+        }
+        return loggers.get(loggerName);
     }
 
     /**

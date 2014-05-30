@@ -5,7 +5,7 @@ usar nuestro  logger como backend. 
 # [DONE] Nuevo Nivel
 Se requiere agregar el nivel ``TRACE`` > DEBUG > INFO > WARN > ERROR > FATAL > OFF. 
 
-# Multiples Loggers
+# [DONE - NEEDS TESTING] Multiples Loggers
 Permitir definir y utilizar loguers distintos en diferentes areas de una aplicacion. Es decir, se 
 quiere poder utilizar dos loggers con distintas configuraciones en lugares distintos. 
 
