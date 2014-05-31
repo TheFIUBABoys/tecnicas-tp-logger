@@ -10,15 +10,15 @@ import java.util.*;
  */
 public class LoggerPropertyReader extends LoggerConfigReader{
 
-    public LoggerPropertyReader(PropertyApplyingDelegate aDelegate) {
-        super(aDelegate);
+    public LoggerPropertyReader(PropertyApplyingDelegate aDelegate, String filename) {
+        super(aDelegate, filename);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void loadConfigFromFile(String filename) throws Exception {
-        FileInputStream inputStream = new FileInputStream(filename);
+    public void loadConfig() throws Exception {
+        FileInputStream inputStream = new FileInputStream(configFile);
         Properties properties = new Properties();
         properties.load(inputStream);
         inputStream.close();

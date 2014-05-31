@@ -41,7 +41,13 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         logLevelSet = new LevelDebug();
         logFormat = new LogFormatImpl();
         outputWriters = new HashMap<String, Writer>();
-        configReader = new LoggerPropertyReader(this);
+        LoggerConfigReaderFactory factory = LoggerConfigReaderFactory.getInstace();
+        configReader = factory.getReaderFor(this);
+        try {
+            configReader.loadConfig();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -91,6 +97,13 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         if (!outputWriters.containsKey(filename)) {
             outputWriters.put(filename, new FileWriter(filename));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void loadConfig() throws Exception {
+        configReader.loadConfig();
     }
 
     /**
@@ -174,10 +187,12 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void loadConfigFromFile(String filename) throws Exception {
-        configReader.loadConfigFromFile(filename);
-    }
+
+
+//    /**
+//     * {@inheritDoc}
+//     */
+//    public void loadConfigFromFile(String filename) throws Exception {
+//        configReader.loadConfig(filename);
+//    }
 }

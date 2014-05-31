@@ -2,7 +2,6 @@ package logger;
 
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -16,16 +15,16 @@ import java.io.FileInputStream;
  */
 public class LoggerXMLReader extends LoggerConfigReader{
 
-    public LoggerXMLReader(PropertyApplyingDelegate aDelegate) {
-        super(aDelegate);
+    public LoggerXMLReader(PropertyApplyingDelegate aDelegate, String filename) {
+        super(aDelegate, filename);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void loadConfigFromFile(String filename) throws Exception {
+    public void loadConfig() throws Exception {
 
-        FileInputStream inputStream = new FileInputStream(filename);
+        FileInputStream inputStream = new FileInputStream(configFile);
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();

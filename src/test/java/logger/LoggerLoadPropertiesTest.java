@@ -13,19 +13,16 @@ import java.io.PrintStream;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 
 public class LoggerLoadPropertiesTest {
     Logger loggerInstance;
-    String filename = "appProperties.txt";
+    String filename = "logger­config.properties";
     String outputFilename = "outputFilename.txt";
     File standardOutputStream;
 
 
     private void setUpPropertyFileWithKeyValueDict(Map<String, String> dict) throws Exception {
-        loggerInstance = null;
-        loggerInstance = LoggerImpl.getLogger();
         Properties applicationProps = new Properties();
         for (String key : dict.keySet()) {
             applicationProps.setProperty(key, dict.get(key));
@@ -34,6 +31,8 @@ public class LoggerLoadPropertiesTest {
         FileOutputStream outputFile = new FileOutputStream(filename);
         applicationProps.store(outputFile, "---No Comment---");
         outputFile.close();
+
+        loggerInstance.loadConfig();
     }
 
     private void tearDownStandardOutputRedirect() throws IOException {
@@ -49,15 +48,21 @@ public class LoggerLoadPropertiesTest {
 
     @Before
     public void setUp() throws Exception {
-        loggerInstance = LoggerImpl.getLogger();
+        // CREATING CONFIG FILE FOR LOGGER TO CREATE ITS READER
+        FileOutputStream file = new FileOutputStream(filename);
+        file.close();
+        loggerInstance = LoggerImpl.getLogger("property");
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
         File directory = new File(("./"));
-        for(File f: directory.listFiles())
-            if(f.getName().endsWith(".txt"))
+        for(File f: directory.listFiles()) {
+            if (f.getName().endsWith(".txt"))
                 f.delete();
+            if (f.getName().endsWith(".properties"))
+                f.delete();
+        }
     }
 
     private void setUpConsoleOutputProperty() throws Exception {
@@ -70,7 +75,6 @@ public class LoggerLoadPropertiesTest {
     public void testCheckIfLoadingConsoleOutputPropertyFromFileWork() throws Exception {
         setUpStandardOutputRedirect();
         setUpConsoleOutputProperty();
-        loggerInstance.loadConfigFromFile(filename);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
@@ -109,7 +113,6 @@ public class LoggerLoadPropertiesTest {
     @Test
     public void testLoadOutputFile() throws Exception {
         setUpOutputFileProperty();
-        loggerInstance.loadConfigFromFile(filename);
         loggerInstance.setConsoleOutput(false);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
@@ -130,7 +133,6 @@ public class LoggerLoadPropertiesTest {
     @Test
     public void testLoadSeveralOutputFiles() throws Exception {
         setUpOutputFilesProperty();
-        loggerInstance.loadConfigFromFile(filename);
         loggerInstance.setConsoleOutput(false);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
@@ -152,7 +154,6 @@ public class LoggerLoadPropertiesTest {
     @Test
     public void testLoadLogLevel() throws Exception {
         setUpFatalLevelProperty();
-        loggerInstance.loadConfigFromFile(filename);
         loggerInstance.addOutputFile(outputFilename);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
@@ -172,7 +173,6 @@ public class LoggerLoadPropertiesTest {
     @Test
     public void testLoadLogFormat() throws Exception {
         setUpFormatProperty();
-        loggerInstance.loadConfigFromFile(filename);
         loggerInstance.addOutputFile(outputFilename);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
@@ -188,7 +188,6 @@ public class LoggerLoadPropertiesTest {
     @Test(expected = WrongPropertyFormatException.class)
     public void testWrongFormatConsole() throws Exception {
         setUpWrongFormatConsoleProperty();
-        loggerInstance.loadConfigFromFile(filename);
     }
 
     private void setUpWrongFormatLevelProperty() throws Exception {
@@ -200,7 +199,6 @@ public class LoggerLoadPropertiesTest {
     @Test(expected = WrongPropertyFormatException.class)
     public void testWrongFormatLevel() throws Exception {
         setUpWrongFormatLevelProperty();
-        loggerInstance.loadConfigFromFile(filename);
     }
 
     private void setUpWrongFormatFormatProperty() throws Exception {
@@ -209,17 +207,9 @@ public class LoggerLoadPropertiesTest {
         setUpPropertyFileWithKeyValueDict(data);
     }
 
-    @Test
+    @Test(expected = WrongPropertyFormatException.class)
     public void testWrongFormatFormat() throws Exception {
-        try {
-            setUpWrongFormatFormatProperty();
-            loggerInstance.loadConfigFromFile(filename);
-            assertTrue(false);
-        } catch (WrongPropertyFormatException e) {
-            assertTrue(true);
-        } catch (Exception e) {
-            assertTrue(false);
-        }
+        setUpWrongFormatFormatProperty();
     }
 
 }

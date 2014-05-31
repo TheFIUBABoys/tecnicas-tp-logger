@@ -32,10 +32,17 @@ public abstract class LoggerConfigReader {
     //Action dict: key: propertyKey; value: action method corresponding to that property.
     protected Map<String, PropertyApplier> methodMap = new HashMap<String, PropertyApplier>();
     private PropertyApplyingDelegate delegate;
+    protected String configFile;
 
     public LoggerConfigReader(PropertyApplyingDelegate aDelegate) {
         initMethodMap();
         delegate = aDelegate;
+    }
+
+    public LoggerConfigReader(PropertyApplyingDelegate aDelegate, String filename) {
+        initMethodMap();
+        delegate = aDelegate;
+        configFile = filename;
     }
 
     /**
@@ -90,6 +97,6 @@ public abstract class LoggerConfigReader {
      * @param filename the filename to load the config from.
      * @throws Exception Will call the corresponding action method stored in method dictionary.
      */
-    public abstract void loadConfigFromFile(String filename) throws Exception;
+    public abstract void loadConfig() throws Exception;
 
 }
