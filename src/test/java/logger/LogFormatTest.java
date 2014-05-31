@@ -86,7 +86,8 @@ public class LogFormatTest {
     public void testToJson() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
+        String expected = "{\"datetime\":\"" + (new Date()).toString() + "\",\"logger\":\"Message\",\"level\":\"DEBUG\",\"message\":\"Message\"}";
 
-        assertEquals("DEBUG - Message", jsonFormat.formatLogMessage(message, logLevel));
+        assertEquals(expected, jsonFormat.formatLogMessage(message, logLevel));
     }
 }

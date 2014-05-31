@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class LogContainerImpl implements LogContainer {
 
-    private Date datetime;
+    private String datetime;
     private String logger;
     private String level;
     private String message;
@@ -19,7 +19,7 @@ public class LogContainerImpl implements LogContainer {
 
     @Override
     public void setDate(Date date) {
-        this.datetime = date;
+        this.datetime = date.toString();
     }
 
     @Override
