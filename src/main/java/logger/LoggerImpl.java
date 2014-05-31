@@ -1,14 +1,14 @@
 package logger;
 
+import logger.exceptions.InvalidFormatException;
+import logger.exceptions.NotExistingLevelException;
+import logger.exceptions.WrongPropertyFormatException;
 import logger.level.LevelDebug;
 import logger.level.LogLevel;
 import logger.level.LogLevelFactory;
 import logger.writer.ConsoleWriter;
 import logger.writer.FileWriter;
 import logger.writer.Writer;
-import logger.exceptions.InvalidFormatException;
-import logger.exceptions.NotExistingLevelException;
-import logger.exceptions.WrongPropertyFormatException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -97,6 +97,14 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     public void setLogLevel(LogLevel logLevel) {
         logLevelSet = logLevel;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LogLevel getLogLevel() {
+        return this.logLevelSet;
     }
 
     /**

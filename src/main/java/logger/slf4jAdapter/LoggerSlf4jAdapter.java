@@ -1,13 +1,19 @@
-package logger;
+package logger.slf4jAdapter;
 
+import logger.Logger;
+import logger.LoggerImpl;
 import logger.level.LogLevel;
-import org.slf4j.*;
+import org.slf4j.Marker;
 
 /**
  * Created by Lucas on 5/30/2014.
  */
-public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
-    private Logger logger = LoggerImpl.getLogger();
+public class LoggerSlf4jAdapter implements org.slf4j.Logger {
+    private Logger logger;
+
+    public LoggerSlf4jAdapter(){
+        logger =  LoggerImpl.getLogger();
+    }
 
     @Override
     public String getName() {
@@ -16,7 +22,7 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isTraceEnabled() {
-        return false;
+       return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_TRACE))==0);
     }
 
     @Override
@@ -46,12 +52,12 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isTraceEnabled(Marker marker) {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_TRACE))==0);
     }
 
     @Override
     public void trace(Marker marker, String s) {
-
+        this.logger.logMessage(s, LogLevel.LEVEL_TRACE);
     }
 
     @Override
@@ -76,7 +82,7 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isDebugEnabled() {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_DEBUG))==0);
     }
 
     @Override
@@ -106,12 +112,12 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isDebugEnabled(Marker marker) {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_DEBUG))==0);
     }
 
     @Override
     public void debug(Marker marker, String s) {
-
+        this.logger.logMessage(s, LogLevel.LEVEL_DEBUG);
     }
 
     @Override
@@ -136,7 +142,7 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isInfoEnabled() {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_INFO))==0);
     }
 
     @Override
@@ -166,12 +172,12 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isInfoEnabled(Marker marker) {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_INFO))==0);
     }
 
     @Override
     public void info(Marker marker, String s) {
-
+        this.logger.logMessage(s, LogLevel.LEVEL_INFO);
     }
 
     @Override
@@ -196,7 +202,7 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isWarnEnabled() {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_WARN))==0);
     }
 
     @Override
@@ -226,12 +232,12 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isWarnEnabled(Marker marker) {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_WARN))==0);
     }
 
     @Override
     public void warn(Marker marker, String s) {
-
+        this.logger.logMessage(s, LogLevel.LEVEL_WARN);
     }
 
     @Override
@@ -256,7 +262,7 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isErrorEnabled() {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_ERROR))==0);
     }
 
     @Override
@@ -286,12 +292,12 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public boolean isErrorEnabled(Marker marker) {
-        return false;
+        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_ERROR))==0);
     }
 
     @Override
     public void error(Marker marker, String s) {
-
+        this.logger.logMessage(s, LogLevel.LEVEL_ERROR);
     }
 
     @Override
@@ -311,6 +317,6 @@ public class LoggerSlf4jAdapter  implements  org.slf4j.Logger{
 
     @Override
     public void error(Marker marker, String s, Throwable throwable) {
-
+        this.logger.logMessage(s, LogLevel.LEVEL_ERROR);
     }
 }

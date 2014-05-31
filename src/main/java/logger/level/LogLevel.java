@@ -5,6 +5,8 @@ package logger.level;
  * The responsibility of this class is to provide an interface
  * for the different types of logging levels.
  */
+
+
 public interface LogLevel extends Comparable<LogLevel> {
 
     /**

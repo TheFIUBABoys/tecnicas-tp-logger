@@ -35,6 +35,14 @@ public interface Logger {
      */
     public void setLogLevel(LogLevel logLevel);
 
+
+    /**
+     * Gets the logging logger.level, which determines which type of messages
+     * will be logged.
+     */
+    public LogLevel getLogLevel();
+
+
     /**
      * Sets whether the logger will or won't log into terminal.
      *
