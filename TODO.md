@@ -28,10 +28,10 @@ cumplan con algun patrón de regular expression. 
 a todas las propiedades de un mensaje (contenido, nivel, fecha, etc) si lo desea loguear 
 o no. 
 
-# Configuración
+# Configuración [DOING Tomi]
 Permitir leer la configuración desde un archivo XML. 
 
-# Inicialización
+# Inicialización [DOING Tomi]
 La herramienta deberá intentar leer la configuración automáticamente de la siguiente manera: 
 - Si existe el archivo logger­config.properties, leerlo y utilizar esa configuración. 
 - Si existe el archivo logger­config.xml, leerlo y utilizar esa configuración. 
