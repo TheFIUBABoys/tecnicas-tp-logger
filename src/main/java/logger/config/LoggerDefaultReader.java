@@ -1,4 +1,4 @@
-package logger;
+package logger.config;
 
 import logger.level.LogLevel;
 

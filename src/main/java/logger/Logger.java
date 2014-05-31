@@ -1,5 +1,6 @@
 package logger;
 
+import logger.format.LogFormat;
 import logger.level.LogLevel;
 
 import java.io.IOException;

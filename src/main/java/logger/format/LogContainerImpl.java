@@ -1,7 +1,6 @@
-package logger.filters;
+package logger.format;
 
 import com.google.gson.Gson;
-import logger.level.LogLevel;
 
 import java.util.Date;
 

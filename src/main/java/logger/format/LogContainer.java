@@ -1,4 +1,4 @@
-package logger.filters;
+package logger.format;
 
 import logger.level.LogLevel;
 

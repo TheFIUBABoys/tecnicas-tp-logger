@@ -1,4 +1,4 @@
-package logger;
+package logger.config;
 
 
 import org.w3c.dom.Document;
@@ -13,7 +13,7 @@ import java.io.FileInputStream;
  * Created by Lucas
  * Class that extends LoggerConfigReader and reads config form Properties File
  */
-public class LoggerXMLReader extends LoggerConfigReader{
+public class LoggerXMLReader extends LoggerConfigReader {
 
     public LoggerXMLReader(PropertyApplyingDelegate aDelegate, String filename) {
         super(aDelegate, filename);

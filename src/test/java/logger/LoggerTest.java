@@ -1,5 +1,6 @@
 package logger;
 
+import logger.format.LogFormatImpl;
 import logger.level.LogLevel;
 import org.junit.After;
 import org.junit.AfterClass;

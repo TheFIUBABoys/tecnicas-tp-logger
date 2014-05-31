@@ -1,6 +1,7 @@
 package logger;
 
 import logger.exceptions.WrongPropertyFormatException;
+import logger.format.LogFormatImpl;
 import logger.level.LogLevel;
 import org.junit.AfterClass;
 import org.junit.Before;

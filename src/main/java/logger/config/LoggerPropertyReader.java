@@ -1,4 +1,4 @@
-package logger;
+package logger.config;
 
 
 import java.io.FileInputStream;
@@ -8,7 +8,7 @@ import java.util.*;
  * Created by Lucas
  * Class that extends LoggerConfigReader and reads config form Properties File
  */
-public class LoggerPropertyReader extends LoggerConfigReader{
+public class LoggerPropertyReader extends LoggerConfigReader {
 
     public LoggerPropertyReader(PropertyApplyingDelegate aDelegate, String filename) {
         super(aDelegate, filename);

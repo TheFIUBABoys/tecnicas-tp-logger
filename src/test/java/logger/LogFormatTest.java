@@ -1,5 +1,7 @@
 package logger;
 
+import logger.format.LogFormat;
+import logger.format.LogFormatImpl;
 import logger.level.LevelDebug;
 import logger.level.LogLevel;
 import logger.exceptions.InvalidFormatException;
