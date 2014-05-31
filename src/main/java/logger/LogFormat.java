@@ -8,6 +8,9 @@ import logger.level.LogLevel;
  */
 public interface LogFormat {
 
+    public static String JSON_STRATEGY = "json";
+    public static String STRING_STRATEGY = "string";
+
     /**
      * Formats the received log message.
      *
@@ -24,5 +27,11 @@ public interface LogFormat {
      */
     public void setEndOfLineSeparator(String newEol);
 
+    /**
+     * Sets the strategy to be used in the formatting.
+     *
+     * @param strategy the strategy to use.
+     */
+    public void setFormatStrategy(String strategy);
 
 }

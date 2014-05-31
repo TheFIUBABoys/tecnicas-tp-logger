@@ -18,6 +18,7 @@ public class LogFormatTest {
     private LogFormat defaultFormat;
     private LogFormat messageFormatDate;
     private LogFormat endOfLineFormat;
+    private LogFormat jsonFormat;
 
     @Before
     public void setUp() throws Exception {
@@ -26,6 +27,8 @@ public class LogFormatTest {
         threadFormat = new LogFormatImpl("%t - %M");
         defaultFormat = new LogFormatImpl();
         messageFormatDate = new LogFormatImpl("%d{dd-MM-yyyy}");
+        jsonFormat = new LogFormatImpl();
+        jsonFormat.setFormatStrategy(LogFormat.JSON_STRATEGY);
     }
 
     @Test
@@ -77,5 +80,13 @@ public class LogFormatTest {
         endOfLineFormat.setEndOfLineSeparator(",");
 
         assertEquals(expected, endOfLineFormat.formatLogMessage(message, logLevel));
+    }
+
+    @Test
+    public void testToJson() throws Exception {
+        String message = "Message";
+        LogLevel logLevel = new LevelDebug();
+
+        assertEquals("DEBUG - Message", jsonFormat.formatLogMessage(message, logLevel));
     }
 }

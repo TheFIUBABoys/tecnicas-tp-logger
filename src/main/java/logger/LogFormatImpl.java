@@ -4,6 +4,8 @@ import logger.filters.*;
 import logger.level.LogLevel;
 import logger.exceptions.InvalidFormatException;
 
+import java.util.Date;
+
 /**
  * Created by GonchuB on 09/05/2014.
  * This class' responsibility is to format a message, given the
@@ -13,11 +15,13 @@ public class LogFormatImpl implements LogFormat {
 
     private String formatString;
     private String separatorField = "\n";
+    private String strategySet;
 
     /**
      * Creates a new LogFormatImpl instance with a default format.
      */
     public LogFormatImpl() {
+        strategySet = LogFormat.STRING_STRATEGY;
         formatString = "%p - %m";
     }
 
@@ -31,6 +35,7 @@ public class LogFormatImpl implements LogFormat {
         if (!validFormat(format)) {
             throw new InvalidFormatException("Invalid format: " + format);
         }
+        strategySet = LogFormat.STRING_STRATEGY;
         formatString = format;
     }
 
@@ -44,6 +49,7 @@ public class LogFormatImpl implements LogFormat {
         String copy = format.concat("");
 
         FormatFilterInterface messageFilter = new MessageFilter("");
+        FormatFilterInterface loggerNameFilter = new LoggerNameFilter("");
         FormatFilterInterface levelFilter = new LevelFilter("");
         FormatFilterInterface separatorFilter = new SeparatorFilter();
         FormatFilterInterface dateFilter = new DateFilter();
@@ -51,6 +57,7 @@ public class LogFormatImpl implements LogFormat {
         FormatFilterInterface percentFilter = new PercentFilter();
 
         copy = messageFilter.clear(copy);
+        copy = loggerNameFilter.clear(copy);
         copy = levelFilter.clear(copy);
         copy = separatorFilter.clear(copy);
         copy = dateFilter.clear(copy);
@@ -64,8 +71,18 @@ public class LogFormatImpl implements LogFormat {
      * {@inheritDoc}
      */
     public String formatLogMessage(String message, LogLevel level) {
+        String formattedMessage = null;
+        if (strategySet.equals(LogFormat.STRING_STRATEGY)) {
+            formattedMessage = formatLogMessageString(message, level);
+        } else if (strategySet.equals(LogFormat.JSON_STRATEGY)) {
+            formattedMessage = formatLogMessageJson(message, level, message);
+        }
+        return formattedMessage;
+    }
 
+    public String formatLogMessageString(String message, LogLevel level) {
         FormatFilterInterface messageFilter = new MessageFilter(message);
+        FormatFilterInterface loggerNameFilter = new LoggerNameFilter(message);
         FormatFilterInterface levelFilter = new LevelFilter(level.toString());
         FormatFilterInterface separatorFilter = new SeparatorFilter(separatorField);
         FormatFilterInterface dateFilter = new DateFilter();
@@ -75,6 +92,7 @@ public class LogFormatImpl implements LogFormat {
         String replaced = formatString;
 
         replaced = messageFilter.filter(replaced);
+        replaced = loggerNameFilter.filter(replaced);
         replaced = levelFilter.filter(replaced);
         replaced = separatorFilter.filter(replaced);
         replaced = dateFilter.filter(replaced);
@@ -89,6 +107,19 @@ public class LogFormatImpl implements LogFormat {
      */
     public void setEndOfLineSeparator(String newEol) {
         separatorField = newEol;
+    }
+
+    public void setFormatStrategy(String strategy) {
+        strategySet = strategy;
+    }
+
+    public String formatLogMessageJson(String message, LogLevel level, String loggerName) {
+        LogContainer logMessage = new LogContainerImpl();
+        logMessage.setDate(new Date());
+        logMessage.setLoggerName(loggerName);
+        logMessage.setLogLevel(level);
+        logMessage.setMessage(message);
+        return logMessage.toJson();
     }
 
 }

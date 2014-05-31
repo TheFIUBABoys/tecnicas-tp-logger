@@ -28,10 +28,10 @@ cumplan con algun patrón de regular expression. 
 a todas las propiedades de un mensaje (contenido, nivel, fecha, etc) si lo desea loguear 
 o no. 
 
-# Configuración [DONE]
+# [DONE] Configuración
 Permitir leer la configuración desde un archivo XML. 
 
-# Inicialización [DONE]
+# [DONE] Inicialización
 La herramienta deberá intentar leer la configuración automáticamente de la siguiente manera: 
 - Si existe el archivo logger­config.properties, leerlo y utilizar esa configuración. 
 - Si existe el archivo logger­config.xml, leerlo y utilizar esa configuración. 
@@ -39,7 +39,7 @@ La herramienta deberá intentar leer la configuración automáticamente 
 que se utilice siempre el mismo Logger, con nivel INFO y un formato de mensaje 
 específico). 
 
-# Nuevo Formato
+# [DONE] Nuevo Formato
 Se quiere poder formatear los mensajes a un JSON del siguiente estilo: 
 
     {‘datetime’: ‘2001­07­04T12:08:56.235­0700’, ‘level’: ‘INFO’, ‘logger’: ‘LoggerName’, ‘message’: ‘processing ...’} 
@@ -48,7 +48,7 @@ Se quiere poder formatear los mensajes a un JSON del siguiente estilo
 Agregar una nueva pseudo­variable: 
 - %g debería mostrar el nombre del Logger que emitió el mensaje. 
 
-# Destinos Custom
+# [DONE] Destinos Custom
 Permitir al usuario definir y configurar sus propios destinos.  
 Ej: (pueden usar otra estructura) 
 

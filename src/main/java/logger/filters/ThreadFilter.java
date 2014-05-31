@@ -18,10 +18,10 @@ public class ThreadFilter extends FormatFilter {
         String filtered = message;
         Thread current = Thread.currentThread();
         StackTraceElement[] stackTrace = current.getStackTrace();
-        StackTraceElement stackTraceElement = current.getStackTrace()[2];
+        StackTraceElement stackTraceElement = current.getStackTrace()[3];
         for (Integer i = 0; i < stackTrace.length; i++) {
             if (stackTrace[i].getClassName().equals(getClass().getName())) {
-                stackTraceElement = stackTrace[i + 2];
+                stackTraceElement = stackTrace[i + 3];
                 break;
             }
         }
