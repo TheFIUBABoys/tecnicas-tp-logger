@@ -3,6 +3,7 @@ package logger.slf4jAdapter;
 import logger.Logger;
 import logger.LoggerImpl;
 import logger.level.LogLevel;
+import logger.level.LogLevelComparisonResult;
 import org.slf4j.Marker;
 
 /**
@@ -22,7 +23,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isTraceEnabled() {
-       return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_TRACE))==0);
+       return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_TRACE))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isTraceEnabled(Marker marker) {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_TRACE))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_TRACE))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -82,7 +83,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isDebugEnabled() {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_DEBUG))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_DEBUG))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -112,7 +113,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isDebugEnabled(Marker marker) {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_DEBUG))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_DEBUG))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -142,7 +143,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isInfoEnabled() {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_INFO))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_INFO))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -172,7 +173,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isInfoEnabled(Marker marker) {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_INFO))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_INFO))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -202,7 +203,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isWarnEnabled() {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_WARN))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_WARN))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -232,7 +233,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isWarnEnabled(Marker marker) {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_WARN))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_WARN))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -262,7 +263,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isErrorEnabled() {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_ERROR))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_ERROR))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override
@@ -292,7 +293,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public boolean isErrorEnabled(Marker marker) {
-        return  ((logger.getLogLevel().compareTo(LogLevel.LEVEL_ERROR))==0);
+        return  ((logger.getLogLevel().compareToLevel(LogLevel.LEVEL_ERROR))== LogLevelComparisonResult.resultEqual);
     }
 
     @Override

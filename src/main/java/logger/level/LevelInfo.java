@@ -1,7 +1,7 @@
 package logger.level;
 
 /**
- * Created by GonchuB on 09/05/2014.
+ * Created by GonchuB on 09/05/20LogLevelComparisonResult.resultGreater4.
  * This class represents the INFO logging logger.level. It
  * implements all comparing methods defined by the LogLevel
  * interface.
@@ -11,57 +11,57 @@ public class LevelInfo implements LogLevel {
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LogLevel logLevel) {
-        return logLevel.compareTo(this);
+    public LogLevelComparisonResult compareToLevel(LogLevel logLevel) {
+        return logLevel.compareToLevel(this);
     }
 
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LevelTrace logLevel) {
-        return 1;
+    public LogLevelComparisonResult compareToLevel(LevelTrace logLevel) {
+        return LogLevelComparisonResult.resultGreater;
     }
 
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LevelDebug logLevel) {
-        return 1;
+    public LogLevelComparisonResult compareToLevel(LevelDebug logLevel) {
+        return LogLevelComparisonResult.resultGreater;
     }
 
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LevelInfo logLevel) {
-        return -1;
+    public LogLevelComparisonResult compareToLevel(LevelInfo logLevel) {
+        return LogLevelComparisonResult.resultEqual;
     }
 
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LevelWarn logLevel) {
-        return -1;
+    public LogLevelComparisonResult compareToLevel(LevelWarn logLevel) {
+        return LogLevelComparisonResult.resultLesser;
     }
 
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LevelError logLevel) {
-        return -1;
+    public LogLevelComparisonResult compareToLevel(LevelError logLevel) {
+        return LogLevelComparisonResult.resultLesser;
     }
 
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LevelFatal logLevel) {
-        return -1;
+    public LogLevelComparisonResult compareToLevel(LevelFatal logLevel) {
+        return LogLevelComparisonResult.resultLesser;
     }
 
     /**
      * {@inheritDoc}
      */
-    public int compareTo(LevelOff logLevel) {
-        return 1;
+    public LogLevelComparisonResult compareToLevel(LevelOff logLevel) {
+        return LogLevelComparisonResult.resultLesser;
     }
 
     /**

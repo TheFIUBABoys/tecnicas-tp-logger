@@ -5,6 +5,7 @@ import logger.exceptions.NotExistingLevelException;
 import logger.exceptions.WrongPropertyFormatException;
 import logger.level.LevelDebug;
 import logger.level.LogLevel;
+import logger.level.LogLevelComparisonResult;
 import logger.level.LogLevelFactory;
 import logger.writer.ConsoleWriter;
 import logger.writer.FileWriter;
@@ -112,7 +113,8 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     public void logMessage(String message, LogLevel logLevel) {
         // Check if log logger.level is lower than the one set. If so, execute the logging.
-        if (logLevel.compareTo(logLevelSet) < 0) {
+        if (logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultLesser
+                || logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultEqual ) {
             executeLog(message, logLevel);
         }
     }

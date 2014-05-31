@@ -103,19 +103,16 @@ public class LoggerTest {
         loggerInstance.logMessage("Warn Message%n", LogLevel.LEVEL_WARN);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
 
-        assertOnlyErrorAndFatalWereLogged();
+        assertOnlyFatalWasLogged();
     }
 
-    private void assertOnlyErrorAndFatalWereLogged() throws FileNotFoundException {
+    private void assertOnlyFatalWasLogged() throws FileNotFoundException {
         Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
             list.add(s.next());
         }
         s.close();
-
-        assertFalse(list.get(0).equals("ERROR"));
-        assertFalse(list.get(2).equals("Error"));
 
         assertTrue(list.get(0).equals("FATAL"));
         assertTrue(list.get(2).equals("Fatal"));

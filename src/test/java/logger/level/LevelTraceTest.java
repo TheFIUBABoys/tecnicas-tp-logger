@@ -2,43 +2,44 @@ package logger.level;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LevelTraceTest {
 
     @Test
     public void testCompareToTrace() throws Exception {
-        assertTrue(LogLevel.LEVEL_TRACE.compareTo(LogLevel.LEVEL_TRACE) < 0);
+        assertTrue(LogLevel.LEVEL_TRACE.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultEqual);
     }
 
     @Test
     public void testCompareToDebug() throws Exception {
-        assertTrue(LogLevel.LEVEL_DEBUG.compareTo(LogLevel.LEVEL_TRACE) < 0);
+        assertTrue(LogLevel.LEVEL_DEBUG.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToInfo() throws Exception {
-        assertTrue(LogLevel.LEVEL_INFO.compareTo(LogLevel.LEVEL_TRACE) < 0);
+        assertTrue(LogLevel.LEVEL_INFO.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToWarn() throws Exception {
-        assertTrue(LogLevel.LEVEL_WARN.compareTo(LogLevel.LEVEL_TRACE) < 0);
+        assertTrue(LogLevel.LEVEL_WARN.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToError() throws Exception {
-        assertTrue(LogLevel.LEVEL_ERROR.compareTo(LogLevel.LEVEL_TRACE) < 0);
+        assertTrue(LogLevel.LEVEL_ERROR.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToFatal() throws Exception {
-        assertTrue(LogLevel.LEVEL_FATAL.compareTo(LogLevel.LEVEL_TRACE) < 0);
+        assertTrue(LogLevel.LEVEL_FATAL.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToOff() throws Exception {
-        assertTrue(LogLevel.LEVEL_OFF.compareTo(LogLevel.LEVEL_TRACE) > 0);
+        assertTrue(LogLevel.LEVEL_OFF.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
