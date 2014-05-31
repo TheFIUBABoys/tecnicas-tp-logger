@@ -14,7 +14,7 @@ public interface LogContainer {
 
     public void setLoggerName(String name);
 
-    public void setLogLevel(LogLevel logLevel);
+    public void setLogLevel(String logLevel);
 
     public void setMessage(String message);
 

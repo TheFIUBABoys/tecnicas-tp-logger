@@ -117,7 +117,7 @@ public class LogFormatImpl implements LogFormat {
         LogContainer logMessage = new LogContainerImpl();
         logMessage.setDate(new Date());
         logMessage.setLoggerName(loggerName);
-        logMessage.setLogLevel(level);
+        logMessage.setLogLevel(level.toString());
         logMessage.setMessage(message);
         return logMessage.toJson();
     }

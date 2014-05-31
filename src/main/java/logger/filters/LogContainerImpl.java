@@ -13,7 +13,7 @@ public class LogContainerImpl implements LogContainer {
 
     private Date datetime;
     private String logger;
-    private LogLevel level;
+    private String level;
     private String message;
 
 
@@ -28,7 +28,7 @@ public class LogContainerImpl implements LogContainer {
     }
 
     @Override
-    public void setLogLevel(LogLevel logLevel) {
+    public void setLogLevel(String logLevel) {
         this.level = logLevel;
     }
 
