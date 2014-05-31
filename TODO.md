@@ -44,7 +44,7 @@ Se quiere poder formatear los mensajes a un JSON del siguiente estilo
 
     {‘datetime’: ‘2001­07­04T12:08:56.235­0700’, ‘level’: ‘INFO’, ‘logger’: ‘LoggerName’, ‘message’: ‘processing ...’} 
 
-# Formato Mensajes (Pattern de la entrega anterior) 
+# [DONE] Formato Mensajes (Pattern de la entrega anterior) 
 Agregar una nueva pseudo­variable: 
 - %g debería mostrar el nombre del Logger que emitió el mensaje. 
 
