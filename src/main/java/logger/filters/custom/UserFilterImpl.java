@@ -1,4 +1,4 @@
-package logger.filters;
+package logger.filters.custom;
 
 import logger.format.LogContainer;
 
@@ -13,14 +13,25 @@ public class UserFilterImpl implements UserFilter {
 
     private String regex;
 
+    /**
+     * Empty constructor.
+     */
     public UserFilterImpl() {
 
     }
 
+    /**
+     * Sets the regex to test against the message.
+     *
+     * @param regex the regex to set.
+     */
     public void setRegex(String regex) {
         this.regex = regex;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Boolean matchesFilter(LogContainer logContainer) {
 

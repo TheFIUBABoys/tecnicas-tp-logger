@@ -74,7 +74,7 @@ public class LogFormatImpl implements LogFormat {
     public String formatLogMessage(String message, LogLevel level, String loggerName) {
         String formattedMessage;
         FormatMessageStrategy strategy = new StringFormatStrategy(formatString, separatorField);
-        
+
         if (strategySet.equals(LogFormat.STRING_STRATEGY)) {
             strategy = new StringFormatStrategy(formatString, separatorField);
         } else if (strategySet.equals(LogFormat.JSON_STRATEGY)) {
@@ -91,6 +91,9 @@ public class LogFormatImpl implements LogFormat {
         separatorField = newEol;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setFormatStrategy(String strategy) {
         strategySet = strategy;
     }

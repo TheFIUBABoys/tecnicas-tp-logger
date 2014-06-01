@@ -1,4 +1,4 @@
-package logger.filters;
+package logger.filters.custom;
 
 import logger.format.LogContainer;
 

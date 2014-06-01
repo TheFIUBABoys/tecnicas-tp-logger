@@ -1,6 +1,6 @@
 package logger;
 
-import logger.filters.UserFilter;
+import logger.filters.custom.UserFilter;
 import logger.format.LogFormat;
 import logger.level.LogLevel;
 
@@ -68,15 +68,11 @@ public interface Logger {
      */
     public void addFilter(UserFilter filter);
 
-
+    /**
+     * Configures the logger.
+     *
+     * @throws Exception if something goes wrong while reading configuration files.
+     */
     public void loadConfig() throws Exception;
-
-//    /**
-//     * Loads the configuration from the given file.
-//     *
-//     * @param filename the filename of the configuration.
-//     * @throws Exception if an error occurred when configuring.
-//     */
-//    public void loadConfigFromFile(String filename) throws Exception;
 
 }

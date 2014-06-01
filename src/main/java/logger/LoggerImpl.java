@@ -6,7 +6,7 @@ import logger.config.PropertyApplyingDelegate;
 import logger.exceptions.InvalidFormatException;
 import logger.exceptions.NotExistingLevelException;
 import logger.exceptions.WrongPropertyFormatException;
-import logger.filters.UserFilter;
+import logger.filters.custom.UserFilter;
 import logger.format.LogContainer;
 import logger.format.LogContainerImpl;
 import logger.format.LogFormat;
@@ -20,7 +20,6 @@ import logger.writer.FileWriter;
 import logger.writer.Writer;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -118,10 +117,20 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     public void addFilter(UserFilter filter) {
         filters.add(filter);
     }
 
+    /**
+     * Checks if the log matches any of the user set filters.
+     *
+     * @param log the log to test against the filters.
+     * @return True if it matches any of them, False otherwise.
+     */
     private Boolean matchesAnyFilter(LogContainer log) {
         for (UserFilter filter : filters) {
             if (filter.matchesFilter(log)) {
@@ -166,7 +175,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             log.setDate(new Date());
             log.setLogLevel(logLevel.toString());
             if (!matchesAnyFilter(log)) {
-                executeLog(message, logLevel, loggerName);
+                executeLog(message, logLevel);
             }
         }
     }
@@ -178,7 +187,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * @param message  the message that will be added after formatting.
      * @param logLevel the logging logger.level of the message.
      */
-    private void executeLog(String message, LogLevel logLevel, String loggerName) {
+    private void executeLog(String message, LogLevel logLevel) {
         String formattedMessage = logFormat.formatLogMessage(message, logLevel, loggerName);
         for (Writer w : outputWriters.values()) {
             w.write(formattedMessage);
@@ -226,11 +235,4 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
-
-//    /**
-//     * {@inheritDoc}
-//     */
-//    public void loadConfigFromFile(String filename) throws Exception {
-//        configReader.loadConfig(filename);
-//    }
 }
