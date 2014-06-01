@@ -1,10 +1,11 @@
 package logger.format;
 
-import logger.filters.*;
-import logger.level.LogLevel;
 import logger.exceptions.InvalidFormatException;
-
-import java.util.Date;
+import logger.filters.*;
+import logger.format.strategy.FormatMessageStrategy;
+import logger.format.strategy.JsonFormatStrategy;
+import logger.format.strategy.StringFormatStrategy;
+import logger.level.LogLevel;
 
 /**
  * Created by GonchuB on 09/05/2014.
@@ -71,35 +72,16 @@ public class LogFormatImpl implements LogFormat {
      * {@inheritDoc}
      */
     public String formatLogMessage(String message, LogLevel level, String loggerName) {
-        String formattedMessage = null;
+        String formattedMessage;
+        FormatMessageStrategy strategy = new StringFormatStrategy(formatString, separatorField);
+        
         if (strategySet.equals(LogFormat.STRING_STRATEGY)) {
-            formattedMessage = formatLogMessageString(message, level, loggerName);
+            strategy = new StringFormatStrategy(formatString, separatorField);
         } else if (strategySet.equals(LogFormat.JSON_STRATEGY)) {
-            formattedMessage = formatLogMessageJson(message, level, loggerName);
+            strategy = new JsonFormatStrategy();
         }
+        formattedMessage = strategy.formatMessage(message, level, loggerName);
         return formattedMessage;
-    }
-
-    public String formatLogMessageString(String message, LogLevel level, String loggerName) {
-        FormatFilterInterface messageFilter = new MessageFilter(message);
-        FormatFilterInterface loggerNameFilter = new LoggerNameFilter(loggerName);
-        FormatFilterInterface levelFilter = new LevelFilter(level.toString());
-        FormatFilterInterface separatorFilter = new SeparatorFilter(separatorField);
-        FormatFilterInterface dateFilter = new DateFilter();
-        FormatFilterInterface threadFilter = new ThreadFilter();
-        FormatFilterInterface percentFilter = new PercentFilter();
-
-        String replaced = formatString;
-
-        replaced = messageFilter.filter(replaced);
-        replaced = loggerNameFilter.filter(replaced);
-        replaced = levelFilter.filter(replaced);
-        replaced = separatorFilter.filter(replaced);
-        replaced = dateFilter.filter(replaced);
-        replaced = threadFilter.filter(replaced);
-        replaced = percentFilter.filter(replaced);
-
-        return replaced;
     }
 
     /**
@@ -111,15 +93,6 @@ public class LogFormatImpl implements LogFormat {
 
     public void setFormatStrategy(String strategy) {
         strategySet = strategy;
-    }
-
-    public String formatLogMessageJson(String message, LogLevel level, String loggerName) {
-        LogContainer logMessage = new LogContainerImpl();
-        logMessage.setDate(new Date());
-        logMessage.setLoggerName(loggerName);
-        logMessage.setLogLevel(level.toString());
-        logMessage.setMessage(message);
-        return logMessage.toJson();
     }
 
 }
