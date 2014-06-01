@@ -206,10 +206,8 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * {@inheritDoc}
      */
     public void logMessage(String message, LogLevel logLevel, Throwable exception) {
-        if (shouldBeLogged(message, logLevel)) {
-            executeLog(message, logLevel);
-            //TODO: log exception
-        }
+        message = message + ". Exception: " + exception.getMessage() + ". Due to: " + exception.getCause();
+        logMessage(message, logLevel);
     }
 
     /**

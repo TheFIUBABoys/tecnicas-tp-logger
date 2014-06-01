@@ -159,14 +159,6 @@ public class LoggerTest {
         assertTrue(list.get(7).equals("Message"));
     }
 
-    @Test
-    public void testThrowableApi() throws Throwable {
-        loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
-        String error = "Error Message%n";
-        loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, new Throwable("Testing"));
-        fail("Not implemented yet");
-    }
-
     private void assertFormattedMessageLoggedCorrectly() throws FileNotFoundException {
         Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();

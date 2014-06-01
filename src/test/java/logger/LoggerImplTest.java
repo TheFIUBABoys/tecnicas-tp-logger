@@ -46,6 +46,15 @@ public class LoggerImplTest {
         loggerInstance.logMessage("LOG", LogLevel.LEVEL_FATAL);
 
         assertEquals("FATAL - LOG", baos.toString());
+    }
 
+    @Test
+    public void testThrowableApi() throws Throwable {
+        loggerInstance = LoggerImpl.getLogger("logger1");
+        loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
+        loggerInstance.setConsoleOutput(true);
+        String error = "Error Message";
+        loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, new Throwable("Testing", new Throwable("Cause")));
+        assertEquals("ERROR - Error Message. Exception: Testing. Due to: java.lang.Throwable: Cause", baos.toString());
     }
 }
