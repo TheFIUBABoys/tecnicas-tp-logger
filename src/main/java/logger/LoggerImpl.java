@@ -163,9 +163,13 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     }
 
     /**
-     * {@inheritDoc}
+     * If the log meets the requiriements returns True, otherwise return false.
+     *
+     * @param message  the message to log.
+     * @param logLevel the log level of the messge.
+     * @return True if the logging was done, False otherwise.
      */
-    public void logMessage(String message, LogLevel logLevel) {
+    private Boolean shouldBeLogged(String message, LogLevel logLevel) {
         // Check if log logger.level is lower than the one set. If so, execute the logging.
         if (logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultLesser
                 || logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultEqual) {
@@ -175,8 +179,28 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             log.setDate(new Date());
             log.setLogLevel(logLevel.toString());
             if (!matchesAnyFilter(log)) {
-                executeLog(message, logLevel);
+                return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void logMessage(String message, LogLevel logLevel) {
+        if (shouldBeLogged(message, logLevel)) {
+            executeLog(message, logLevel);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void logMessage(String message, LogLevel logLevel, Throwable exception) throws Throwable {
+        if (shouldBeLogged(message, logLevel)) {
+            executeLog(message, logLevel);
+            throw exception;
         }
     }
 

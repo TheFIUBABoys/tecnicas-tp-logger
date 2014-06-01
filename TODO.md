@@ -17,7 +17,7 @@ quiere poder utilizar dos loggers con distintas configuraciones en luga
  
 Y cada uno de esos Loggers tienen potencialmente una configuración distinta. 
 
-# Logger API
+# [DONE] Logger API
 Agregar la posibilidad de recibir una exception (Throwable) como parametro de la api.  
 Ej: logger.info(‘un mensaje’, exception) 
 

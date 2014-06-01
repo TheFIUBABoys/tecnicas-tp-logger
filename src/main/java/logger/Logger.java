@@ -30,6 +30,17 @@ public interface Logger {
     public void logMessage(String message, LogLevel logLevel);
 
     /**
+     * Logs the received message with the also received logging logger.level
+     * if the logger.level is lower than the logger.level set. After logging,
+     * throws the exception.
+     *
+     * @param message   the message that will be added after formatting.
+     * @param logLevel  the logging logger.level of the message.
+     * @param exception logs and throws this exception.
+     */
+    public void logMessage(String message, LogLevel logLevel, Throwable exception) throws Throwable;
+
+    /**
      * Sets the logging logger.level, which determines which type of messages
      * will be logged.
      *
