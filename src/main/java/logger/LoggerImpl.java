@@ -205,10 +205,10 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     /**
      * {@inheritDoc}
      */
-    public void logMessage(String message, LogLevel logLevel, Throwable exception) throws Throwable {
+    public void logMessage(String message, LogLevel logLevel, Throwable exception) {
         if (shouldBeLogged(message, logLevel)) {
             executeLog(message, logLevel);
-            throw exception;
+            //TODO: log exception
         }
     }
 

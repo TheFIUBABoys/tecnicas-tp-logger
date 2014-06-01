@@ -38,7 +38,7 @@ public interface Logger {
      * @param logLevel  the logging logger.level of the message.
      * @param exception logs and throws this exception.
      */
-    public void logMessage(String message, LogLevel logLevel, Throwable exception) throws Throwable;
+    public void logMessage(String message, LogLevel logLevel, Throwable exception);
 
     /**
      * Logs a message with a given logging logger.level

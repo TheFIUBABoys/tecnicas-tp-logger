@@ -14,8 +14,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LoggerTest {
 
@@ -160,11 +159,12 @@ public class LoggerTest {
         assertTrue(list.get(7).equals("Message"));
     }
 
-    @Test(expected = Throwable.class)
+    @Test
     public void testThrowableApi() throws Throwable {
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
         String error = "Error Message%n";
         loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, new Throwable("Testing"));
+        fail("Not implemented yet");
     }
 
     private void assertFormattedMessageLoggedCorrectly() throws FileNotFoundException {
