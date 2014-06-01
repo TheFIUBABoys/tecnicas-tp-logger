@@ -21,7 +21,7 @@ Y cada uno de esos Loggers tienen potencialmente una configuración di
 Agregar la posibilidad de recibir una exception (Throwable) como parametro de la api.  
 Ej: logger.info(‘un mensaje’, exception) 
 
-# [DONE - Needs test] Filtros
+# [DONE] Filtros
 - Permitir configurar un filtro a un Logger particular que filtre aquellos mensajes que 
 cumplan con algun patrón de regular expression. 
 - Permitir a un usuario definir y configurar un Filtro Custom, que le permita decidir en base 
