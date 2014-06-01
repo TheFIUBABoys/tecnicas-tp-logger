@@ -38,7 +38,7 @@ public class LogFormatTest {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
 
-        assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel));
+        assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel, null));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class LogFormatTest {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
 
-        assertEquals("DEBUG - Message", defaultFormat.formatLogMessage(message, logLevel));
+        assertEquals("DEBUG - Message", defaultFormat.formatLogMessage(message, logLevel, null));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LogFormatTest {
         String dateFormat = "dd-MM-yyyy";
         String expectedDate = (new SimpleDateFormat(dateFormat)).format(new Date());
 
-        assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel));
+        assertEquals(expectedDate, messageFormatDate.formatLogMessage(message, logLevel, null));
     }
 
     @Test(expected = InvalidFormatException.class)
@@ -71,7 +71,7 @@ public class LogFormatTest {
         LogLevel logLevel = new LevelDebug();
         String expected = "main - testThreadFormat";
 
-        assertEquals(expected, threadFormat.formatLogMessage(message, logLevel));
+        assertEquals(expected, threadFormat.formatLogMessage(message, logLevel, null));
     }
 
     @Test
@@ -81,15 +81,15 @@ public class LogFormatTest {
         String expected = "Message,";
         endOfLineFormat.setEndOfLineSeparator(",");
 
-        assertEquals(expected, endOfLineFormat.formatLogMessage(message, logLevel));
+        assertEquals(expected, endOfLineFormat.formatLogMessage(message, logLevel, null));
     }
 
     @Test
     public void testToJson() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
-        String expected = "{\"datetime\":\"" + (new Date()).toString() + "\",\"logger\":\"Message\",\"level\":\"DEBUG\",\"message\":\"Message\"}";
+        String expected = "{\"datetime\":\"" + (new Date()).toString() + "\",\"logger\":\"LOGGER\",\"level\":\"DEBUG\",\"message\":\"Message\"}";
 
-        assertEquals(expected, jsonFormat.formatLogMessage(message, logLevel));
+        assertEquals(expected, jsonFormat.formatLogMessage(message, logLevel, "LOGGER"));
     }
 }

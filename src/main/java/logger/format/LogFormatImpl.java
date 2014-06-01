@@ -70,19 +70,19 @@ public class LogFormatImpl implements LogFormat {
     /**
      * {@inheritDoc}
      */
-    public String formatLogMessage(String message, LogLevel level) {
+    public String formatLogMessage(String message, LogLevel level, String loggerName) {
         String formattedMessage = null;
         if (strategySet.equals(LogFormat.STRING_STRATEGY)) {
-            formattedMessage = formatLogMessageString(message, level);
+            formattedMessage = formatLogMessageString(message, level, loggerName);
         } else if (strategySet.equals(LogFormat.JSON_STRATEGY)) {
-            formattedMessage = formatLogMessageJson(message, level, message);
+            formattedMessage = formatLogMessageJson(message, level, loggerName);
         }
         return formattedMessage;
     }
 
-    public String formatLogMessageString(String message, LogLevel level) {
+    public String formatLogMessageString(String message, LogLevel level, String loggerName) {
         FormatFilterInterface messageFilter = new MessageFilter(message);
-        FormatFilterInterface loggerNameFilter = new LoggerNameFilter(message);
+        FormatFilterInterface loggerNameFilter = new LoggerNameFilter(loggerName);
         FormatFilterInterface levelFilter = new LevelFilter(level.toString());
         FormatFilterInterface separatorFilter = new SeparatorFilter(separatorField);
         FormatFilterInterface dateFilter = new DateFilter();

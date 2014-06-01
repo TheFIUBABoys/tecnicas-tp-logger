@@ -18,7 +18,7 @@ public interface LogFormat {
      * @param level   the logging logger.level of the message.
      * @return the string with the formatted message (parameters in the format interpolated).
      */
-    public String formatLogMessage(String message, LogLevel level);
+    public String formatLogMessage(String message, LogLevel level, String loggerName);
 
     /**
      * Configures the end of line separator.

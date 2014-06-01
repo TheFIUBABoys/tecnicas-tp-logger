@@ -45,6 +45,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private HashMap<String, Writer> outputWriters;
     private LoggerConfigReader configReader;
     private ArrayList<UserFilter> filters;
+    private String loggerName;
 
     /**
      * Private constructor to be called from the getLogger method.
@@ -61,6 +62,11 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private LoggerImpl(String name) {
+        this();
+        this.loggerName = name;
     }
 
     /**
@@ -82,7 +88,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     public static Logger getLogger(String loggerName) {
         if (loggers.get(loggerName) == null) {
-            loggers.put(loggerName, new LoggerImpl());
+            loggers.put(loggerName, new LoggerImpl(loggerName));
         }
         return loggers.get(loggerName);
     }
@@ -160,7 +166,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             log.setDate(new Date());
             log.setLogLevel(logLevel.toString());
             if (!matchesAnyFilter(log)) {
-                executeLog(message, logLevel);
+                executeLog(message, logLevel, loggerName);
             }
         }
     }
@@ -172,8 +178,8 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * @param message  the message that will be added after formatting.
      * @param logLevel the logging logger.level of the message.
      */
-    private void executeLog(String message, LogLevel logLevel) {
-        String formattedMessage = logFormat.formatLogMessage(message, logLevel);
+    private void executeLog(String message, LogLevel logLevel, String loggerName) {
+        String formattedMessage = logFormat.formatLogMessage(message, logLevel, loggerName);
         for (Writer w : outputWriters.values()) {
             w.write(formattedMessage);
         }
