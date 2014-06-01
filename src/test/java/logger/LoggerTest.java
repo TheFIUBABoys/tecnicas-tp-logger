@@ -167,4 +167,54 @@ public class LoggerTest {
         loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, new Throwable("Testing"));
     }
 
+    private void assertFormattedMessageLoggedCorrectly() throws FileNotFoundException {
+        Scanner s = new Scanner(standardOutputStream);
+        ArrayList<String> list = new ArrayList<String>();
+        while (s.hasNext()) {
+            list.add(s.next());
+        }
+        s.close();
+
+        assertTrue(list.get(0).equals("ERROR"));
+        assertTrue(list.get(1).equals("-"));
+        assertTrue(list.get(2).equals("Error"));
+        assertTrue(list.get(3).equals("Message"));
+        assertTrue(list.get(4).equals("This"));
+        assertTrue(list.get(5).equals("message"));
+    }
+
+
+    @Test
+    public void testLogFormattedWithOneObject() throws Exception {
+        loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
+
+        String error = "Error Message {} %n";
+        String formattedObject = "This message";
+        loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, formattedObject);
+        assertFormattedMessageLoggedCorrectly();
+
+    }
+
+    @Test
+    public void testLogFormattedWithTwoObjects() throws Exception {
+        loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
+        String error = "Error Message {} {} %n";
+        String f1= "This";
+        String f2 = "message";
+        loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, f1, f2);
+        assertFormattedMessageLoggedCorrectly();
+    }
+
+    @Test
+    public void testLogFormattedWithSeveralObjects() throws Exception {
+        loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
+        String error = "{} {} {} {} %n";
+        String f1= "Error";
+        String f2 = "Message";
+        String f3= "This ";
+        String f4 = "message";
+        loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, f1, f2, f3, f4);
+        assertFormattedMessageLoggedCorrectly();
+    }
+
 }
