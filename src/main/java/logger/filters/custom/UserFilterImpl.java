@@ -1,6 +1,10 @@
 package logger.filters.custom;
 
+import logger.exceptions.NotExistingLevelException;
 import logger.format.LogContainer;
+import logger.level.LogLevel;
+import logger.level.LogLevelComparisonResult;
+import logger.level.LogLevelFactory;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,19 +18,17 @@ public class UserFilterImpl implements UserFilter {
     private String regex;
 
     /**
-     * Empty constructor.
+     * Constructor with regex.
      */
-    public UserFilterImpl() {
-
+    public UserFilterImpl(String regex) {
+        this.regex = regex;
     }
 
     /**
-     * Sets the regex to test against the message.
-     *
-     * @param regex the regex to set.
+     * Empty constructor.s
      */
-    public void setRegex(String regex) {
-        this.regex = regex;
+    public UserFilterImpl() {
+
     }
 
     /**
@@ -37,13 +39,35 @@ public class UserFilterImpl implements UserFilter {
 
         Boolean matches = false;
 
-        if (!regex.isEmpty()) {
+        if (regex != null && !regex.isEmpty()) {
             Pattern userPattern = Pattern.compile(regex);
             Matcher messageMatches = userPattern.matcher(logContainer.getMessage());
             matches = messageMatches.find();
         }
 
+        if (!matches) {
+            matches = moreThanInfo(logContainer);
+        }
+
         return matches;
 
     }
+
+    /**
+     * Arbitrary filter.
+     *
+     * @param logContainer the log container to compare to.
+     * @return True if log level is more than info.
+     */
+    private Boolean moreThanInfo(LogContainer logContainer) {
+        LogLevelFactory factory = LogLevelFactory.getInstance();
+        LogLevel level;
+        try {
+            level = factory.createLogLevel(logContainer.getLogLevel());
+        } catch (NotExistingLevelException e) {
+            return false;
+        }
+        return level.compareToLevel(LogLevel.LEVEL_INFO) == LogLevelComparisonResult.resultGreater;
+    }
+
 }
