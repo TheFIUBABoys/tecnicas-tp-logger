@@ -18,6 +18,14 @@ public interface LogContainer {
 
     public void setMessage(String message);
 
+    public String getDate();
+
+    public String getLoggerName();
+
+    public String getLogLevel();
+
+    public String getMessage();
+
     public String toJson();
 
 }

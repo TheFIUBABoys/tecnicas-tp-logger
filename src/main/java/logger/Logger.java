@@ -1,5 +1,6 @@
 package logger;
 
+import logger.filters.UserFilter;
 import logger.format.LogFormat;
 import logger.level.LogLevel;
 
@@ -59,6 +60,13 @@ public interface Logger {
      * @throws IOException if an error occurs during the opening of the file.
      */
     public void addOutputFile(String filename) throws IOException;
+
+    /**
+     * Adds a user defined filter.
+     *
+     * @param filter the filter ot be added.
+     */
+    public void addFilter(UserFilter filter);
 
 
     public void loadConfig() throws Exception;

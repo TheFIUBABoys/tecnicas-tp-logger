@@ -6,6 +6,9 @@ import logger.config.PropertyApplyingDelegate;
 import logger.exceptions.InvalidFormatException;
 import logger.exceptions.NotExistingLevelException;
 import logger.exceptions.WrongPropertyFormatException;
+import logger.filters.UserFilter;
+import logger.format.LogContainer;
+import logger.format.LogContainerImpl;
 import logger.format.LogFormat;
 import logger.format.LogFormatImpl;
 import logger.level.LevelDebug;
@@ -17,6 +20,9 @@ import logger.writer.FileWriter;
 import logger.writer.Writer;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -38,6 +44,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private LogFormat logFormat;
     private HashMap<String, Writer> outputWriters;
     private LoggerConfigReader configReader;
+    private ArrayList<UserFilter> filters;
 
     /**
      * Private constructor to be called from the getLogger method.
@@ -46,6 +53,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         logLevelSet = new LevelDebug();
         logFormat = new LogFormatImpl();
         outputWriters = new HashMap<String, Writer>();
+        filters = new ArrayList<UserFilter>();
         LoggerConfigReaderFactory factory = LoggerConfigReaderFactory.getInstace();
         configReader = factory.getReaderFor(this);
         try {
@@ -104,6 +112,19 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
+    public void addFilter(UserFilter filter) {
+        filters.add(filter);
+    }
+
+    private Boolean matchesAnyFilter(LogContainer log) {
+        for (UserFilter filter : filters) {
+            if (filter.matchesFilter(log)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -132,8 +153,15 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     public void logMessage(String message, LogLevel logLevel) {
         // Check if log logger.level is lower than the one set. If so, execute the logging.
         if (logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultLesser
-                || logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultEqual ) {
-            executeLog(message, logLevel);
+                || logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultEqual) {
+
+            LogContainer log = new LogContainerImpl();
+            log.setMessage(message);
+            log.setDate(new Date());
+            log.setLogLevel(logLevel.toString());
+            if (!matchesAnyFilter(log)) {
+                executeLog(message, logLevel);
+            }
         }
     }
 
@@ -191,7 +219,6 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             throw new WrongPropertyFormatException(fileValue + " is not a valid value for " + property);
         }
     }
-
 
 
 //    /**

@@ -37,6 +37,26 @@ public class LogContainerImpl implements LogContainer {
     }
 
     @Override
+    public String getDate() {
+        return datetime;
+    }
+
+    @Override
+    public String getLoggerName() {
+        return logger;
+    }
+
+    @Override
+    public String getLogLevel() {
+        return level;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    @Override
     public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
