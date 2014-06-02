@@ -3,6 +3,7 @@ package logger;
 import logger.exceptions.WrongPropertyFormatException;
 import logger.format.LogFormatImpl;
 import logger.level.LogLevel;
+import logger.writer.FileWriter;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 
@@ -177,7 +181,7 @@ public class LoggerLoadXMLTest {
     @Test
     public void testLoadLogLevel() throws Exception {
         setUpFatalLevelProperty();
-        loggerInstance.addOutputFile(outputFilename);
+        loggerInstance.addOutput(new FileWriter(outputFilename));
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
@@ -196,7 +200,7 @@ public class LoggerLoadXMLTest {
     @Test
     public void testLoadLogFormat() throws Exception {
         setUpFormatProperty();
-        loggerInstance.addOutputFile(outputFilename);
+        loggerInstance.addOutput(new FileWriter(outputFilename));
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         testFile(outputFilename);

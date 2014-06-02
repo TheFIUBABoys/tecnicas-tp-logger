@@ -2,6 +2,7 @@ package logger;
 
 import logger.format.LogFormatImpl;
 import logger.level.LogLevel;
+import logger.writer.FileWriter;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,8 +40,8 @@ public class LoggerTest {
         loggerInstance = LoggerImpl.getLogger();
         loggerInstance.setConsoleOutput(true);
         loggerInstance.setMessageFormat(new LogFormatImpl("%p - %m"));
-        loggerInstance.addOutputFile(permanentFilename);
-        loggerInstance.addOutputFile(temporaryFilename);
+        loggerInstance.addOutput(new FileWriter(permanentFilename));
+        loggerInstance.addOutput(new FileWriter(temporaryFilename));
         setUpStandarOutputRedirect();
     }
 
@@ -130,8 +131,8 @@ public class LoggerTest {
         loggerInstance.logMessage(debug, LogLevel.LEVEL_DEBUG);
         loggerInstance.logMessage(info, LogLevel.LEVEL_INFO);
         for (int i = 0; i < 10; i++) {
-            loggerInstance.addOutputFile(temporaryFilename);
-            loggerInstance.addOutputFile(permanentFilename);
+            loggerInstance.addOutput(new FileWriter(temporaryFilename));
+            loggerInstance.addOutput(new FileWriter(permanentFilename));
         }
         assertMessageLoggedCorrectly();
 

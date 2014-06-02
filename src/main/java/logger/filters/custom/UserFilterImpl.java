@@ -25,7 +25,7 @@ public class UserFilterImpl implements UserFilter {
     }
 
     /**
-     * Empty constructor.s
+     * Empty constructor.
      */
     public UserFilterImpl() {
 

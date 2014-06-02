@@ -3,6 +3,7 @@ package logger;
 import logger.filters.custom.UserFilter;
 import logger.format.LogFormat;
 import logger.level.LogLevel;
+import logger.writer.Writer;
 
 import java.io.IOException;
 
@@ -77,10 +78,10 @@ public interface Logger {
      * Adds an output file to which the LoggerImpl will log.
      * Creates the file if it doesn't exist.
      *
-     * @param filename the path of the file to log into.
+     * @param writer the path of the file to log into.
      * @throws IOException if an error occurs during the opening of the file.
      */
-    public void addOutputFile(String filename) throws IOException;
+    public void addOutput(Writer writer) throws IOException;
 
     /**
      * Adds a user defined filter.

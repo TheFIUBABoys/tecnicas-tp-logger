@@ -44,6 +44,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     private LogLevel logLevelSet;
     private LogFormat logFormat;
     private HashMap<String, Writer> outputWriters;
+    private static Integer outputCount = 0;
     private LoggerConfigReader configReader;
     private ArrayList<UserFilter> filters;
     private String loggerName;
@@ -112,11 +113,12 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
 
     /**
      * {@inheritDoc}
+     *
+     * @param writer
      */
-    public void addOutputFile(String filename) throws IOException {
-        if (!outputWriters.containsKey(filename)) {
-            outputWriters.put(filename, new FileWriter(filename));
-        }
+    public void addOutput(Writer writer) throws IOException {
+        outputWriters.put(outputCount.toString(), writer);
+        outputCount += 1;
     }
 
 
@@ -249,7 +251,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * {@inheritDoc}
      */
     public void applyOutputFileProperty(String property, String fileValue) throws IOException {
-        addOutputFile(fileValue);
+        addOutput(new FileWriter(fileValue));
     }
 
     /**
