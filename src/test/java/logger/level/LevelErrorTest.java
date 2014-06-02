@@ -19,12 +19,12 @@ public class LevelErrorTest {
 
     @Test
     public void testCompareToInfo() throws Exception {
-    	assertTrue(LogLevel.LEVEL_INFO.compareToLevel(LogLevel.LEVEL_ERROR) == LogLevelComparisonResult.resultGreater);
+        assertTrue(LogLevel.LEVEL_INFO.compareToLevel(LogLevel.LEVEL_ERROR) == LogLevelComparisonResult.resultGreater);
     }
 
     @Test
     public void testCompareToWarn() throws Exception {
-    	assertTrue(LogLevel.LEVEL_WARN.compareToLevel(LogLevel.LEVEL_ERROR) == LogLevelComparisonResult.resultGreater);
+        assertTrue(LogLevel.LEVEL_WARN.compareToLevel(LogLevel.LEVEL_ERROR) == LogLevelComparisonResult.resultGreater);
     }
 
     @Test

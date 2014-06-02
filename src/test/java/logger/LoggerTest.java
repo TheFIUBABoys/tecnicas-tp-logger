@@ -15,7 +15,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class LoggerTest {
 
@@ -192,7 +193,7 @@ public class LoggerTest {
     public void testLogFormattedWithTwoObjects() throws Exception {
         loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
         String error = "Error Message {} {} %n";
-        String f1= "This";
+        String f1 = "This";
         String f2 = "message";
         loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, f1, f2);
         assertFormattedMessageLoggedCorrectly();
@@ -202,9 +203,9 @@ public class LoggerTest {
     public void testLogFormattedWithSeveralObjects() throws Exception {
         loggerInstance.setLogLevel(LogLevel.LEVEL_ERROR);
         String error = "{} {} {} {} %n";
-        String f1= "Error";
+        String f1 = "Error";
         String f2 = "Message";
-        String f3= "This ";
+        String f3 = "This ";
         String f4 = "message";
         loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, f1, f2, f3, f4);
         assertFormattedMessageLoggedCorrectly();

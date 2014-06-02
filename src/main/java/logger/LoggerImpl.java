@@ -57,7 +57,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         logFormat = new LogFormatImpl();
         outputWriters = new HashMap<String, Writer>();
         filters = new ArrayList<UserFilter>();
-        LoggerConfigReaderFactory factory = LoggerConfigReaderFactory.getInstace();
+        LoggerConfigReaderFactory factory = LoggerConfigReaderFactory.getInstance();
         configReader = factory.getReaderFor(this);
         try {
             configReader.loadConfig();

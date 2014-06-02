@@ -1,6 +1,5 @@
 package logger.filters.custom;
 
-import logger.exceptions.NotExistingLevelException;
 import logger.format.LogContainer;
 import logger.format.LogContainerImpl;
 import logger.level.LogLevel;

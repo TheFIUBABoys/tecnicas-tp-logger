@@ -1,8 +1,8 @@
 package logger;
 
+import logger.exceptions.WrongPropertyFormatException;
 import logger.format.LogFormatImpl;
 import logger.level.LogLevel;
-import logger.exceptions.WrongPropertyFormatException;
 import logger.writer.FileWriter;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -59,7 +59,7 @@ public class LoggerLoadPropertiesTest {
     @AfterClass
     public static void tearDown() throws Exception {
         File directory = new File(("./"));
-        for(File f: directory.listFiles()) {
+        for (File f : directory.listFiles()) {
             if (f.getName().endsWith(".txt"))
                 f.delete();
             if (f.getName().endsWith(".properties"))
@@ -128,7 +128,7 @@ public class LoggerLoadPropertiesTest {
 
     private void setUpOutputFilesProperty() throws Exception {
         Map<String, String> data = new HashMap<String, String>();
-        data.put("outputFile", outputFilename + "," + "1"+outputFilename);
+        data.put("outputFile", outputFilename + "," + "1" + outputFilename);
         setUpPropertyFileWithKeyValueDict(data);
     }
 
@@ -143,7 +143,7 @@ public class LoggerLoadPropertiesTest {
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
 
         testFile(outputFilename);
-        testFile("1"+outputFilename );
+        testFile("1" + outputFilename);
 
     }
 

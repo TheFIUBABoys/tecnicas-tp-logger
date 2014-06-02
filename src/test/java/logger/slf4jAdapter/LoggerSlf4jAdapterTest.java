@@ -25,7 +25,7 @@ public class LoggerSlf4jAdapterTest {
 
     @Test
     public void testLoggerFactory() throws Exception {
-       fail("Not implemented yet");
+        fail("Not implemented yet");
     }
 
     @Test

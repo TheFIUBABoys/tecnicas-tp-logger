@@ -84,10 +84,10 @@ public class LoggerLoadXMLTest {
     @AfterClass
     public static void tearDown() throws Exception {
         File directory = new File(("./"));
-        for(File f: directory.listFiles()) {
-            if(f.getName().endsWith(".txt"))
+        for (File f : directory.listFiles()) {
+            if (f.getName().endsWith(".txt"))
                 f.delete();
-            if(f.getName().equals("logger-config.xml"))
+            if (f.getName().equals("logger-config.xml"))
                 f.delete();
         }
     }
@@ -153,7 +153,7 @@ public class LoggerLoadXMLTest {
 
     private void setUpOutputFilesProperty() throws Exception {
         Map<String, String> data = new HashMap<String, String>();
-        data.put("outputFile", outputFilename + "," + "1"+outputFilename);
+        data.put("outputFile", outputFilename + "," + "1" + outputFilename);
         setUpPropertyFileWithKeyValueDict(data);
     }
 
@@ -168,7 +168,7 @@ public class LoggerLoadXMLTest {
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
 
         testFile(outputFilename);
-        testFile("1"+outputFilename );
+        testFile("1" + outputFilename);
 
     }
 

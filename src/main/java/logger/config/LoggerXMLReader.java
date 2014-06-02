@@ -15,6 +15,12 @@ import java.io.FileInputStream;
  */
 public class LoggerXMLReader extends LoggerConfigReader {
 
+    /**
+     * Constructor. Calls its parent's constructor.
+     *
+     * @param aDelegate the property applying delegate.
+     * @param filename  the filename of the configuration file.
+     */
     public LoggerXMLReader(PropertyApplyingDelegate aDelegate, String filename) {
         super(aDelegate, filename);
     }
@@ -28,14 +34,14 @@ public class LoggerXMLReader extends LoggerConfigReader {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse( inputStream);
+        Document document = builder.parse(inputStream);
 
 
         for (String tagName : LoggerConfigReader.PROPERTY_CONFIG_KEYS) {
             NodeList list = document.getElementsByTagName(tagName);
-            if (list.getLength() > 0){
+            if (list.getLength() > 0) {
                 Node node = list.item(0);
-                if (node.hasChildNodes()){
+                if (node.hasChildNodes()) {
                     String value = node.getChildNodes().item(0).getNodeValue();
                     if (!value.equals("null")) {
                         methodMap.get(tagName).applyPropertyWithValue(tagName, value);

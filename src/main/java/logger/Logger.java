@@ -47,9 +47,9 @@ public interface Logger {
      *
      * @param message  the message that will be added after formatting.
      * @param logLevel the logging logger.level of the message.
-     * @param objects the objects to be formatted.
+     * @param objects  the objects to be formatted.
      */
-    public void logMessage(String message, LogLevel logLevel, Object ...objects);
+    public void logMessage(String message, LogLevel logLevel, Object... objects);
 
     /**
      * Sets the logging logger.level, which determines which type of messages
