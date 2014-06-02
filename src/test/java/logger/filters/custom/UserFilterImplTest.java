@@ -1,5 +1,6 @@
 package logger.filters.custom;
 
+import logger.exceptions.NotExistingLevelException;
 import logger.format.LogContainer;
 import logger.format.LogContainerImpl;
 import logger.level.LogLevel;
@@ -47,6 +48,12 @@ public class UserFilterImplTest {
     @Test
     public void testSetLogLevel() throws Exception {
         logContainer.setLogLevel(LogLevel.LEVEL_INFO.toString());
+        assertFalse(userFilter.matchesFilter(logContainer));
+    }
+
+    @Test
+    public void testInvalidLogLevel() {
+        logContainer.setLogLevel("not important");
         assertFalse(userFilter.matchesFilter(logContainer));
     }
 }

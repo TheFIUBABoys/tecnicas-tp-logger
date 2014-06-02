@@ -180,9 +180,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             log.setMessage(message);
             log.setDate(new Date());
             log.setLogLevel(logLevel.toString());
-            if (!matchesAnyFilter(log)) {
-                return true;
-            }
+            return !matchesAnyFilter(log);
         }
         return false;
     }

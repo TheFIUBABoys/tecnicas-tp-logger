@@ -1,5 +1,6 @@
 package logger;
 
+import logger.filters.custom.UserFilterImpl;
 import logger.level.LogLevel;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +50,7 @@ public class LoggerImplTest {
     }
 
     @Test
-    public void testThrowableApi() throws Throwable {
+    public void testThrowableApi() {
         loggerInstance = LoggerImpl.getLogger("logger1");
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
         loggerInstance.setConsoleOutput(true);
@@ -57,4 +58,23 @@ public class LoggerImplTest {
         loggerInstance.logMessage(error, LogLevel.LEVEL_ERROR, new Throwable("Testing", new Throwable("Cause")));
         assertEquals("ERROR - Error Message. Exception: Testing. Due to: java.lang.Throwable: Cause", baos.toString());
     }
+
+    @Test
+    public void testGetLogLevel() {
+        loggerInstance = LoggerImpl.getLogger("logger1");
+        loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
+        assertEquals(LogLevel.LEVEL_INFO, loggerInstance.getLogLevel());
+    }
+
+    @Test
+    public void testFilter() {
+        loggerInstance = LoggerImpl.getLogger("logger1");
+        loggerInstance.setLogLevel(LogLevel.LEVEL_TRACE);
+        loggerInstance.addFilter(new UserFilterImpl());
+        loggerInstance.logMessage("DONT LOG", LogLevel.LEVEL_TRACE);
+        assertEquals("", baos.toString());
+        loggerInstance.logMessage("LOG", LogLevel.LEVEL_ERROR);
+        assertEquals("ERROR - LOG", baos.toString());
+    }
+
 }
