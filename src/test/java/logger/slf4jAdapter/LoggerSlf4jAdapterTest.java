@@ -19,19 +19,17 @@ import static org.junit.Assert.assertTrue;
 public class LoggerSlf4jAdapterTest {
 
     private Logger logger;
-    private File standardOutputStream;
     private ILoggerFactory loggerFactory;
     private ByteArrayOutputStream baos;
 
     private void setUpStandarOutputRedirect() throws IOException {
-        standardOutputStream = new File("tmp_stdout_adapter.txt");
-        standardOutputStream.createNewFile();
-        System.setOut(new PrintStream(standardOutputStream));
+        baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        System.setOut(ps);
     }
 
     @After
     public void tearDownStandarOutputRedirect() throws IOException {
-        standardOutputStream.delete();
         System.setOut(System.out);
     }
 
@@ -113,13 +111,16 @@ public class LoggerSlf4jAdapterTest {
     }
 
     private void assertFormattedMessageLoggedCorrectly() throws FileNotFoundException {
+
+        // FIXME
+        baos.toString();
+
         Scanner s = new Scanner(standardOutputStream);
         ArrayList<String> list = new ArrayList<String>();
         while (s.hasNext()) {
             list.add(s.next());
         }
         s.close();
-
         assertTrue(list.get(0).equals("ERROR"));
         assertTrue(list.get(1).equals("-"));
         assertTrue(list.get(2).equals("Error"));
