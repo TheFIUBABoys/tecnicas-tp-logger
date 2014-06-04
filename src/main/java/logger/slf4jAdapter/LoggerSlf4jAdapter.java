@@ -5,6 +5,8 @@ import logger.LoggerImpl;
 import logger.level.LogLevel;
 import logger.level.LogLevelComparisonResult;
 import org.slf4j.Marker;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 /**
  * Created by Lucas on 5/30/2014.
@@ -12,8 +14,14 @@ import org.slf4j.Marker;
 public class LoggerSlf4jAdapter implements org.slf4j.Logger {
     private Logger logger;
 
+    private void logFormattedMessage(String message, LogLevel logLevel, Object... objects) {
+        FormattingTuple formatted = MessageFormatter.arrayFormat(message, objects);
+        logger.logMessage(formatted.getMessage(),logLevel);
+    }
+
     public LoggerSlf4jAdapter() {
         logger = LoggerImpl.getLogger();
+        logger.setConsoleOutput(true);
     }
 
     @Override
@@ -33,17 +41,17 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void trace(String s, Object o) {
-        this.logger.logMessage(s, LogLevel.LEVEL_TRACE, o);
+        logFormattedMessage(s, LogLevel.LEVEL_TRACE, o);
     }
 
     @Override
     public void trace(String s, Object o, Object o2) {
-        this.logger.logMessage(s, LogLevel.LEVEL_TRACE, o, o2);
+        logFormattedMessage(s, LogLevel.LEVEL_TRACE, o, o2);
     }
 
     @Override
     public void trace(String s, Object... objects) {
-        this.logger.logMessage(s, LogLevel.LEVEL_TRACE, objects);
+        logFormattedMessage(s, LogLevel.LEVEL_TRACE, objects);
     }
 
     @Override
@@ -93,17 +101,17 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void debug(String s, Object o) {
-        this.logger.logMessage(s, LogLevel.LEVEL_DEBUG, o);
+        logFormattedMessage(s, LogLevel.LEVEL_DEBUG, o);
     }
 
     @Override
     public void debug(String s, Object o, Object o2) {
-        this.logger.logMessage(s, LogLevel.LEVEL_DEBUG, o, o2);
+        logFormattedMessage(s, LogLevel.LEVEL_DEBUG, o, o2);
     }
 
     @Override
     public void debug(String s, Object... objects) {
-        this.logger.logMessage(s, LogLevel.LEVEL_DEBUG, objects);
+        logFormattedMessage(s, LogLevel.LEVEL_DEBUG, objects);
     }
 
     @Override
@@ -153,17 +161,17 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void info(String s, Object o) {
-        this.logger.logMessage(s, LogLevel.LEVEL_INFO, o);
+        logFormattedMessage(s, LogLevel.LEVEL_INFO, o);
     }
 
     @Override
     public void info(String s, Object o, Object o2) {
-        this.logger.logMessage(s, LogLevel.LEVEL_INFO, o, o2);
+        logFormattedMessage(s, LogLevel.LEVEL_INFO, o, o2);
     }
 
     @Override
     public void info(String s, Object... objects) {
-        this.logger.logMessage(s, LogLevel.LEVEL_INFO, objects);
+        logFormattedMessage(s, LogLevel.LEVEL_INFO, objects);
     }
 
     @Override
@@ -213,17 +221,17 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void warn(String s, Object o) {
-        this.logger.logMessage(s, LogLevel.LEVEL_WARN, o);
+        logFormattedMessage(s, LogLevel.LEVEL_WARN, o);
     }
 
     @Override
     public void warn(String s, Object... objects) {
-        this.logger.logMessage(s, LogLevel.LEVEL_WARN, objects);
+        logFormattedMessage(s, LogLevel.LEVEL_WARN, objects);
     }
 
     @Override
     public void warn(String s, Object o, Object o2) {
-        this.logger.logMessage(s, LogLevel.LEVEL_WARN, o, o2);
+        logFormattedMessage(s, LogLevel.LEVEL_WARN, o, o2);
     }
 
     @Override
@@ -273,17 +281,17 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void error(String s, Object o) {
-        this.logger.logMessage(s, LogLevel.LEVEL_ERROR, o);
+        logFormattedMessage(s, LogLevel.LEVEL_ERROR, o);
     }
 
     @Override
     public void error(String s, Object o, Object o2) {
-        this.logger.logMessage(s, LogLevel.LEVEL_ERROR, o, o2);
+        logFormattedMessage(s, LogLevel.LEVEL_ERROR, o, o2);
     }
 
     @Override
     public void error(String s, Object... objects) {
-        this.logger.logMessage(s, LogLevel.LEVEL_ERROR, objects);
+        logFormattedMessage(s, LogLevel.LEVEL_ERROR, objects);
     }
 
     @Override

@@ -18,8 +18,6 @@ import logger.level.LogLevelFactory;
 import logger.writer.ConsoleWriter;
 import logger.writer.FileWriter;
 import logger.writer.Writer;
-import org.slf4j.helpers.FormattingTuple;
-import org.slf4j.helpers.MessageFormatter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         try {
             configReader.loadConfig();
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -196,11 +194,6 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         }
     }
 
-    @Override
-    public void logMessage(String message, LogLevel logLevel, Object... objects) {
-        FormattingTuple formatted = MessageFormatter.arrayFormat(message, objects);
-        executeLog(formatted.getMessage(), logLevel);
-    }
 
     /**
      * {@inheritDoc}

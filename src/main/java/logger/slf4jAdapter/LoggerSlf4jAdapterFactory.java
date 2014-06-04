@@ -19,7 +19,6 @@ public class LoggerSlf4jAdapterFactory implements ILoggerFactory {
 
     @Override
     public org.slf4j.Logger getLogger(String s) {
-        //For now allow only one implementation
-        return loggerMap.get(LoggerSlf4jAdapter.class.getName());
+        return loggerMap.get(s);
     }
 }
