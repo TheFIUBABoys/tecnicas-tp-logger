@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
@@ -111,36 +112,14 @@ public class LoggerSlf4jAdapterTest {
     }
 
     private void assertFormattedMessageLoggedCorrectly() throws FileNotFoundException {
+        String s = baos.toString();
 
-        // FIXME
-        baos.toString();
-
-        Scanner s = new Scanner(standardOutputStream);
-        ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()) {
-            list.add(s.next());
-        }
-        s.close();
-        assertTrue(list.get(0).equals("ERROR"));
-        assertTrue(list.get(1).equals("-"));
-        assertTrue(list.get(2).equals("Error"));
-        assertTrue(list.get(3).equals("Message"));
-        assertTrue(list.get(4).equals("This"));
-        assertTrue(list.get(5).equals("message"));
+        assertEquals("ERROR - Error Message This Message",s);
     }
 
     private void assertMessageLoggedCorrectlyForLevel(String level) throws FileNotFoundException {
-        Scanner s = new Scanner(standardOutputStream);
-        ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()) {
-            list.add(s.next());
-        }
-        s.close();
-        assertEquals(list.get(0), level);
-        assertEquals(list.get(1),"-");
-        assertEquals(list.get(3), "Message");
-        assertEquals(list.get(4), "This");
-        assertEquals(list.get(5), "Message");
+        String s = baos.toString();
+        assertEquals(level+" - Error Message This Message",s);
     }
 
 }
