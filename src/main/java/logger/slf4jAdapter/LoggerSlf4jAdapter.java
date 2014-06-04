@@ -36,26 +36,31 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void trace(String s) {
+        this.logger.setLogLevel(LogLevel.LEVEL_TRACE);
         this.logger.logMessage(s, LogLevel.LEVEL_TRACE);
     }
 
     @Override
     public void trace(String s, Object o) {
+        this.logger.setLogLevel(LogLevel.LEVEL_TRACE);
         logFormattedMessage(s, LogLevel.LEVEL_TRACE, o);
     }
 
     @Override
     public void trace(String s, Object o, Object o2) {
+        this.logger.setLogLevel(LogLevel.LEVEL_TRACE);
         logFormattedMessage(s, LogLevel.LEVEL_TRACE, o, o2);
     }
 
     @Override
     public void trace(String s, Object... objects) {
+        this.logger.setLogLevel(LogLevel.LEVEL_TRACE);
         logFormattedMessage(s, LogLevel.LEVEL_TRACE, objects);
     }
 
     @Override
     public void trace(String s, Throwable throwable) {
+        this.logger.setLogLevel(LogLevel.LEVEL_TRACE);
         this.logger.logMessage(s, LogLevel.LEVEL_TRACE, throwable);
     }
 
@@ -66,7 +71,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void trace(Marker marker, String s) {
-        this.logger.logMessage(s, LogLevel.LEVEL_TRACE);
+        this.trace(s, LogLevel.LEVEL_TRACE);
     }
 
     @Override
@@ -96,26 +101,31 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void debug(String s) {
+        this.logger.setLogLevel(LogLevel.LEVEL_DEBUG);
         this.logger.logMessage(s, LogLevel.LEVEL_DEBUG);
     }
 
     @Override
     public void debug(String s, Object o) {
+        this.logger.setLogLevel(LogLevel.LEVEL_DEBUG);
         logFormattedMessage(s, LogLevel.LEVEL_DEBUG, o);
     }
 
     @Override
     public void debug(String s, Object o, Object o2) {
+        this.logger.setLogLevel(LogLevel.LEVEL_DEBUG);
         logFormattedMessage(s, LogLevel.LEVEL_DEBUG, o, o2);
     }
 
     @Override
     public void debug(String s, Object... objects) {
+        this.logger.setLogLevel(LogLevel.LEVEL_DEBUG);
         logFormattedMessage(s, LogLevel.LEVEL_DEBUG, objects);
     }
 
     @Override
     public void debug(String s, Throwable throwable) {
+        this.logger.setLogLevel(LogLevel.LEVEL_DEBUG);
         this.logger.logMessage(s, LogLevel.LEVEL_DEBUG, throwable);
     }
 
@@ -126,7 +136,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void debug(Marker marker, String s) {
-        this.logger.logMessage(s, LogLevel.LEVEL_DEBUG);
+        this.debug(s, LogLevel.LEVEL_DEBUG);
     }
 
     @Override
@@ -156,26 +166,31 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void info(String s) {
+        this.logger.setLogLevel(LogLevel.LEVEL_INFO);
         this.logger.logMessage(s, LogLevel.LEVEL_INFO);
     }
 
     @Override
     public void info(String s, Object o) {
+        this.logger.setLogLevel(LogLevel.LEVEL_INFO);
         logFormattedMessage(s, LogLevel.LEVEL_INFO, o);
     }
 
     @Override
     public void info(String s, Object o, Object o2) {
+        this.logger.setLogLevel(LogLevel.LEVEL_INFO);
         logFormattedMessage(s, LogLevel.LEVEL_INFO, o, o2);
     }
 
     @Override
     public void info(String s, Object... objects) {
+        this.logger.setLogLevel(LogLevel.LEVEL_INFO);
         logFormattedMessage(s, LogLevel.LEVEL_INFO, objects);
     }
 
     @Override
     public void info(String s, Throwable throwable) {
+        this.logger.setLogLevel(LogLevel.LEVEL_INFO);
         this.logger.logMessage(s, LogLevel.LEVEL_INFO, throwable);
     }
 
@@ -186,7 +201,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void info(Marker marker, String s) {
-        this.logger.logMessage(s, LogLevel.LEVEL_INFO);
+        this.info(s, LogLevel.LEVEL_INFO);
     }
 
     @Override
@@ -216,26 +231,31 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void warn(String s) {
+        this.logger.setLogLevel(LogLevel.LEVEL_WARN);
         this.logger.logMessage(s, LogLevel.LEVEL_WARN);
     }
 
     @Override
     public void warn(String s, Object o) {
+        this.logger.setLogLevel(LogLevel.LEVEL_WARN);
         logFormattedMessage(s, LogLevel.LEVEL_WARN, o);
     }
 
     @Override
     public void warn(String s, Object... objects) {
+        this.logger.setLogLevel(LogLevel.LEVEL_WARN);
         logFormattedMessage(s, LogLevel.LEVEL_WARN, objects);
     }
 
     @Override
     public void warn(String s, Object o, Object o2) {
+        this.logger.setLogLevel(LogLevel.LEVEL_WARN);
         logFormattedMessage(s, LogLevel.LEVEL_WARN, o, o2);
     }
 
     @Override
     public void warn(String s, Throwable throwable) {
+        this.logger.setLogLevel(LogLevel.LEVEL_WARN);
         this.logger.logMessage(s, LogLevel.LEVEL_WARN, throwable);
     }
 
@@ -246,7 +266,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void warn(Marker marker, String s) {
-        this.logger.logMessage(s, LogLevel.LEVEL_WARN);
+        this.warn(s);
     }
 
     @Override
@@ -276,26 +296,31 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void error(String s) {
+        this.logger.setLogLevel(LogLevel.LEVEL_ERROR);
         this.logger.logMessage(s, LogLevel.LEVEL_ERROR);
     }
 
     @Override
     public void error(String s, Object o) {
+        this.logger.setLogLevel(LogLevel.LEVEL_ERROR);
         logFormattedMessage(s, LogLevel.LEVEL_ERROR, o);
     }
 
     @Override
     public void error(String s, Object o, Object o2) {
+        this.logger.setLogLevel(LogLevel.LEVEL_ERROR);
         logFormattedMessage(s, LogLevel.LEVEL_ERROR, o, o2);
     }
 
     @Override
     public void error(String s, Object... objects) {
+        this.logger.setLogLevel(LogLevel.LEVEL_ERROR);
         logFormattedMessage(s, LogLevel.LEVEL_ERROR, objects);
     }
 
     @Override
     public void error(String s, Throwable throwable) {
+        this.logger.setLogLevel(LogLevel.LEVEL_ERROR);
         this.logger.logMessage(s, LogLevel.LEVEL_ERROR, throwable);
     }
 
@@ -306,26 +331,26 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void error(Marker marker, String s) {
-        this.logger.logMessage(s, LogLevel.LEVEL_ERROR);
+        this.error(s, LogLevel.LEVEL_ERROR);
     }
 
     @Override
     public void error(Marker marker, String s, Object o) {
-        this.warn(s, o);
+        this.error(s, o);
     }
 
     @Override
     public void error(Marker marker, String s, Object o, Object o2) {
-        this.warn(s, o, o2);
+        this.error(s, o, o2);
     }
 
     @Override
     public void error(Marker marker, String s, Object... objects) {
-        this.warn(s, objects);
+        this.error(s, objects);
     }
 
     @Override
     public void error(Marker marker, String s, Throwable throwable) {
-        this.logger.logMessage(s, LogLevel.LEVEL_ERROR);
+        this.error(s, LogLevel.LEVEL_ERROR);
     }
 }
