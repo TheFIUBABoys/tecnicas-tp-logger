@@ -19,6 +19,7 @@ public class UserFilterImpl implements UserFilter {
 
     /**
      * Constructor with regex.
+     * @param regex regex value
      */
     public UserFilterImpl(String regex) {
         this.regex = regex;

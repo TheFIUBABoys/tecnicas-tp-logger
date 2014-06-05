@@ -86,7 +86,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
 
     /**
      * Get the instance of the logger required by name. If it doesn't exist, creates one.
-     *
+     * @param loggerName name of the required logger
      * @return the LoggerImpl instance.
      */
     public static Logger getLogger(String loggerName) {
@@ -115,7 +115,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
     /**
      * {@inheritDoc}
      *
-     * @param writer
+     * @param writer is the Object that represents an Output
      */
     public void addOutput(Writer writer) throws IOException {
         outputWriters.put(outputCount.toString(), writer);
