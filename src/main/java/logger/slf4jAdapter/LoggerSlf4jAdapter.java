@@ -351,6 +351,6 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     @Override
     public void error(Marker marker, String s, Throwable throwable) {
-        this.error(s, LogLevel.LEVEL_ERROR);
+        this.error(s, throwable);
     }
 }

@@ -162,6 +162,13 @@ public class LoggerSlf4jAdapterTest {
 
     }
 
+    private void assertFormattedMessageLoggedCorrectlyForLevel (String level, Throwable t) throws Exception {
+        String s = baos.toString();
+        assertEquals(level+" - Error Message. Exception: " + t.getMessage() +
+                ". Due to: " + t.getCause(),s);
+        setUpStandarOutputRedirect();
+    }
+
     @Test
     public void testLogWarnWithMarker() throws Exception {
         logger.warn(marker,"Message This Message");
@@ -265,6 +272,54 @@ public class LoggerSlf4jAdapterTest {
         logger.debug(marker,error,f1,f2,f3,f4);
         assertFormattedMessageLoggedCorrectlyForLevel("DEBUG");
 
+    }
+
+    @Test
+    public void testLogFormattedWithOneException() throws Exception {
+        String error = "Error Message";
+        try {
+            throw new Exception("Exception 1", new Exception("Cause"));
+        } catch (Exception e) {
+            logger.error(error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("ERROR",e);
+
+            logger.trace(error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("TRACE",e);
+
+            logger.warn(error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("WARN",e);
+
+            logger.info(error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("INFO",e);
+
+            logger.debug(error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("DEBUG",e);
+
+        }
+    }
+
+    @Test
+    public void testLogFormattedWithOneExceptionUsingMarker() throws Exception {
+        String error = "Error Message";
+        try {
+            throw new Exception("Exception 1", new Exception("Cause"));
+        } catch (Exception e) {
+            logger.error(marker, error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("ERROR",e);
+
+            logger.trace(marker, error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("TRACE",e);
+
+            logger.warn(marker, error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("WARN",e);
+
+            logger.info(marker, error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("INFO",e);
+
+            logger.debug(marker, error,e);
+            assertFormattedMessageLoggedCorrectlyForLevel("DEBUG",e);
+
+        }
     }
 
 }
