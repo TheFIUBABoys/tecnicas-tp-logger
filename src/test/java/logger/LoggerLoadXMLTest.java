@@ -58,7 +58,9 @@ public class LoggerLoadXMLTest {
 
         transformer.transform(source, result);
 
-        loggerInstance.loadConfig();
+        if (loggerInstance != null){
+            loggerInstance.loadConfig();
+        }
 
     }
 
@@ -76,8 +78,7 @@ public class LoggerLoadXMLTest {
     @Before
     public void setUp() throws Exception {
         // CREATING CONFIG FILE FOR LOGGER TO CREATE ITS READER
-        FileOutputStream file = new FileOutputStream(filename);
-        file.close();
+        setUpConsoleOutputProperty();
         loggerInstance = LoggerImpl.getLogger("xml");
     }
 
