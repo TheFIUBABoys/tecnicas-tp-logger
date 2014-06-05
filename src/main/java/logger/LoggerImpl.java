@@ -63,7 +63,8 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             configReader = factory.getDefaultReaderFor(this);
             try {
                 configReader.loadConfig();
-            } catch (Exception e1) {}
+            } catch (Exception e1) {
+            }
         }
     }
 
@@ -86,6 +87,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
 
     /**
      * Get the instance of the logger required by name. If it doesn't exist, creates one.
+     *
      * @param loggerName name of the required logger
      * @return the LoggerImpl instance.
      */

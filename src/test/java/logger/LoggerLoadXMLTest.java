@@ -17,7 +17,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class LoggerLoadXMLTest {
 
         transformer.transform(source, result);
 
-        if (loggerInstance != null){
+        if (loggerInstance != null) {
             loggerInstance.loadConfig();
         }
 

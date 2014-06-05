@@ -95,6 +95,7 @@ public abstract class LoggerConfigReader {
 
     /**
      * load Config from file
+     *
      * @throws Exception Will call the corresponding action method stored in method dictionary.
      */
     public abstract void loadConfig() throws Exception;

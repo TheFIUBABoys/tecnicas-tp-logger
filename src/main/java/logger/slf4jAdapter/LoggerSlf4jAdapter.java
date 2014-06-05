@@ -16,7 +16,7 @@ public class LoggerSlf4jAdapter implements org.slf4j.Logger {
 
     private void logFormattedMessage(String message, LogLevel logLevel, Object... objects) {
         FormattingTuple formatted = MessageFormatter.arrayFormat(message, objects);
-        logger.logMessage(formatted.getMessage(),logLevel);
+        logger.logMessage(formatted.getMessage(), logLevel);
     }
 
     public LoggerSlf4jAdapter() {
