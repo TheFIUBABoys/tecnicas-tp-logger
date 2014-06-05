@@ -60,7 +60,10 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
         try {
             configReader.loadConfig();
         } catch (Exception e) {
-
+            configReader = factory.getDefaultReaderFor(this);
+            try {
+                configReader.loadConfig();
+            } catch (Exception e1) {}
         }
     }
 

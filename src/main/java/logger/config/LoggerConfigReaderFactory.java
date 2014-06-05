@@ -59,4 +59,8 @@ public class LoggerConfigReaderFactory {
             return new LoggerDefaultReader(aDelegate);
         }
     }
+
+    public LoggerConfigReader getDefaultReaderFor(PropertyApplyingDelegate aDelegate) {
+        return new LoggerDefaultReader(aDelegate);
+    }
 }
