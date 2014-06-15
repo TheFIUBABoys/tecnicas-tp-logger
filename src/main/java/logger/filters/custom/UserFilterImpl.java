@@ -11,7 +11,11 @@ import java.util.regex.Pattern;
 
 /**
  * Created by GonchuB on 31/05/2014.
- * FIUBA
+ * FIUBA.
+ * Example implementation of a User Defined Filter.
+ * This filters out messages with higher Log Level
+ * than INFO. Also has the ability to match a regex
+ * in order to filter.
  */
 public class UserFilterImpl implements UserFilter {
 
@@ -48,7 +52,7 @@ public class UserFilterImpl implements UserFilter {
         }
 
         if (!matches) {
-            matches = moreThanInfo(logContainer);
+            matches = filterMoreThanInfoLevels(logContainer);
         }
 
         return matches;
@@ -61,7 +65,7 @@ public class UserFilterImpl implements UserFilter {
      * @param logContainer the log container to compare to.
      * @return True if log level is more than info.
      */
-    private Boolean moreThanInfo(LogContainer logContainer) {
+    private Boolean filterMoreThanInfoLevels(LogContainer logContainer) {
         LogLevelFactory factory = LogLevelFactory.getInstance();
         LogLevel level;
         try {
