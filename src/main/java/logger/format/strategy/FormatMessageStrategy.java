@@ -14,7 +14,7 @@ public interface FormatMessageStrategy {
     /**
      * Formats the log message and returns a string representation of it.
      *
-     * @param filters    filters to use.
+     * @param filters    filters to use while formatting.
      * @param message    the message of the log.
      * @param logLevel   the level of logging.
      * @param loggerName the name of the logger.

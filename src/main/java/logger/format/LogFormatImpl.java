@@ -31,10 +31,16 @@ public class LogFormatImpl implements LogFormat {
     }
 
 
-    private void addFilter(FormatFilterInterface filter) {
+    /**
+     * {@inheritDoc}
+     */
+    public void addFilter(FormatFilterInterface filter) {
         filters.add(0, filter);
     }
 
+    /**
+     * Generate the defined filters. Add them to the filters list.
+     */
     private void generateFilters() {
         filters = new ArrayList<FormatFilterInterface>();
         addFilter(new PercentFilter());

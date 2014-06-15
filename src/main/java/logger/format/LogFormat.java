@@ -1,5 +1,6 @@
 package logger.format;
 
+import logger.filters.FormatFilterInterface;
 import logger.level.LogLevel;
 
 /**
@@ -34,5 +35,12 @@ public interface LogFormat {
      * @param strategy the strategy to use.
      */
     public void setFormatStrategy(String strategy);
+
+    /**
+     * Add a new filter to the filter array.
+     *
+     * @param filter the filter to add.
+     */
+    public void addFilter(FormatFilterInterface filter);
 
 }

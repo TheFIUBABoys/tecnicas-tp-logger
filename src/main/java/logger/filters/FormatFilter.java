@@ -8,11 +8,17 @@ public abstract class FormatFilter implements FormatFilterInterface {
 
     protected String regex;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String filter(String message, FilterReplaceContainer replaceParams) {
         return filter(message, "");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String filter(String message, String param) {
         String filtered = message;
@@ -20,6 +26,9 @@ public abstract class FormatFilter implements FormatFilterInterface {
         return filtered;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String clear(String message) {
         String filtered = message;

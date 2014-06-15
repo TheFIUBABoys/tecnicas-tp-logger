@@ -10,7 +10,7 @@ public interface FormatFilterInterface {
      * Filters the given message.
      *
      * @param message the message to filter.
-     * @param replaceParams a parameter used by the filter.
+     * @param replaceParams a parameter container used by the filter.
      * @return a new string with the filter value.
      */
     public String filter(String message, FilterReplaceContainer replaceParams);
