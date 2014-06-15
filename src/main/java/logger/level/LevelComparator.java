@@ -134,6 +134,10 @@ import java.util.Map;
             initComparisonTable();
         }
 
+        /**
+         * Compares the first level to the second one
+         * @return LevelComparisonResult, from the perspective of levelOne
+         */
         public LogLevelComparisonResult compareLevelToLevel(LogLevel levelOne, LogLevel levelTwo){
             return comparisonTable.get(levelOne.toString(),levelTwo.toString());
         }
