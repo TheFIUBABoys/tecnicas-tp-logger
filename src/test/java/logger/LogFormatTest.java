@@ -69,7 +69,7 @@ public class LogFormatTest {
     public void testThreadFormat() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
-        String expected = "main - testThreadFormat";
+        String expected = "main - formatLogMessage";
 
         assertEquals(expected, threadFormat.formatLogMessage(message, logLevel, null));
     }

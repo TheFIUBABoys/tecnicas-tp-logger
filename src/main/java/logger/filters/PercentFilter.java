@@ -10,8 +10,13 @@ public class PercentFilter extends FormatFilter {
      * Override default constructor to receive message to replace.
      */
     public PercentFilter() {
-        toReplace = "%";
         regex = "%%";
+    }
+
+    public String filter(String message, String param) {
+        String filtered = message;
+        filtered = filtered.replaceAll(regex, "%");
+        return filtered;
     }
 
 }

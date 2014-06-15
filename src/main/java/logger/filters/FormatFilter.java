@@ -7,12 +7,16 @@ package logger.filters;
 public abstract class FormatFilter implements FormatFilterInterface {
 
     protected String regex;
-    protected String toReplace;
 
     @Override
-    public String filter(String message) {
+    public String filter(String message, FilterReplaceContainer replaceParams) {
+        return filter(message, "");
+    }
+
+    @Override
+    public String filter(String message, String param) {
         String filtered = message;
-        filtered = filtered.replaceAll(regex, toReplace);
+        filtered = filtered.replaceAll(regex, param);
         return filtered;
     }
 

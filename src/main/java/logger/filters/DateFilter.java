@@ -17,7 +17,7 @@ public class DateFilter extends FormatFilter {
     /**
      * {@inheritDoc}
      */
-    public String filter(String message) {
+    public String filter(String message, String param) {
         String filtered = message;
         Matcher dateMatches = datePattern.matcher(message);
         if (dateMatches.find()) {

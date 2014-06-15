@@ -1,9 +1,11 @@
 package logger.format.strategy;
 
+import logger.filters.FormatFilterInterface;
 import logger.format.LogContainer;
 import logger.format.LogContainerImpl;
 import logger.level.LogLevel;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,7 +18,7 @@ public class JsonFormatStrategy implements FormatMessageStrategy {
      * {@inheritDoc}
      */
     @Override
-    public String formatMessage(String message, LogLevel logLevel, String loggerName) {
+    public String formatMessage(ArrayList<FormatFilterInterface> filters, String message, LogLevel logLevel, String loggerName) {
         LogContainer logMessage = new LogContainerImpl();
         logMessage.setDate(new Date());
         logMessage.setLoggerName(loggerName);

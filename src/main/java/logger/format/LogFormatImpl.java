@@ -7,6 +7,8 @@ import logger.format.strategy.JsonFormatStrategy;
 import logger.format.strategy.StringFormatStrategy;
 import logger.level.LogLevel;
 
+import java.util.ArrayList;
+
 /**
  * Created by GonchuB on 09/05/2014.
  * This class' responsibility is to format a message, given the
@@ -17,6 +19,7 @@ public class LogFormatImpl implements LogFormat {
     private String formatString;
     private String separatorField = "\n";
     private String strategySet;
+    private ArrayList<FormatFilterInterface> filters;
 
     /**
      * Creates a new LogFormatImpl instance with a default format.
@@ -24,6 +27,23 @@ public class LogFormatImpl implements LogFormat {
     public LogFormatImpl() {
         strategySet = LogFormat.STRING_STRATEGY;
         formatString = "%p - %m";
+        generateFilters();
+    }
+
+
+    private void addFilter(FormatFilterInterface filter) {
+        filters.add(0, filter);
+    }
+
+    private void generateFilters() {
+        filters = new ArrayList<FormatFilterInterface>();
+        addFilter(new PercentFilter());
+        addFilter(new ThreadFilter());
+        addFilter(new DateFilter());
+        addFilter(new SeparatorFilter());
+        addFilter(new LevelFilter());
+        addFilter(new LoggerNameFilter());
+        addFilter(new MessageFilter());
     }
 
     /**
@@ -33,6 +53,7 @@ public class LogFormatImpl implements LogFormat {
      * @throws InvalidFormatException if the format received is not valid
      */
     public LogFormatImpl(String format) throws InvalidFormatException {
+        generateFilters();
         if (!validFormat(format)) {
             throw new InvalidFormatException("Invalid format: " + format);
         }
@@ -49,21 +70,9 @@ public class LogFormatImpl implements LogFormat {
     private Boolean validFormat(String format) {
         String copy = format.concat("");
 
-        FormatFilterInterface messageFilter = new MessageFilter("");
-        FormatFilterInterface loggerNameFilter = new LoggerNameFilter("");
-        FormatFilterInterface levelFilter = new LevelFilter("");
-        FormatFilterInterface separatorFilter = new SeparatorFilter();
-        FormatFilterInterface dateFilter = new DateFilter();
-        FormatFilterInterface threadFilter = new ThreadFilter();
-        FormatFilterInterface percentFilter = new PercentFilter();
-
-        copy = messageFilter.clear(copy);
-        copy = loggerNameFilter.clear(copy);
-        copy = levelFilter.clear(copy);
-        copy = separatorFilter.clear(copy);
-        copy = dateFilter.clear(copy);
-        copy = threadFilter.clear(copy);
-        copy = percentFilter.clear(copy);
+        for (FormatFilterInterface filter : filters) {
+            copy = filter.clear(copy);
+        }
 
         return copy.replaceAll("%", "").equals(copy);
     }
@@ -80,7 +89,7 @@ public class LogFormatImpl implements LogFormat {
         } else if (strategySet.equals(LogFormat.JSON_STRATEGY)) {
             strategy = new JsonFormatStrategy();
         }
-        formattedMessage = strategy.formatMessage(message, level, loggerName);
+        formattedMessage = strategy.formatMessage(filters, message, level, loggerName);
         return formattedMessage;
     }
 

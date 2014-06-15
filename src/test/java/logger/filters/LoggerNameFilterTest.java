@@ -13,13 +13,13 @@ public class LoggerNameFilterTest {
     @Before
     public void setUp() throws Exception {
         loggerName = "LOGGER1";
-        messageFilter = new LoggerNameFilter(loggerName);
+        messageFilter = new LoggerNameFilter();
     }
 
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%g";
-        assertEquals(loggerName, messageFilter.filter(filterFormat));
+        assertEquals(loggerName, messageFilter.filter(filterFormat, loggerName));
     }
 
     @Test

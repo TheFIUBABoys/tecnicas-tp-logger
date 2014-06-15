@@ -13,13 +13,13 @@ public class MessageFilterTest {
     @Before
     public void setUp() throws Exception {
         message = "Message";
-        messageFilter = new MessageFilter(message);
+        messageFilter = new MessageFilter();
     }
 
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%m";
-        assertEquals(message, messageFilter.filter(filterFormat));
+        assertEquals(message, messageFilter.filter(filterFormat, message));
     }
 
     @Test

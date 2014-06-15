@@ -9,11 +9,13 @@ public class LevelFilter extends FormatFilter {
     /**
      * Override default constructor to receive logger.level to replace.
      *
-     * @param level the logger.level to replace.
      */
-    public LevelFilter(String level) {
-        toReplace = level;
+    public LevelFilter() {
         regex = "%p";
+    }
+
+    public String filter(String message, FilterReplaceContainer replaceParams) {
+        return this.filter(message, replaceParams.getLogLevel());
     }
 
 }

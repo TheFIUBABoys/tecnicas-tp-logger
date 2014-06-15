@@ -15,13 +15,13 @@ public class LevelFilterTest {
     @Before
     public void setUp() throws Exception {
         level = new LevelDebug();
-        levelFilter = new LevelFilter(level.toString());
+        levelFilter = new LevelFilter();
     }
 
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%p";
-        assertEquals(level.toString(), levelFilter.filter(filterFormat));
+        assertEquals(level.toString(), levelFilter.filter(filterFormat, level.toString()));
     }
 
     @Test

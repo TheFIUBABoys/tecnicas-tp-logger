@@ -13,13 +13,13 @@ public class SeparatorFilterTest {
     @Before
     public void setUp() throws Exception {
         separator = ",";
-        separatorFilter = new SeparatorFilter(separator);
+        separatorFilter = new SeparatorFilter();
     }
 
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%n";
-        assertEquals(separator, separatorFilter.filter(filterFormat));
+        assertEquals(separator, separatorFilter.filter(filterFormat, separator));
     }
 
     @Test

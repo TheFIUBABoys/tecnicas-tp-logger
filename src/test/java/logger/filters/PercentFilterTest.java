@@ -17,7 +17,7 @@ public class PercentFilterTest {
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%%";
-        assertEquals("%", percentFilter.filter(filterFormat));
+        assertEquals("%", percentFilter.filter(filterFormat, ""));
     }
 
     @Test

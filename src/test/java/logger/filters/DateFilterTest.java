@@ -21,7 +21,7 @@ public class DateFilterTest {
     public void testFilter() throws Exception {
         String dateFormat = "dd-MM-yyyy";
         String filterFormat = "%d{" + dateFormat + "}";
-        assertEquals((new SimpleDateFormat(dateFormat)).format(new Date()), dateFilter.filter(filterFormat));
+        assertEquals((new SimpleDateFormat(dateFormat)).format(new Date()), dateFilter.filter(filterFormat, ""));
     }
 
     @Test

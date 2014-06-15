@@ -14,7 +14,7 @@ public class ThreadFilter extends FormatFilter {
     /**
      * {@inheritDoc}
      */
-    public String filter(String message) {
+    public String filter(String message, String param) {
         String filtered = message;
         Thread current = Thread.currentThread();
         StackTraceElement[] stackTrace = current.getStackTrace();

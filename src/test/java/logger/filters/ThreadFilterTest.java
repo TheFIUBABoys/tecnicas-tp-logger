@@ -17,7 +17,7 @@ public class ThreadFilterTest {
     @Test
     public void testFilter() throws Exception {
         String filterFormat = "%t - %F";
-        assertEquals("main - NativeMethodAccessorImpl.java", threadFilter.filter(filterFormat));
+        assertEquals("main - NativeMethodAccessorImpl.java", threadFilter.filter(filterFormat, ""));
     }
 
     @Test

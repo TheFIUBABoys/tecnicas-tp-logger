@@ -1,7 +1,11 @@
 package logger.format.strategy;
 
-import logger.filters.*;
+import logger.filters.FilterReplaceContainer;
+import logger.filters.FilterReplaceContainerImpl;
+import logger.filters.FormatFilterInterface;
 import logger.level.LogLevel;
+
+import java.util.ArrayList;
 
 /**
  * Created by GonchuB on 01/06/2014.
@@ -27,24 +31,19 @@ public class StringFormatStrategy implements FormatMessageStrategy {
      * {@inheritDoc}
      */
     @Override
-    public String formatMessage(String message, LogLevel logLevel, String loggerName) {
-        FormatFilterInterface messageFilter = new MessageFilter(message);
-        FormatFilterInterface loggerNameFilter = new LoggerNameFilter(loggerName);
-        FormatFilterInterface levelFilter = new LevelFilter(logLevel.toString());
-        FormatFilterInterface separatorFilter = new SeparatorFilter(separatorField);
-        FormatFilterInterface dateFilter = new DateFilter();
-        FormatFilterInterface threadFilter = new ThreadFilter();
-        FormatFilterInterface percentFilter = new PercentFilter();
+    public String formatMessage(ArrayList<FormatFilterInterface> filters, String message, LogLevel logLevel, String loggerName) {
+
+        FilterReplaceContainer container = new FilterReplaceContainerImpl();
+        container.setMessage(message);
+        container.setLogLevel(logLevel.toString());
+        container.setLoggerName(loggerName);
+        container.setSeparator(separatorField);
 
         String replaced = formatString;
 
-        replaced = messageFilter.filter(replaced);
-        replaced = loggerNameFilter.filter(replaced);
-        replaced = levelFilter.filter(replaced);
-        replaced = separatorFilter.filter(replaced);
-        replaced = dateFilter.filter(replaced);
-        replaced = threadFilter.filter(replaced);
-        replaced = percentFilter.filter(replaced);
+        for (FormatFilterInterface filter : filters) {
+            replaced = filter.filter(replaced, container);
+        }
 
         return replaced;
     }
