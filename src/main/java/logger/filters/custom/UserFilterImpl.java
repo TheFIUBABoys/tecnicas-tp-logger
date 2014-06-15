@@ -2,6 +2,7 @@ package logger.filters.custom;
 
 import logger.exceptions.NotExistingLevelException;
 import logger.format.LogContainer;
+import logger.level.LevelComparator;
 import logger.level.LogLevel;
 import logger.level.LogLevelComparisonResult;
 import logger.level.LogLevelFactory;
@@ -20,7 +21,7 @@ import java.util.regex.Pattern;
 public class UserFilterImpl implements UserFilter {
 
     private String regex;
-
+    private LevelComparator comparator = LevelComparator.getInstance();
     /**
      * Constructor with regex.
      *
@@ -73,7 +74,7 @@ public class UserFilterImpl implements UserFilter {
         } catch (NotExistingLevelException e) {
             return false;
         }
-        return level.compareToLevel(LogLevel.LEVEL_INFO) == LogLevelComparisonResult.resultGreater;
+        return (comparator.compareLevelToLevel(level,LogLevel.LEVEL_INFO) == LogLevelComparisonResult.resultLesser);
     }
 
 }

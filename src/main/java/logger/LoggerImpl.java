@@ -11,10 +11,7 @@ import logger.format.LogContainer;
 import logger.format.LogContainerImpl;
 import logger.format.LogFormat;
 import logger.format.LogFormatImpl;
-import logger.level.LevelDebug;
-import logger.level.LogLevel;
-import logger.level.LogLevelComparisonResult;
-import logger.level.LogLevelFactory;
+import logger.level.*;
 import logger.writer.ConsoleWriter;
 import logger.writer.FileWriter;
 import logger.writer.Writer;
@@ -38,7 +35,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     private static Logger loggerInstance = null;
     private static HashMap<String, Logger> loggers = new HashMap<String, Logger>();
-
+    private LevelComparator comparator = LevelComparator.getInstance();
     private LogLevel logLevelSet;
     private LogFormat logFormat;
     private HashMap<String, Writer> outputWriters;
@@ -179,9 +176,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     private Boolean shouldBeLogged(String message, LogLevel logLevel) {
         // Check if log logger.level is lower than the one set. If so, execute the logging.
-        if (logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultLesser
-                || logLevel.compareToLevel(logLevelSet) == LogLevelComparisonResult.resultEqual) {
-
+        if (comparator.compareLevelToLevel(logLevelSet,logLevel)!=LogLevelComparisonResult.resultGreater){
             LogContainer log = new LogContainerImpl();
             log.setMessage(message);
             log.setDate(new Date());

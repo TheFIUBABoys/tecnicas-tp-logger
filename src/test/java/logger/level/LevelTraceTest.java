@@ -6,40 +6,40 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class LevelTraceTest {
-
+    private LevelComparator comparator = LevelComparator.getInstance();
     @Test
     public void testCompareToTrace() throws Exception {
-        assertTrue(LogLevel.LEVEL_TRACE.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultEqual);
+        assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_TRACE,LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultEqual);
     }
 
     @Test
     public void testCompareToDebug() throws Exception {
-        assertTrue(LogLevel.LEVEL_DEBUG.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
+        assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_TRACE,LogLevel.LEVEL_DEBUG) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToInfo() throws Exception {
-        assertTrue(LogLevel.LEVEL_INFO.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
+        assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_TRACE,LogLevel.LEVEL_INFO) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToWarn() throws Exception {
-        assertTrue(LogLevel.LEVEL_WARN.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
+        assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_TRACE,LogLevel.LEVEL_WARN) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToError() throws Exception {
-        assertTrue(LogLevel.LEVEL_ERROR.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
+        assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_TRACE,LogLevel.LEVEL_ERROR) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToFatal() throws Exception {
-        assertTrue(LogLevel.LEVEL_FATAL.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
+        assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_TRACE,LogLevel.LEVEL_FATAL) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
     public void testCompareToOff() throws Exception {
-        assertTrue(LogLevel.LEVEL_OFF.compareToLevel(LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultLesser);
+        assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_TRACE,LogLevel.LEVEL_OFF) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
