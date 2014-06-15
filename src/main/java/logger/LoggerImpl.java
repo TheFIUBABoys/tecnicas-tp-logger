@@ -64,6 +64,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
             try {
                 configReader.loadConfig();
             } catch (Exception e1) {
+                e1.printStackTrace();
             }
         }
     }
