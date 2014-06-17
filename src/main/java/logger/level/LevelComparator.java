@@ -22,6 +22,7 @@ import java.util.Map;
             }
             public void put(K key1, K key2, Value value){
                 Map<K,Value> subMap;
+                //Regular
                 if (baseMap.containsKey(key1)){
                     subMap = baseMap.get(key1);
                     subMap.put(key2,value);
@@ -30,7 +31,6 @@ import java.util.Map;
                     subMap.put(key2,value);
                     baseMap.put(key1,subMap);
                 }
-
 
             }
 
@@ -41,6 +41,13 @@ import java.util.Map;
 
         Matrix<String,LogLevelComparisonResult> comparisonTable = new Matrix<String, LogLevelComparisonResult>();;
         private static LevelComparator levelComparator = null;
+
+        private void addAntisymetricItemToTable(String k1, String k2, LogLevelComparisonResult item){
+            comparisonTable.put(k1, k2, item);
+            if (!k1.equals(k2)) {
+                comparisonTable.put(k2, k1, item.getOpposite());
+            }
+        }
 
         private void initComparisonTable(){
             initLevelOffComparison();
@@ -54,73 +61,60 @@ import java.util.Map;
         }
 
         private void initLevelDebugComparison() {
-            comparisonTable.put(LogLevel.LEVEL_DEBUG.toString(), LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_DEBUG.toString(), LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_DEBUG.toString(), LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_DEBUG.toString(), LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_DEBUG.toString(), LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_DEBUG.toString(), LogLevel.LEVEL_DEBUG.toString(),LogLevelComparisonResult.resultEqual);
-            comparisonTable.put(LogLevel.LEVEL_DEBUG.toString(), LogLevel.LEVEL_INFO.toString(),LogLevelComparisonResult.resultLesser);
+            String debugId = LogLevel.LEVEL_DEBUG.toString();
+            addAntisymetricItemToTable(debugId, LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(debugId, LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(debugId, LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(debugId, LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(debugId, LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultGreater);
+            addAntisymetricItemToTable(debugId,debugId,LogLevelComparisonResult.resultEqual);
+            addAntisymetricItemToTable(debugId, LogLevel.LEVEL_INFO.toString(),LogLevelComparisonResult.resultLesser);
         }
 
         private void initLevelInfoComparison() {
-            comparisonTable.put(LogLevel.LEVEL_INFO.toString(), LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_INFO.toString(), LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_INFO.toString(), LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_INFO.toString(), LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_INFO.toString(), LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_INFO.toString(), LogLevel.LEVEL_DEBUG.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_INFO.toString(), LogLevel.LEVEL_INFO.toString(),LogLevelComparisonResult.resultEqual);
+            String infoId = LogLevel.LEVEL_INFO.toString();
+            addAntisymetricItemToTable(infoId, LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(infoId, LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(infoId, LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(infoId, LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(infoId, LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(infoId, LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultGreater);
+            addAntisymetricItemToTable(infoId,infoId,LogLevelComparisonResult.resultEqual);
         }
 
         private void initLevelTraceComparison() {
-            comparisonTable.put(LogLevel.LEVEL_TRACE.toString(), LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_TRACE.toString(), LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_TRACE.toString(), LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_TRACE.toString(), LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_TRACE.toString(), LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultEqual);
-            comparisonTable.put(LogLevel.LEVEL_TRACE.toString(), LogLevel.LEVEL_DEBUG.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_TRACE.toString(), LogLevel.LEVEL_INFO.toString(),LogLevelComparisonResult.resultLesser);
+            String traceId = LogLevel.LEVEL_TRACE.toString();
+            addAntisymetricItemToTable(traceId, LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(traceId, LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(traceId, LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(traceId, LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(traceId, traceId,LogLevelComparisonResult.resultEqual);
+
         }
 
         private void initLevelErrorComparison() {
-            comparisonTable.put(LogLevel.LEVEL_ERROR.toString(), LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_ERROR.toString(), LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_ERROR.toString(), LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultEqual);
-            comparisonTable.put(LogLevel.LEVEL_ERROR.toString(), LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_ERROR.toString(), LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_ERROR.toString(), LogLevel.LEVEL_DEBUG.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_ERROR.toString(), LogLevel.LEVEL_INFO.toString(),LogLevelComparisonResult.resultGreater);
+            String errorId = LogLevel.LEVEL_ERROR.toString();
+            addAntisymetricItemToTable(errorId, LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(errorId, LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(errorId, errorId,LogLevelComparisonResult.resultEqual);
+            addAntisymetricItemToTable(errorId, LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultGreater);
         }
 
         private void initLevelWarnComparison() {
-            comparisonTable.put(LogLevel.LEVEL_WARN.toString(), LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_WARN.toString(), LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_WARN.toString(), LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_WARN.toString(), LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultEqual);
-            comparisonTable.put(LogLevel.LEVEL_WARN.toString(), LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_WARN.toString(), LogLevel.LEVEL_DEBUG.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_WARN.toString(), LogLevel.LEVEL_INFO.toString(),LogLevelComparisonResult.resultGreater);
+            String warnId = LogLevel.LEVEL_WARN.toString();
+            addAntisymetricItemToTable(warnId, LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(warnId, LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(warnId, warnId,LogLevelComparisonResult.resultEqual);
         }
 
         private void initLevelFatalComparison() {
-            comparisonTable.put(LogLevel.LEVEL_FATAL.toString(), LogLevel.LEVEL_OFF.toString(), LogLevelComparisonResult.resultLesser);
-            comparisonTable.put(LogLevel.LEVEL_FATAL.toString(), LogLevel.LEVEL_FATAL.toString(), LogLevelComparisonResult.resultEqual);
-            comparisonTable.put(LogLevel.LEVEL_FATAL.toString(), LogLevel.LEVEL_ERROR.toString(), LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_FATAL.toString(), LogLevel.LEVEL_WARN.toString(), LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_FATAL.toString(), LogLevel.LEVEL_TRACE.toString(), LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_FATAL.toString(), LogLevel.LEVEL_DEBUG.toString(), LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_FATAL.toString(), LogLevel.LEVEL_INFO.toString(), LogLevelComparisonResult.resultGreater);
+            String fatalId = LogLevel.LEVEL_FATAL.toString();
+            addAntisymetricItemToTable(fatalId, LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultLesser);
+            addAntisymetricItemToTable(fatalId, fatalId,LogLevelComparisonResult.resultEqual);
         }
 
         private void initLevelOffComparison() {
-            comparisonTable.put(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultEqual);
-            comparisonTable.put(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_FATAL.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_ERROR.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_WARN.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_TRACE.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_DEBUG.toString(),LogLevelComparisonResult.resultGreater);
-            comparisonTable.put(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_INFO.toString(),LogLevelComparisonResult.resultGreater);
+            addAntisymetricItemToTable(LogLevel.LEVEL_OFF.toString(), LogLevel.LEVEL_OFF.toString(),LogLevelComparisonResult.resultEqual);
         }
 
         public static LevelComparator getInstance(){

@@ -5,7 +5,24 @@ package logger.level;
  * Comparison result constants.
  */
 public enum LogLevelComparisonResult {
-    resultEqual,
-    resultLesser,
-    resultGreater
+    resultEqual{
+        @Override
+        public LogLevelComparisonResult getOpposite() {
+            return resultEqual;
+        }
+    },
+    resultLesser{
+        @Override
+        public LogLevelComparisonResult getOpposite() {
+            return resultGreater;
+        }
+    },
+    resultGreater{
+        @Override
+        public LogLevelComparisonResult getOpposite() {
+            return resultLesser;
+        }
+    };
+
+    public abstract LogLevelComparisonResult getOpposite();
 }
