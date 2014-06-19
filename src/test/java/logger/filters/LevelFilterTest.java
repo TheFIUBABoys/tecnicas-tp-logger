@@ -19,13 +19,13 @@ public class LevelFilterTest {
     }
 
     @Test
-    public void testFilter() throws Exception {
+    public void filter() throws Exception {
         String filterFormat = "%p";
         assertEquals(level.toString(), levelFilter.filter(filterFormat, level.toString()));
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void clear() throws Exception {
         String filterFormat = "%p";
         assertEquals("", levelFilter.clear(filterFormat));
     }

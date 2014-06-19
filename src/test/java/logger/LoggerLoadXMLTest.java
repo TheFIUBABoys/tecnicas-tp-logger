@@ -99,7 +99,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test
-    public void testCheckIfLoadingConsoleOutputPropertyFromFileWork() throws Exception {
+    public void checkIfLoadingConsoleOutputPropertyFromFileWork() throws Exception {
         setUpStandardOutputRedirect();
         setUpConsoleOutputProperty();
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
@@ -138,7 +138,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test
-    public void testLoadOutputFile() throws Exception {
+    public void loadOutputFile() throws Exception {
         setUpOutputFileProperty();
         loggerInstance.setConsoleOutput(false);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
@@ -158,7 +158,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test
-    public void testLoadSeveralOutputFiles() throws Exception {
+    public void loadSeveralOutputFiles() throws Exception {
         setUpOutputFilesProperty();
         loggerInstance.setConsoleOutput(false);
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
@@ -179,7 +179,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test
-    public void testLoadLogLevel() throws Exception {
+    public void loadLogLevel() throws Exception {
         setUpFatalLevelProperty();
         loggerInstance.addOutput(new FileWriter(outputFilename));
         loggerInstance.setMessageFormat(new LogFormatImpl("%m"));
@@ -198,7 +198,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test
-    public void testLoadLogFormat() throws Exception {
+    public void loadLogFormat() throws Exception {
         setUpFormatProperty();
         loggerInstance.addOutput(new FileWriter(outputFilename));
         loggerInstance.logMessage("Fatal Message%n", LogLevel.LEVEL_FATAL);
@@ -213,7 +213,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test(expected = WrongPropertyFormatException.class)
-    public void testWrongFormatConsole() throws Exception {
+    public void wrongFormatConsole() throws Exception {
         setUpWrongFormatConsoleProperty();
     }
 
@@ -224,7 +224,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test(expected = WrongPropertyFormatException.class)
-    public void testWrongFormatLevel() throws Exception {
+    public void wrongFormatLevel() throws Exception {
         setUpWrongFormatLevelProperty();
     }
 
@@ -235,7 +235,7 @@ public class LoggerLoadXMLTest {
     }
 
     @Test(expected = WrongPropertyFormatException.class)
-    public void testWrongFormatFormat() throws Exception {
+    public void wrongFormatFormat() throws Exception {
         setUpWrongFormatFormatProperty();
     }
 

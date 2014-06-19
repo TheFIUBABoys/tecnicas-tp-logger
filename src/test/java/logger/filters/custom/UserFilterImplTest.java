@@ -34,24 +34,24 @@ public class UserFilterImplTest {
     }
 
     @Test
-    public void testMatchesFilter() throws Exception {
+    public void matchesFilter() throws Exception {
         assertFalse(userFilter.matchesFilter(logContainer));
     }
 
     @Test
-    public void testSetRegex() throws Exception {
+    public void setRegex() throws Exception {
         userFilter = new UserFilterImpl(message);
         assertTrue(userFilter.matchesFilter(logContainer));
     }
 
     @Test
-    public void testSetLogLevel() throws Exception {
+    public void setLogLevel() throws Exception {
         logContainer.setLogLevel(LogLevel.LEVEL_INFO.toString());
         assertFalse(userFilter.matchesFilter(logContainer));
     }
 
     @Test
-    public void testInvalidLogLevel() {
+    public void invalidLogLevel() {
         logContainer.setLogLevel("not important");
         assertFalse(userFilter.matchesFilter(logContainer));
     }

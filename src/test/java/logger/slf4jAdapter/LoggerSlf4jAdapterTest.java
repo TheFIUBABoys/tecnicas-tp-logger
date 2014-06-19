@@ -39,21 +39,21 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLoggerFactory() throws Exception {
+    public void loggerFactory() throws Exception {
         logger = loggerFactory.getLogger(LoggerSlf4jAdapter.class.getName());
         assertEquals(logger.getClass().getName(), LoggerSlf4jAdapter.class.getName());
         assertEquals(logger.getName(), LoggerSlf4jAdapter.class.getName());
     }
 
     @Test
-    public void testLogWarn() throws Exception {
+    public void logWarn() throws Exception {
         logger.warn("Message This Message");
         assertMessageLoggedCorrectlyForLevel("WARN");
         assertTrue(logger.isWarnEnabled());
     }
 
     @Test
-    public void testLogError() throws Exception {
+    public void logError() throws Exception {
         logger.error("Message This Message");
         assertMessageLoggedCorrectlyForLevel("ERROR");
         assertTrue(logger.isErrorEnabled());
@@ -61,21 +61,21 @@ public class LoggerSlf4jAdapterTest {
 
 
     @Test
-    public void testLogTrace() throws Exception {
+    public void logTrace() throws Exception {
         logger.trace("Message This Message");
         assertMessageLoggedCorrectlyForLevel("TRACE");
         assertTrue(logger.isTraceEnabled());
     }
 
     @Test
-    public void testLogDebug() throws Exception {
+    public void logDebug() throws Exception {
         logger.debug("Message This Message");
         assertMessageLoggedCorrectlyForLevel("DEBUG");
         assertTrue(logger.isDebugEnabled());
     }
 
     @Test
-    public void testLogInfo() throws Exception {
+    public void logInfo() throws Exception {
         logger.info("Message This Message");
         assertMessageLoggedCorrectlyForLevel("INFO");
         assertTrue(logger.isInfoEnabled());
@@ -83,7 +83,7 @@ public class LoggerSlf4jAdapterTest {
 
 
     @Test
-    public void testLogFormattedWithOneObject() throws Exception {
+    public void logFormattedWithOneObject() throws Exception {
         String error = "Error Message {}";
         String formattedObject = "This message";
         logger.error(error, formattedObject);
@@ -103,7 +103,7 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLogFormattedWithTwoObjects() throws Exception {
+    public void logFormattedWithTwoObjects() throws Exception {
 
         String error = "Error Message {} {}";
         String f1 = "This";
@@ -126,7 +126,7 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLogFormattedWithSeveralObjects() throws Exception {
+    public void logFormattedWithSeveralObjects() throws Exception {
         String error = "{} {} {} {}";
         String f1 = "Error";
         String f2 = "Message";
@@ -169,14 +169,14 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLogWarnWithMarker() throws Exception {
+    public void logWarnWithMarker() throws Exception {
         logger.warn(marker, "Message This Message");
         assertMessageLoggedCorrectlyForLevel("WARN");
         assertTrue(logger.isWarnEnabled(marker));
     }
 
     @Test
-    public void testLogErrorWithMarker() throws Exception {
+    public void logErrorWithMarker() throws Exception {
         logger.error(marker, "Message This Message");
         assertMessageLoggedCorrectlyForLevel("ERROR");
         assertTrue(logger.isErrorEnabled(marker));
@@ -184,21 +184,21 @@ public class LoggerSlf4jAdapterTest {
 
 
     @Test
-    public void testLogTraceWithMarker() throws Exception {
+    public void logTraceWithMarker() throws Exception {
         logger.trace(marker, "Message This Message");
         assertMessageLoggedCorrectlyForLevel("TRACE");
         assertTrue(logger.isTraceEnabled(marker));
     }
 
     @Test
-    public void testLogDebugWithMarker() throws Exception {
+    public void logDebugWithMarker() throws Exception {
         logger.debug(marker, "Message This Message");
         assertMessageLoggedCorrectlyForLevel("DEBUG");
         assertTrue(logger.isDebugEnabled(marker));
     }
 
     @Test
-    public void testLogInfoWithMarker() throws Exception {
+    public void logInfoWithMarker() throws Exception {
         logger.info(marker, "Message This Message");
         assertMessageLoggedCorrectlyForLevel("INFO");
         assertTrue(logger.isInfoEnabled(marker));
@@ -206,7 +206,7 @@ public class LoggerSlf4jAdapterTest {
 
 
     @Test
-    public void testLogFormattedWithOneObjectWithMarker() throws Exception {
+    public void logFormattedWithOneObjectWithMarker() throws Exception {
         String error = "Error Message {}";
         String formattedObject = "This message";
         logger.error(marker, error, formattedObject);
@@ -226,7 +226,7 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLogFormattedWithTwoObjectsWithMarker() throws Exception {
+    public void logFormattedWithTwoObjectsWithMarker() throws Exception {
 
         String error = "Error Message {} {}";
         String f1 = "This";
@@ -250,7 +250,7 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLogFormattedWithSeveralObjectsWithMarker() throws Exception {
+    public void logFormattedWithSeveralObjectsWithMarker() throws Exception {
         String error = "{} {} {} {}";
         String f1 = "Error";
         String f2 = "Message";
@@ -274,7 +274,7 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLogFormattedWithOneException() throws Exception {
+    public void logFormattedWithOneException() throws Exception {
         String error = "Error Message";
         try {
             throw new Exception("Exception 1", new Exception("Cause"));
@@ -298,7 +298,7 @@ public class LoggerSlf4jAdapterTest {
     }
 
     @Test
-    public void testLogFormattedWithOneExceptionUsingMarker() throws Exception {
+    public void logFormattedWithOneExceptionUsingMarker() throws Exception {
         String error = "Error Message";
         try {
             throw new Exception("Exception 1", new Exception("Cause"));

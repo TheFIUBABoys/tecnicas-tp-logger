@@ -15,13 +15,13 @@ public class ThreadFilterTest {
     }
 
     @Test
-    public void testFilter() throws Exception {
+    public void filter() throws Exception {
         String filterFormat = "%t - %F";
         assertEquals("main - NativeMethodAccessorImpl.java", threadFilter.filter(filterFormat, ""));
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void clear() throws Exception {
         String filterFormat = "%t%F";
         assertEquals("", threadFilter.clear(filterFormat));
     }

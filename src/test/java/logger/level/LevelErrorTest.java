@@ -8,42 +8,42 @@ import static org.junit.Assert.assertTrue;
 public class LevelErrorTest {
     private LevelComparator comparator = LevelComparator.getInstance();
     @Test
-    public void testCompareToTrace() throws Exception {
+    public void compareToTrace() throws Exception {
         assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_ERROR,LogLevel.LEVEL_TRACE) == LogLevelComparisonResult.resultGreater);
     }
 
     @Test
-    public void testCompareToDebug() throws Exception {
+    public void compareToDebug() throws Exception {
         assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_ERROR,LogLevel.LEVEL_DEBUG) == LogLevelComparisonResult.resultGreater);
     }
 
     @Test
-    public void testCompareToInfo() throws Exception {
+    public void compareToInfo() throws Exception {
         assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_ERROR,LogLevel.LEVEL_INFO) == LogLevelComparisonResult.resultGreater);
     }
 
     @Test
-    public void testCompareToWarn() throws Exception {
+    public void compareToWarn() throws Exception {
         assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_ERROR,LogLevel.LEVEL_WARN) == LogLevelComparisonResult.resultGreater);
     }
 
     @Test
-    public void testCompareToError() throws Exception {
+    public void compareToError() throws Exception {
         assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_ERROR,LogLevel.LEVEL_ERROR) == LogLevelComparisonResult.resultEqual);
     }
 
     @Test
-    public void testCompareToFatal() throws Exception {
+    public void compareToFatal() throws Exception {
         assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_ERROR,LogLevel.LEVEL_FATAL) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
-    public void testCompareToOff() throws Exception {
+    public void compareToOff() throws Exception {
         assertTrue(comparator.compareLevelToLevel(LogLevel.LEVEL_ERROR,LogLevel.LEVEL_OFF) == LogLevelComparisonResult.resultLesser);
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void toStringShouldReturnERROR() throws Exception {
         assertEquals("ERROR", LogLevel.LEVEL_ERROR.toString());
     }
 

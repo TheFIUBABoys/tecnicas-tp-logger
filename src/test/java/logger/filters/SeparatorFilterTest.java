@@ -17,13 +17,13 @@ public class SeparatorFilterTest {
     }
 
     @Test
-    public void testFilter() throws Exception {
+    public void filter() throws Exception {
         String filterFormat = "%n";
         assertEquals(separator, separatorFilter.filter(filterFormat, separator));
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void clear() throws Exception {
         String filterFormat = "%n";
         assertEquals("", separatorFilter.clear(filterFormat));
     }

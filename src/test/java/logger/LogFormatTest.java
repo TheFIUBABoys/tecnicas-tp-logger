@@ -34,7 +34,7 @@ public class LogFormatTest {
     }
 
     @Test
-    public void testFormatLogMessage() throws Exception {
+    public void formatLogMessage() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
 
@@ -42,7 +42,7 @@ public class LogFormatTest {
     }
 
     @Test
-    public void testDefaultFormatLogMessage() throws Exception {
+    public void defaultFormatLogMessage() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
 
@@ -50,7 +50,7 @@ public class LogFormatTest {
     }
 
     @Test
-    public void testFormatWithDate() throws Exception {
+    public void formatWithDate() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
         String dateFormat = "dd-MM-yyyy";
@@ -60,13 +60,13 @@ public class LogFormatTest {
     }
 
     @Test(expected = InvalidFormatException.class)
-    public void testInvalidFormat() throws Exception {
+    public void invalidFormat() throws Exception {
         String invalidFormatString = "%p - %m - %w";
         new LogFormatImpl(invalidFormatString);
     }
 
     @Test
-    public void testThreadFormat() throws Exception {
+    public void threadFormat() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
         String expected = "main - formatLogMessage";
@@ -75,7 +75,7 @@ public class LogFormatTest {
     }
 
     @Test
-    public void testConfigurableEol() throws Exception {
+    public void configurableEol() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
         String expected = "Message,";
@@ -85,7 +85,7 @@ public class LogFormatTest {
     }
 
     @Test
-    public void testToJson() throws Exception {
+    public void toJson() throws Exception {
         String message = "Message";
         LogLevel logLevel = new LevelDebug();
         String expected = "{\"datetime\":\"" + (new Date()).toString() + "\",\"logger\":\"LOGGER\",\"level\":\"DEBUG\",\"message\":\"Message\"}";

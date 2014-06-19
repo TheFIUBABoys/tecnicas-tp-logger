@@ -60,7 +60,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void testLogMessageInfo() throws Exception {
+    public void logMessageInfo() throws Exception {
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
 
         String error = "Error Message%n";
@@ -76,7 +76,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void testLogMessageOff() throws Exception {
+    public void logMessageOff() throws Exception {
         loggerInstance.setLogLevel(LogLevel.LEVEL_OFF);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Debug Message%n", LogLevel.LEVEL_DEBUG);
@@ -98,7 +98,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void testLogMessageFatal() throws Exception {
+    public void logMessageFatal() throws Exception {
         loggerInstance.setLogLevel(LogLevel.LEVEL_FATAL);
         loggerInstance.logMessage("Error Message%n", LogLevel.LEVEL_ERROR);
         loggerInstance.logMessage("Debug Message%n", LogLevel.LEVEL_DEBUG);
@@ -121,7 +121,7 @@ public class LoggerTest {
     }
 
     @Test
-    public void testAddSameOutputFileSeveralTimes() throws Exception {
+    public void addSameOutputFileSeveralTimes() throws Exception {
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
 
         String error = "Error Message%n";

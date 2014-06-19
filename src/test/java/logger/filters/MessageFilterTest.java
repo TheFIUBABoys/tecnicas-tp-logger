@@ -17,13 +17,13 @@ public class MessageFilterTest {
     }
 
     @Test
-    public void testFilter() throws Exception {
+    public void filter() throws Exception {
         String filterFormat = "%m";
         assertEquals(message, messageFilter.filter(filterFormat, message));
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void clear() throws Exception {
         String filterFormat = "%m";
         assertEquals("", messageFilter.clear(filterFormat));
     }

@@ -18,14 +18,14 @@ public class DateFilterTest {
     }
 
     @Test
-    public void testFilter() throws Exception {
+    public void filter() throws Exception {
         String dateFormat = "dd-MM-yyyy";
         String filterFormat = "%d{" + dateFormat + "}";
         assertEquals((new SimpleDateFormat(dateFormat)).format(new Date()), dateFilter.filter(filterFormat, ""));
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void clear() throws Exception {
         String dateFormat = "dd-MM-yyyy";
         String filterFormat = "%d{" + dateFormat + "}";
         assertEquals("", dateFilter.clear(filterFormat));

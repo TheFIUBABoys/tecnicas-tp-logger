@@ -23,7 +23,7 @@ public class LoggerImplTest {
     }
 
     @Test
-    public void testGetLogger() throws Exception {
+    public void getLogger() throws Exception {
         loggerInstance = LoggerImpl.getLogger();
         loggerInstance.setConsoleOutput(true);
         loggerInstance.setLogLevel(LogLevel.LEVEL_DEBUG);
@@ -33,7 +33,7 @@ public class LoggerImplTest {
     }
 
     @Test
-    public void testGetLogger1() throws Exception {
+    public void getLogger1() throws Exception {
         // This one logs.
         loggerInstance = LoggerImpl.getLogger("logger1");
         loggerInstance.setConsoleOutput(true);
@@ -50,7 +50,7 @@ public class LoggerImplTest {
     }
 
     @Test
-    public void testThrowableApi() {
+    public void throwableApi() {
         loggerInstance = LoggerImpl.getLogger("logger1");
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
         loggerInstance.setConsoleOutput(true);
@@ -60,14 +60,14 @@ public class LoggerImplTest {
     }
 
     @Test
-    public void testGetLogLevel() {
+    public void getLogLevel() {
         loggerInstance = LoggerImpl.getLogger("logger1");
         loggerInstance.setLogLevel(LogLevel.LEVEL_INFO);
         assertEquals(LogLevel.LEVEL_INFO, loggerInstance.getLogLevel());
     }
 
     @Test
-    public void testFilter() {
+    public void filter() {
         loggerInstance = LoggerImpl.getLogger("logger1");
         loggerInstance.setLogLevel(LogLevel.LEVEL_TRACE);
         loggerInstance.addFilter(new UserFilterImpl());

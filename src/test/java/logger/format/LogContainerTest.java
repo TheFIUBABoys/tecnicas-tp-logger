@@ -19,35 +19,35 @@ public class LogContainerTest {
     }
 
     @Test
-    public void testSetDate() throws Exception {
+    public void setDate() throws Exception {
         Date dateSet = new Date();
         logContainer.setDate(dateSet);
         assertEquals(dateSet.toString(), logContainer.getDate());
     }
 
     @Test
-    public void testSetLoggerName() throws Exception {
+    public void setLoggerName() throws Exception {
         String loggerName = "logger";
         logContainer.setLoggerName(loggerName);
         assertEquals(loggerName, logContainer.getLoggerName());
     }
 
     @Test
-    public void testSetLogLevel() throws Exception {
+    public void setLogLevel() throws Exception {
         LogLevel level = LogLevel.LEVEL_DEBUG;
         logContainer.setLogLevel(level.toString());
         assertEquals(level.toString(), logContainer.getLogLevel());
     }
 
     @Test
-    public void testSetMessage() throws Exception {
+    public void setMessage() throws Exception {
         String message = "message";
         logContainer.setMessage(message);
         assertEquals(message, logContainer.getMessage());
     }
 
     @Test
-    public void testToJson() throws Exception {
+    public void toJson() throws Exception {
         logContainer.setMessage("doesn't matter");
         logContainer.setDate(new Date());
         logContainer.setLoggerName("dont care");

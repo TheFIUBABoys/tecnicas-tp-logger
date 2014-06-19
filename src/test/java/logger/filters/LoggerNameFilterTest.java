@@ -17,13 +17,13 @@ public class LoggerNameFilterTest {
     }
 
     @Test
-    public void testFilter() throws Exception {
+    public void filter() throws Exception {
         String filterFormat = "%g";
         assertEquals(loggerName, messageFilter.filter(filterFormat, loggerName));
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void clear() throws Exception {
         String filterFormat = "%g";
         assertEquals("", messageFilter.clear(filterFormat));
     }
