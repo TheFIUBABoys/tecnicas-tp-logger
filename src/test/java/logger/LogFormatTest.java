@@ -3,7 +3,6 @@ package logger;
 import logger.exceptions.InvalidFormatException;
 import logger.format.LogFormat;
 import logger.format.LogFormatImpl;
-import logger.level.LevelDebug;
 import logger.level.LogLevel;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class LogFormatTest {
     @Test
     public void formatLogMessage() throws Exception {
         String message = "Message";
-        LogLevel logLevel = new LevelDebug();
+        LogLevel logLevel = LogLevel.LEVEL_DEBUG;
 
         assertEquals("DEBUG - Message", messageFormat.formatLogMessage(message, logLevel, null));
     }
@@ -44,7 +43,7 @@ public class LogFormatTest {
     @Test
     public void defaultFormatLogMessage() throws Exception {
         String message = "Message";
-        LogLevel logLevel = new LevelDebug();
+        LogLevel logLevel = LogLevel.LEVEL_DEBUG;
 
         assertEquals("DEBUG - Message", defaultFormat.formatLogMessage(message, logLevel, null));
     }
@@ -52,7 +51,7 @@ public class LogFormatTest {
     @Test
     public void formatWithDate() throws Exception {
         String message = "Message";
-        LogLevel logLevel = new LevelDebug();
+        LogLevel logLevel = LogLevel.LEVEL_DEBUG;
         String dateFormat = "dd-MM-yyyy";
         String expectedDate = (new SimpleDateFormat(dateFormat)).format(new Date());
 
@@ -68,7 +67,7 @@ public class LogFormatTest {
     @Test
     public void threadFormat() throws Exception {
         String message = "Message";
-        LogLevel logLevel = new LevelDebug();
+        LogLevel logLevel = LogLevel.LEVEL_DEBUG;
         String expected = "main - formatLogMessage";
 
         assertEquals(expected, threadFormat.formatLogMessage(message, logLevel, null));
@@ -77,7 +76,7 @@ public class LogFormatTest {
     @Test
     public void configurableEol() throws Exception {
         String message = "Message";
-        LogLevel logLevel = new LevelDebug();
+        LogLevel logLevel = LogLevel.LEVEL_DEBUG;
         String expected = "Message,";
         endOfLineFormat.setEndOfLineSeparator(",");
 
@@ -87,7 +86,7 @@ public class LogFormatTest {
     @Test
     public void toJson() throws Exception {
         String message = "Message";
-        LogLevel logLevel = new LevelDebug();
+        LogLevel logLevel = LogLevel.LEVEL_DEBUG;
         String expected = "{\"datetime\":\"" + (new Date()).toString() + "\",\"logger\":\"LOGGER\",\"level\":\"DEBUG\",\"message\":\"Message\"}";
 
         assertEquals(expected, jsonFormat.formatLogMessage(message, logLevel, "LOGGER"));

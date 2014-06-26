@@ -35,7 +35,6 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     private static Logger loggerInstance = null;
     private static HashMap<String, Logger> loggers = new HashMap<String, Logger>();
-    private LevelComparator comparator = LevelComparator.getInstance();
     private LogLevel logLevelSet;
     private LogFormat logFormat;
     private HashMap<String, Writer> outputWriters;
@@ -48,7 +47,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * Private constructor to be called from the getLogger method.
      */
     private LoggerImpl() {
-        logLevelSet = new LevelDebug();
+        logLevelSet = LogLevel.LEVEL_DEBUG;
         logFormat = new LogFormatImpl();
         outputWriters = new HashMap<String, Writer>();
         filters = new ArrayList<UserFilter>();
@@ -178,7 +177,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     private Boolean shouldBeLogged(String message, LogLevel logLevel) {
         // Check if log logger.level is lower than the one set. If so, execute the logging.
-        if (comparator.compareLevelToLevel(logLevelSet, logLevel) != LogLevelComparisonResult.resultGreater) {
+        if (logLevelSet.compareTo(logLevel)<=0){
             LogContainer log = new LogContainerImpl();
             log.setMessage(message);
             log.setDate(new Date());

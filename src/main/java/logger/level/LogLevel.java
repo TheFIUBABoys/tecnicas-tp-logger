@@ -7,19 +7,56 @@ package logger.level;
  */
 
 
-public interface LogLevel {
+public enum LogLevel {
 
     /**
      * Easy access to debugging logger.level types.
      * Example of semantics: LogLevel.LEVEL_DEBUG
      */
-    public static LogLevel LEVEL_TRACE = new LevelTrace();
-    public static LogLevel LEVEL_DEBUG = new LevelDebug();
-    public static LogLevel LEVEL_INFO = new LevelInfo();
-    public static LogLevel LEVEL_WARN = new LevelWarn();
-    public static LogLevel LEVEL_ERROR = new LevelError();
-    public static LogLevel LEVEL_FATAL = new LevelFatal();
-    public static LogLevel LEVEL_OFF = new LevelOff();
+    LEVEL_TRACE {
+        @Override
+        public String toString() {
+            return "TRACE";
+        }
+    },
 
-    public String toString();
+    LEVEL_DEBUG {
+        @Override
+
+        public String toString() {
+            return "DEBUG";
+        }
+    },
+    LEVEL_INFO {
+        @Override
+
+        public String toString() {
+            return "INFO";
+        }
+    },
+    LEVEL_WARN {
+        @Override
+
+        public String toString() {
+            return "WARN";
+        }
+    },
+    LEVEL_ERROR {
+        @Override
+        public String toString() {
+            return "ERROR";
+        }
+    },
+    LEVEL_FATAL {
+        @Override
+        public String toString() {
+            return "FATAL";
+        }
+    },
+    LEVEL_OFF {
+        @Override
+        public String toString() {
+            return "OFF";
+        }
+    };
 }

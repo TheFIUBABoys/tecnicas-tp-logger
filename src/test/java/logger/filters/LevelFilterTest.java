@@ -1,6 +1,6 @@
 package logger.filters;
 
-import logger.level.LevelDebug;
+
 import logger.level.LogLevel;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class LevelFilterTest {
 
     @Before
     public void setUp() throws Exception {
-        level = new LevelDebug();
+        level = LogLevel.LEVEL_DEBUG;
         levelFilter = new LevelFilter();
     }
 

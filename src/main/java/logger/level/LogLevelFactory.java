@@ -37,28 +37,20 @@ public class LogLevelFactory {
      */
     public LogLevel createLogLevel(String level) throws NotExistingLevelException {
 
-        LogLevel traceInstance = new LevelTrace();
-        LogLevel debugInstance = new LevelDebug();
-        LogLevel infoInstance = new LevelInfo();
-        LogLevel warnInstance = new LevelWarn();
-        LogLevel errorInstance = new LevelError();
-        LogLevel fatalInstance = new LevelFatal();
-        LogLevel offInstance = new LevelOff();
-
-        if (level.equals(traceInstance.toString())) {
-            return traceInstance;
-        } else if (level.equals(debugInstance.toString())) {
-            return debugInstance;
-        } else if (level.equals(infoInstance.toString())) {
-            return infoInstance;
-        } else if (level.equals(warnInstance.toString())) {
-            return warnInstance;
-        } else if (level.equals(errorInstance.toString())) {
-            return errorInstance;
-        } else if (level.equals(fatalInstance.toString())) {
-            return fatalInstance;
-        } else if (level.equals(offInstance.toString())) {
-            return offInstance;
+        if (level.equals(LogLevel.LEVEL_TRACE.toString())) {
+            return LogLevel.LEVEL_TRACE;
+        } else if (level.equals(LogLevel.LEVEL_DEBUG.toString())) {
+            return LogLevel.LEVEL_DEBUG;
+        } else if (level.equals(LogLevel.LEVEL_INFO.toString())) {
+            return LogLevel.LEVEL_INFO;
+        } else if (level.equals(LogLevel.LEVEL_WARN.toString())) {
+            return LogLevel.LEVEL_WARN;
+        } else if (level.equals(LogLevel.LEVEL_ERROR.toString())) {
+            return LogLevel.LEVEL_ERROR;
+        } else if (level.equals(LogLevel.LEVEL_FATAL.toString())) {
+            return LogLevel.LEVEL_FATAL;
+        } else if (level.equals(LogLevel.LEVEL_OFF.toString())) {
+            return LogLevel.LEVEL_OFF;
         } else {
             throw new NotExistingLevelException();
         }
@@ -66,3 +58,4 @@ public class LogLevelFactory {
     }
 
 }
+

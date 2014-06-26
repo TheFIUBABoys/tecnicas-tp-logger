@@ -23,35 +23,35 @@ public class LogLevelFactoryTest {
 
     @Test
     public void createLogLevelTrace() throws NotExistingLevelException {
-        LogLevel levelTrace = new LevelTrace();
+        LogLevel levelTrace = LogLevel.LEVEL_TRACE;
         LogLevel createdLevel = factoryInstance.createLogLevel(levelTrace.toString());
         assertEquals(createdLevel.toString(), levelTrace.toString());
     }
 
     @Test
     public void createLogLevelDebug() throws NotExistingLevelException {
-        LogLevel levelDebug = new LevelDebug();
+        LogLevel levelDebug = LogLevel.LEVEL_DEBUG;
         LogLevel createdLevel = factoryInstance.createLogLevel(levelDebug.toString());
         assertEquals(createdLevel.toString(), levelDebug.toString());
     }
 
     @Test
     public void createLogLevelInfo() throws NotExistingLevelException {
-        LogLevel levelInfo = new LevelInfo();
+        LogLevel levelInfo = LogLevel.LEVEL_INFO;
         LogLevel createdLevel = factoryInstance.createLogLevel(levelInfo.toString());
         assertEquals(createdLevel.toString(), levelInfo.toString());
     }
 
     @Test
     public void createLogLevelWarn() throws NotExistingLevelException {
-        LogLevel levelWarn = new LevelWarn();
+        LogLevel levelWarn = LogLevel.LEVEL_WARN;
         LogLevel createdLevel = factoryInstance.createLogLevel(levelWarn.toString());
         assertEquals(createdLevel.toString(), levelWarn.toString());
     }
 
     @Test
     public void createLogLevelError() throws NotExistingLevelException {
-        LogLevel levelError = new LevelError();
+        LogLevel levelError = LogLevel.LEVEL_ERROR;
         LogLevel createdLevel = factoryInstance.createLogLevel(levelError.toString());
         assertEquals(createdLevel.toString(), levelError.toString());
 
@@ -59,14 +59,14 @@ public class LogLevelFactoryTest {
 
     @Test
     public void createLogLevelFatal() throws NotExistingLevelException {
-        LogLevel levelFatal = new LevelFatal();
+        LogLevel levelFatal = LogLevel.LEVEL_FATAL;
         LogLevel createdLevel = factoryInstance.createLogLevel(levelFatal.toString());
         assertEquals(createdLevel.toString(), levelFatal.toString());
     }
 
     @Test
     public void createLogLevelOff() throws NotExistingLevelException {
-        LogLevel levelOff = new LevelOff();
+        LogLevel levelOff = LogLevel.LEVEL_OFF;
         LogLevel createdLevel = factoryInstance.createLogLevel(levelOff.toString());
         assertEquals(createdLevel.toString(), levelOff.toString());
     }
