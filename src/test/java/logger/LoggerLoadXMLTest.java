@@ -63,7 +63,7 @@ public class LoggerLoadXMLTest {
 
     }
 
-    private void tearDownStandardOutputRedirect() throws IOException {
+    private void tearDownStandardOutputRedirect() {
         standardOutputStream.delete();
         System.setOut(System.out);
     }

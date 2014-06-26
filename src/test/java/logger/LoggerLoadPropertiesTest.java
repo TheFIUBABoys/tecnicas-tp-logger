@@ -37,7 +37,7 @@ public class LoggerLoadPropertiesTest {
         loggerInstance.loadConfig();
     }
 
-    private void tearDownStandardOutputRedirect() throws IOException {
+    private void tearDownStandardOutputRedirect() {
         standardOutputStream.delete();
         System.setOut(System.out);
     }

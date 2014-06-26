@@ -107,8 +107,10 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      * {@inheritDoc}
      */
     public void setConsoleOutput(Boolean value) {
-        if (!outputWriters.containsKey(ConsoleWriter.FILENAME)) {
+        if (!outputWriters.containsKey(ConsoleWriter.FILENAME) && value) {
             outputWriters.put(ConsoleWriter.FILENAME, new ConsoleWriter());
+        } else if (!value) {
+            outputWriters.remove(ConsoleWriter.FILENAME);
         }
     }
 
@@ -176,7 +178,7 @@ public class LoggerImpl implements Logger, PropertyApplyingDelegate {
      */
     private Boolean shouldBeLogged(String message, LogLevel logLevel) {
         // Check if log logger.level is lower than the one set. If so, execute the logging.
-        if (comparator.compareLevelToLevel(logLevelSet,logLevel)!=LogLevelComparisonResult.resultGreater){
+        if (comparator.compareLevelToLevel(logLevelSet, logLevel) != LogLevelComparisonResult.resultGreater) {
             LogContainer log = new LogContainerImpl();
             log.setMessage(message);
             log.setDate(new Date());
